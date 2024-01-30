@@ -8,57 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>소모임</title>
-<style type="text/css">
-.card{
-	width: calc(50% - 10px);
-	float: left;
-	margin: 5px 5px;
-}
-.image{
-	position: relative;
-	background-color: black;
-	color: white;
-	width: 100%;
-	height: 200px;
-}
-.image:hover{
-	background-color: rgba(0, 0, 0, 0.8);
-}
-.info{
-	position: absolute;
-	width: 100%;
-	height: 100%;
-}
-.category{
-	top: 0%;
-	background-color: rgba(255, 255, 255, 0.8);
-	padding: 10px;
-	z-index: 1;
-	margin: 10px;
-	border-radius: 10%;
-	height: 10%;
-	width: 12%;
-	text-align: center;
-}
-.title{
-	width: 50%;
-	text-align: left;
-	box-sizing: border-box;
-	float: left;
-	top: 50%;
-}
-.views{
-	width: 50%;
-	box-sizing: border-box;
-	text-align: right;
-	float: left;
-		top: 50%;
-}
-.writer{
-	text-align: left;
-	top: 50%;
-}
-</style>
+<link href="./css/somoim.css" rel="stylesheet"/>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
