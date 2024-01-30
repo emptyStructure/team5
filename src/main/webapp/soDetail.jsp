@@ -7,6 +7,20 @@
 <title>소모임 디테일</title>
 </head>
 <body>
+	<div class="main">
+		<div class="mainStyle">
+			<article>
+				<div class="somoimDetail">
+					<div class="title">
+						${detail.stitle }
+					</div>
+					<div>
+					
+					</div>
+				</div>
+			</article>
+		</div>
+	</div>
 	
 
 </body>

@@ -63,7 +63,8 @@
 <script type="text/javascript">
 $(function(){
 	$('.image').click(function(){
-		location.href="./soDetail";
+		let sno = $(this).children().children(".sno").val();
+		location.href="./soDetail?sno="+sno;
 	});
 });
 </script>
@@ -84,6 +85,7 @@ $(function(){
 									<div class="title">${row.stitle }</div>
 									<div class="views">100</div>
 									<div class="writer">${row.mno }</div>
+									<input type="hidden" class="sno" value="${row.sno }">
 								</div>
 							</div>
 						</div>
