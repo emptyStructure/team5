@@ -14,10 +14,11 @@
 		<div class="menu">
 			<nav>
 				<ul>
-					<li onclick="url('./messagewrite')"><i class="xi-send"></i>쪽지 쓰기</li>
-					<li onclick="url('./members')">받은 쪽지함</li>
-					<li onclick="url('./board')"><i class="xi-send"></i>보낸 쪽지함</li>
-					<li onclick="url('./comments')"><i class="xi-trash"></i>휴지통</li>
+					<li onclick="url('./message')"><i class="xi-home"></i> 홈</li>
+					<li onclick="url('./messagewrite')"><i class="xi-send"></i> 쪽지 쓰기</li>
+					<li onclick="url('./messages')"><i class="xi-reply"></i> 받은 쪽지함</li>
+					<li onclick="url('./board')"><i class="xi-share"></i> 보낸 쪽지함</li>
+					<li onclick="url('./comments')"><i class="xi-trash"></i> 휴지통</li>
 				</ul>
 			</nav>
 		</div>
