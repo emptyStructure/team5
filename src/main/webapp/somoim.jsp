@@ -9,9 +9,18 @@
 <meta charset="UTF-8">
 <title>소모임</title>
 <style type="text/css">
-td{
+.image{
+	position: relative;
+	background-color: black;
+	color: white;
+	width: 500px;
+	height: 300px;
 	text-align: center;
-	width: 100px;
+}
+.category{
+	position: absolute;
+	background-color: white;
+	z-index: 1;
 }
 
 </style>
@@ -23,29 +32,17 @@ td{
 		</header>
 		<div class="main">
 			<div class="mainStyle">
-				<table border="1">
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>내용</th>
-						<th>회원번호</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>삭제여부</th>
-					</tr>
+				<div>
 					<c:forEach items="${list }" var="row">
-					<tr>
-						<td>${row.sno }</td>
-						<td>${row.stitle }</td>
-						<td>${row.scontent }</td>
-						<td>${row.mno }</td>
-						<td>박시호</td>
-						<td>${row.sdate }</td>
-						<td>${row.sdel }</td>
-					</tr>
+						<div class="card">
+							<div class="image">	사진</div>
+							<div class="category">카테고리</div>
+							<div class="writer">${row.mno }</div>
+							<div class="views">100</div>
+							<div class="title">${row.stitle }</div>
+						</div>
 					</c:forEach>
-				</table>
-			
+				</div>
 			</div>
 		</div>
 	</div>
