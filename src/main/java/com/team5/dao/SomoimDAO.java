@@ -28,9 +28,11 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setMno(rs.getInt(1));
 				dto.setStitle(rs.getString(2));
 				dto.setScontent(rs.getString(3));
-				dto.setMno(rs.getInt(4));
-				dto.setSdate(rs.getString(5));
-				dto.setSdel(rs.getInt(6));
+				dto.setScategory(rs.getString(4));
+				dto.setMno(rs.getInt(5));
+				dto.setSdate(rs.getString(6));
+				dto.setSdel(rs.getInt(7));
+				dto.setSimg(rs.getString(8));
 				result.add(dto);
 			}
 		} catch (SQLException e) {
