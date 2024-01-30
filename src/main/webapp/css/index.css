@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+body{
+	margin: 0;
+	padding: 0;
+}
+
+.container{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.menu{
+	width: 100%;
+	height: 50px;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+}
+nav ul li{
+  display: inline-block;
+  margin: 0 10px;
+  color: black;
+}
+nav ul li:hover{
+	color: black;
+}
+
+.main{
+ 	flex-grow: 1;
+	display: flex;
+	padding: 20px;
+}
+
+.board, .somoim, .market{
+	flex-grow: 1;
+	background-color: gainsboro;
+	margin: 0 10px; 
+	}
+
+
