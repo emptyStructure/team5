@@ -26,21 +26,20 @@ $(function(){
 		</header>
 		<div class="main">
 			<div class="mainStyle">
-				<div>
-					<c:forEach items="${list }" var="row">
-						<div class="card">
-							<div class="image">	
-								<div class="info">
-									<div class="category">${row.scategory }</div>
-									<div class="title">${row.stitle }</div>
-									<div class="views">100</div>
-									<div class="writer">${row.mno }</div>
-									<input type="hidden" class="sno" value="${row.sno }">
-								</div>
+				<c:forEach items="${list }" var="row">
+					<div class="card">
+						<div class="image">	
+							<div class="category">${row.scategory }</div>
+							<div class="info">
+								<div class="title">${row.stitle }</div>
+								<div class="views">❤️ 100</div>
+								<div class="writer">박시호</div>
+								<input type="hidden" class="sno" value="${row.sno }">
 							</div>
 						</div>
-					</c:forEach>
-				</div>
+					</div>
+				</c:forEach>
+				<!-- <div class="over">대충 아무 말</div> --> 
 			</div>
 		</div>
 	</div>
