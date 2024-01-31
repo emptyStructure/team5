@@ -2,7 +2,7 @@ package com.team5.dto;
 
 public class SomoimDTO {
 	private int sno, mno, sdel;
-	private String stitle, scontent, sdate, scategory;
+	private String stitle, scontent, sdate, scategory, swriter;
 	public int getSno() {
 		return sno;
 	}
@@ -44,6 +44,12 @@ public class SomoimDTO {
 	}
 	public void setScategory(String scategory) {
 		this.scategory = scategory;
+	}
+	public String getSwriter() {
+		return swriter;
+	}
+	public void setSwriter(String swriter) {
+		this.swriter = swriter;
 	}
 
 	
