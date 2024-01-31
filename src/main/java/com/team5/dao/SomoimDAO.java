@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.team5.dto.JoinSomoimDTO;
 import com.team5.dto.SomoimDTO;
 
 public class SomoimDAO extends AbstractDAO{
@@ -30,7 +31,8 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setScontent(rs.getString(3));
 				dto.setScategory(rs.getString(4));
 				dto.setSwriter(rs.getString(5));
-				dto.setSdate(rs.getString(6));
+				dto.setMno(rs.getInt(6));
+				dto.setSdate(rs.getString(7));
 				result.add(dto);
 			}
 		} catch (SQLException e) {
@@ -61,7 +63,8 @@ public class SomoimDAO extends AbstractDAO{
 				result.setScontent(rs.getString(3));
 				result.setScategory(rs.getString(4));
 				result.setSwriter(rs.getString(5));
-				result.setSdate(rs.getString(6));
+				result.setMno(rs.getInt(6));
+				result.setSdate(rs.getString(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,6 +72,28 @@ public class SomoimDAO extends AbstractDAO{
 			close(rs, pstmt, conn);
 		}
 		
+		return result;
+	}
+	
+	public int join(JoinSomoimDTO dto) {
+		int result = 0;
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO joinSomoim (mno, sno, name, ph, message) VALUES (?,?,?,?,?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getMno());
+			pstmt.setInt(2, dto.getSno());
+			pstmt.setString(3, dto.getName());
+			pstmt.setString(4, dto.getPh());
+			pstmt.setString(5, dto.getMessage());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(null, pstmt, conn);
+		}
 		return result;
 	}
 
