@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>중하하 로그인</title>
 <style type="text/css">
 body {
 	background-color: #1BBC9B;
@@ -56,7 +57,6 @@ function err() {
 </head>
 <body>
 	<div class="container">
-	<h1>로그인입니다.</h1>
 		<div class="main">
 			<div class="mainStyle">
 				<article>

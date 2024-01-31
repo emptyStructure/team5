@@ -28,10 +28,11 @@ public class Index extends HttpServlet {
 		IndexDAO dao = new IndexDAO();
 		
 		List<BoardDTO> boardList = dao.boardList();	
-		List<SomoimDTO> somList = dao.somList();	
+		List<SomoimDTO> somList = dao.somList();
 		
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("somList", somList);
+		request.setAttribute("marketList", dao.marketList());
 		
 		RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
 		rd.forward(request, response);
