@@ -18,7 +18,7 @@ public class SomoimDAO extends AbstractDAO{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT * FROM somoim";
+		String sql = "SELECT * FROM somoimView";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -29,9 +29,8 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setStitle(rs.getString(2));
 				dto.setScontent(rs.getString(3));
 				dto.setScategory(rs.getString(4));
-				dto.setMno(rs.getInt(5));
+				dto.setSwriter(rs.getString(5));
 				dto.setSdate(rs.getString(6));
-				dto.setSdel(rs.getInt(7));
 				result.add(dto);
 			}
 		} catch (SQLException e) {
@@ -50,7 +49,7 @@ public class SomoimDAO extends AbstractDAO{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT * FROM somoim where sno=?";
+		String sql = "SELECT * FROM somoimView where sno=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
@@ -61,9 +60,8 @@ public class SomoimDAO extends AbstractDAO{
 				result.setStitle(rs.getString(2));
 				result.setScontent(rs.getString(3));
 				result.setScategory(rs.getString(4));
-				result.setMno(rs.getInt(5));
+				result.setSwriter(rs.getString(5));
 				result.setSdate(rs.getString(6));
-				result.setSdel(rs.getInt(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

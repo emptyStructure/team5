@@ -37,7 +37,7 @@ $(function(){
 							<div class="info">
 								<div class="title">${row.stitle }</div>
 								<div class="views">❤️ 100</div>
-								<div class="writer">박시호</div>
+								<div class="writer">${row.swriter }</div>
 								<input type="hidden" class="sno" value="${row.sno }">
 							</div>
 						</div>
