@@ -36,7 +36,7 @@ $(function(){
 							<div class="category">${row.scategory }</div>
 							<div class="info">
 								<div class="title">${row.stitle }</div>
-								<div class="views">❤️ 100</div>
+								<div class="views">👪${row.total } ❤️100</div>
 								<div class="writer">${row.swriter }</div>
 								<input type="hidden" class="sno" value="${row.sno }">
 							</div>
