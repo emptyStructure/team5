@@ -5,6 +5,46 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+body {
+	background-color: #1BBC9B;
+}
+
+h1 {
+	text-align: center;
+	font-size: 100px;
+	color: white;
+}
+
+.login {
+	margin: 0 auto;
+	width: 300px;
+	min-height: 100px;
+	
+	padding: 10px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.login input {
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	color: #eeeef1;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	background-color: #9b9b9b;
+	border-radius: 5px;
+}
+
+.login button {
+	width: 45%;
+	height: 30px;
+	color: #eeeef1;
+	font-size: large;
+	background-color: #9b9b9b;
+}
+</style>
 <script type="text/javascript">
 function err() {
 	let errBox = document.querySelector("#errorMSG");
