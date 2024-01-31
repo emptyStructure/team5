@@ -3,6 +3,7 @@ package com.team5.dto;
 public class BoardDTO {
 	private int bno, mno, bdel, bcount;
 	private String btitle, bcontent, bwrite, bdate, bip;
+	
 	public int getBno() {
 		return bno;
 	}
@@ -57,4 +58,6 @@ public class BoardDTO {
 	public void setBip(String bip) {
 		this.bip = bip;
 	}
+	
+	
 }

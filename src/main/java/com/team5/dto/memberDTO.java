@@ -1,8 +1,8 @@
 package com.team5.dto;
 
-public class memberDTO {
-	private int mno, mgrade;
-	private String mid, mpw, mname;
+public class MemberDTO {
+	private int mno, mgrade, count;
+	private String mid, mpw, mname, mdate;
 	public int getMno() {
 		return mno;
 	}
@@ -32,6 +32,18 @@ public class memberDTO {
 	}
 	public void setMname(String mname) {
 		this.mname = mname;
+	}
+	public String getMdate() {
+		return mdate;
+	}
+	public void setMdate(String mdate) {
+		this.mdate = mdate;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 }

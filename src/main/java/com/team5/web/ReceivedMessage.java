@@ -10,29 +10,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team5.dao.SomoimDAO;
-import com.team5.dto.SomoimDTO;
+import com.team5.dao.MessageDAO;
+import com.team5.dto.MessageDTO;
 
-@WebServlet("/somoim")
-public class Somoim extends HttpServlet {
+@WebServlet("/receivedmessage")
+public class ReceivedMessage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Somoim() {
+    public ReceivedMessage() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SomoimDAO dao = new SomoimDAO();
-		List<SomoimDTO> list = dao.list();
+		MessageDAO dao = new MessageDAO();
+		List<MessageDTO> list = dao.receivedList();
+		
 		request.setAttribute("list", list);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("somoim.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("receivedmessage.jsp");
 		rd.forward(request, response);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 	}
 
 }
