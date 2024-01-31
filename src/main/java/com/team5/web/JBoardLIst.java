@@ -34,14 +34,14 @@ public class JBoardLIst extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//page받기 
-		//int page = 1;
-		//if (request.getParameter("page") != null && request.getParameter("page") != "") {
-		//	page = Util.str2Int2(request.getParameter("page"));
-		//}
+		int page = 1;
+		if (request.getParameter("page") != null && request.getParameter("page") != "") {
+			page = Util.str2Int2(request.getParameter("page"));
+		}
 		
 		JBoardDAO dao = new JBoardDAO();
 		//List<JBoardDTO> list = dao.jBoardList(page);
-		List<JBoardDTO> list = dao.jBoardList();
+		List<JBoardDTO> list = dao.jBoardList(page);
 				
 		//int totalCount = dao.totalCount();
 
