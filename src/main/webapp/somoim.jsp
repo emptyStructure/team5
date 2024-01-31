@@ -14,7 +14,11 @@
 $(function(){
 	$('.image').click(function(){
 		let sno = $(this).children().children(".sno").val();
-		location.href="./soDetail?sno="+sno;
+		var url = "./soDetail?sno="+sno;
+        var name = "popup test";
+        var option = "width = 600, height = 700, top = 100, left = 200, location = no"
+		window.open(url, name, option);
+		
 	});
 });
 </script>
@@ -39,7 +43,6 @@ $(function(){
 						</div>
 					</div>
 				</c:forEach>
-				<!-- <div class="over">대충 아무 말</div> --> 
 			</div>
 		</div>
 	</div>
