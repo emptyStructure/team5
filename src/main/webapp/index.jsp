@@ -14,20 +14,9 @@
 </head>
 <body>	
 	<div class="container">
-		<h2>메인 페이지</h2>
 		<div class="header">
 			<div class="menu">
-				<nav>
-					<ul>
-						<li onclick="url('./')">홈</li>
-						<li onclick="url('./')">게시판</li>
-						<li onclick="url('./somoim')">소모임</li>
-						<li onclick="url('./jboard')">마켓</li><c:choose><c:when test="${sessionScope.mname eq null}">
-						<li onclick="url('./login')">로그인</li></c:when><c:otherwise>
-						<li onclick="url('./myInfo')">${sessionScope.mname}님</li>
-						<li onclick="url('./logout')">로그아웃</li></c:otherwise></c:choose>
-					</ul>
-				</nav>
+				<%@ include file="menu.jsp"%>
 			</div>
 		</div>	
 		<div class="middle">				
@@ -52,8 +41,7 @@
 					광고2
 				</div>
 			</div>
-			<div class="main">		
-
+			<div class="main">
 				<div class="content">
 					<div class="board">	
 						<div class="new">
