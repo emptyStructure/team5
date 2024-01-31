@@ -1,6 +1,8 @@
 package com.team5.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,30 +11,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team5.dao.SomoimDAO;
-import com.team5.dto.SomoimDTO;
+import com.team5.dao.MessageDAO;
+import com.team5.dto.MessageDTO;
 
-@WebServlet("/soDetail")
-public class SoDetail extends HttpServlet {
+@WebServlet("/trashmessage")
+public class TrashMessage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SoDetail() {
+    public TrashMessage() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getParameter("sno");
-
-		SomoimDAO dao = new SomoimDAO();
-		SomoimDTO detail = dao.detail(Integer.parseInt(request.getParameter("sno")));
-		request.setAttribute("detail", detail);
+		MessageDAO dao = new MessageDAO();
+		List<MessageDTO> namelist = new ArrayList<MessageDTO>();
+		namelist = dao.nameList();
 		
-		RequestDispatcher rd = request.getRequestDispatcher("soDetail.jsp");
+		request.setAttribute("namelist", namelist);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("trashmessage.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	}
 
 }

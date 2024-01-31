@@ -8,62 +8,18 @@
 <head>
 <meta charset="UTF-8">
 <title>소모임</title>
-<style type="text/css">
-.card{
-	width: calc(50% - 10px);
-	float: left;
-	margin: 5px 5px;
-}
-.image{
-	position: relative;
-	background-color: black;
-	color: white;
-	width: 100%;
-	height: 200px;
-}
-.image:hover{
-	background-color: rgba(0, 0, 0, 0.8);
-}
-.info{
-	position: absolute;
-	width: 100%;
-	height: 100%;
-}
-.category{
-	top: 0%;
-	background-color: rgba(255, 255, 255, 0.8);
-	padding: 10px;
-	z-index: 1;
-	margin: 10px;
-	border-radius: 10%;
-	height: 10%;
-	width: 12%;
-	text-align: center;
-}
-.title{
-	width: 50%;
-	text-align: left;
-	box-sizing: border-box;
-	float: left;
-	top: 50%;
-}
-.views{
-	width: 50%;
-	box-sizing: border-box;
-	text-align: right;
-	float: left;
-		top: 50%;
-}
-.writer{
-	text-align: left;
-	top: 50%;
-}
-</style>
+<link href="./css/somoim.css" rel="stylesheet"/>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.image').click(function(){
-		location.href="./soDetail";
+		let sno = $(this).children().children(".sno").val();
+		var url = "./soDetail?sno="+sno;
+        var name = "popup test";
+        var option = "width = 1000, height = 700, top = 100, left = 200, location = no"
+		/*window.open(url, name, option);*/
+        location.href=url;
+		
 	});
 });
 </script>
@@ -75,20 +31,19 @@ $(function(){
 		</header>
 		<div class="main">
 			<div class="mainStyle">
-				<div>
-					<c:forEach items="${list }" var="row">
-						<div class="card">
-							<div class="image">	
-								<div class="info">
-									<div class="category">${row.scategory }</div>
-									<div class="title">${row.stitle }</div>
-									<div class="views">100</div>
-									<div class="writer">${row.mno }</div>
-								</div>
+				<c:forEach items="${list }" var="row">
+					<div class="card">
+						<div class="image">	
+							<div class="category">${row.scategory }</div>
+							<div class="info">
+								<div class="title">${row.stitle }</div>
+								<div class="views">❤️ 100</div>
+								<div class="writer">박시호</div>
+								<input type="hidden" class="sno" value="${row.sno }">
 							</div>
 						</div>
-					</c:forEach>
-				</div>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>
