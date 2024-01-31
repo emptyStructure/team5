@@ -51,8 +51,8 @@ public class Login extends HttpServlet {
 				
 				response.sendRedirect("./index");
 			} else {
-				//에러페이지?
-				response.sendRedirect("./login");
+				//에러페이지? 파라미터값 = 4567
+				response.sendRedirect("./login?error=4567");
 			}
 			
 		}
