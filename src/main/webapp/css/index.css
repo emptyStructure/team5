@@ -125,7 +125,7 @@ nav ul li:hover{
 	height: 12px;
 }
 
-.loginBox{
+.loginBox, .doneLogin{
 	margin: 0 auto;
 	width: 180px;
 	height: 140px;
@@ -145,6 +145,7 @@ nav ul li:hover{
 	height: 25px;
 	color: black;
 }
+
 a{
 	font-size: small;
 }

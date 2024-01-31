@@ -35,17 +35,19 @@
 				왼사이드<br>
 				광고1
 			</div>
-			<div class="sideTwo">
-				<div class="loginBox"><c:choose><c:when test="${sessionScope.mname eq null}">
+			<div class="sideTwo"><c:choose><c:when test="${sessionScope.mname eq null}">
+				<div class="loginBox">
 					<form action="./login" method="post">
 						<input type="text" name="id">			
 						<input type="password" name="pw">
-						<button type="submit">로그인</button>
-						<a href="./join">회원가입</a>		
-					</form></c:when><c:otherwise>
-						${sessionScope.mname}님<br>
-						<a href="./message">내쪽지함</a></c:otherwise></c:choose>
-				</div>
+						<button type="submit">로그인</button>		
+					</form>
+					<a href="./join">회원가입</a>	
+				</div></c:when><c:otherwise>
+				<div class="doneLogin">
+					${sessionScope.mname}님<br>
+					<a href="./message">내쪽지함</a>
+				</div></c:otherwise></c:choose>
 				<div>
 					광고2
 				</div>
