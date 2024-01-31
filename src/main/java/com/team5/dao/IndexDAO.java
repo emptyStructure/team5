@@ -20,7 +20,7 @@ public class IndexDAO extends AbstractDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT btitle, "
+		String sql = "SELECT bno, btitle, "
 				+ "if(date_format(current_timestamp(),'%Y. %m. %d') = DATE_FORMAT(bdate,'%Y. %m. %d'),date_format(bdate,'%h:%i'),date_format(bdate,'%m. %d')) AS bdate "	
 				+ "FROM board ORDER BY bno desc LIMIT 0, 10";
 		
@@ -30,8 +30,9 @@ public class IndexDAO extends AbstractDAO{
 			
 			while(rs.next()) {
 				BoardDTO e = new BoardDTO();
-				e.setBtitle(rs.getString(1));
-				e.setBdate(rs.getString(2));
+				e.setBno(rs.getInt(1));
+				e.setBtitle(rs.getString(2));
+				e.setBdate(rs.getString(3));
 				list.add(e);
 			}
 		} catch (SQLException e) {
@@ -48,7 +49,7 @@ public class IndexDAO extends AbstractDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT stitle, "
+		String sql = "SELECT sno, stitle, "
 				+ "if(date_format(current_timestamp(),'%Y. %m. %d') = DATE_FORMAT(sdate,'%Y. %m. %d'),date_format(sdate,'%h:%i'),date_format(sdate,'%m. %d')) AS sdate "
 				+ "FROM somoim ORDER BY sno desc LIMIT 0, 10";
 		
@@ -58,6 +59,7 @@ public class IndexDAO extends AbstractDAO{
 			
 			while(rs.next()) {
 				SomoimDTO e = new SomoimDTO();
+				e.setSno(rs.getInt("sno"));
 				e.setStitle(rs.getString("stitle"));
 				e.setSdate(rs.getString("sdate"));
 				list.add(e);
@@ -77,7 +79,7 @@ public class IndexDAO extends AbstractDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT jtitle, "
+		String sql = "SELECT jno, jtitle, "
 				+ "if(date_format(CURRENT_TIMESTAMP(),'%Y. %m. %d') = DATE_FORMAT(jdate,'%Y. %m. %d'),date_format(jdate,'%h:%i'),date_format(jdate,'%m. %d')) AS jdate "
 				+ "FROM joonggo ORDER BY jno DESC LIMIT 0, 10";
 		
@@ -86,6 +88,7 @@ public class IndexDAO extends AbstractDAO{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Map<String, Object> e = new HashMap<String, Object>();
+				e.put("jno", rs.getInt("jno"));
 				e.put("title", rs.getString("jtitle"));
 				e.put("date", rs.getString("jdate"));
 				list.add(e);

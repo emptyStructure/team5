@@ -33,7 +33,7 @@
 		<div class="middle">				
 			<div class="sideOne">
 				왼사이드<br>
-				광고
+				광고1
 			</div>
 			<div class="sideTwo">
 				<div class="loginBox"><c:choose><c:when test="${sessionScope.mname eq null}">
@@ -45,6 +45,9 @@
 					</form></c:when><c:otherwise>
 						${sessionScope.mname}님<br>
 						<a href="./message">내쪽지함</a></c:otherwise></c:choose>
+				</div>
+				<div>
+					광고2
 				</div>
 			</div>
 			<div class="main">		
@@ -72,7 +75,7 @@
 							<table>
 								<c:forEach items="${somList}" var="row">
 								<tr>
-									<td class="title">${row.stitle }</td>
+									<td class="title"><a href="./soDetail?sno=${row.sno}">${row.stitle }</a></td>
 									<td class="date">${row.sdate }</td>
 								</tr></c:forEach>
 							</table>
