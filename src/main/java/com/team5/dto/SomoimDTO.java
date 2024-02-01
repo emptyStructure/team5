@@ -1,7 +1,7 @@
 package com.team5.dto;
 
 public class SomoimDTO {
-	private int sno, mno, sdel;
+	private int sno, mno, sdel, total;
 	private String stitle, scontent, sdate, scategory, swriter;
 	public int getSno() {
 		return sno;
@@ -50,6 +50,12 @@ public class SomoimDTO {
 	}
 	public void setSwriter(String swriter) {
 		this.swriter = swriter;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
 	

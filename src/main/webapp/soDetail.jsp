@@ -63,7 +63,7 @@ $(document).ready(function(){
 			<div class="body">
 				<div class="info">
 					<div class="writer">${detail.swriter }</div>
-					<div class="view">❤️ 100</div>
+					<div class="view">👪 ${detail.total } / ❤️ 100</div>
 				</div>
 				<div class="conStyle">
 					<div class="content">${detail.scontent }</div>
