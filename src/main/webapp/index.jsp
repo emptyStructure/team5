@@ -8,17 +8,15 @@
 <meta charset="UTF-8">
 <title>index</title>
 <link href="./css/index.css" rel="stylesheet"/>
-<script type="text/javascript">
-	function url(url){location.href=url;}
-</script>
+<script type="text/javascript" src="./js/menu.js"></script>
 </head>
 <body>	
+	<header>
+		<div class="menu">
+			<%@ include file="menu.jsp"%>
+		</div>
+	</header>	
 	<div class="container">
-		<div class="header">
-			<div class="menu">
-				<%@ include file="menu.jsp"%>
-			</div>
-		</div>	
 		<div class="middle">				
 			<div class="sideOne">
 				왼사이드<br>
@@ -29,13 +27,16 @@
 					<form action="./login" method="post">
 						<input type="text" name="id">			
 						<input type="password" name="pw">
+						<button type="button"><a href="./join">회원가입</a></button>		
 						<button type="submit">로그인</button>		
 					</form>
-					<a href="./join">회원가입</a>	
 				</div></c:when><c:otherwise>
 				<div class="doneLogin">
-					${sessionScope.mname}님<br>
-					<a href="./message">내쪽지함</a>
+					<form action="./logout">
+						${sessionScope.mname}님<br>
+						<button type="button"><a href="./myInfo">마이페이지</a></button>
+						<button type="submit">로그아웃</button>
+					</form>					
 				</div></c:otherwise></c:choose>
 				<div>
 					광고2
@@ -89,7 +90,8 @@
 			</div>
 		</div>
 	</div>
-	
-
+	<footer>
+		푸터푸터푸터
+	</footer>
 </body>
 </html>

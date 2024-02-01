@@ -31,7 +31,7 @@ public class Logout extends HttpServlet {
 			session.removeAttribute("mid");
 		}
 		session.invalidate();
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/index");
 		//로그아웃후 인덱스페이지로 갑니다.
 		rd.forward(request, response);
 	}

@@ -4,8 +4,26 @@ body{
 	margin: 0;
 	padding: 0;
 }
+
+header{
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	display: inline-block;
+	justify-content: flex-end;
+	text-align: center;
+	padding-top: 50px;
+}
+
+footer{
+	width: 100%;
+	height: 20px;
+	bottom: 0px;
+	border: 1px solid black;
+	font-size: small;
+}
+
 .container{
-	margin: 0;
 	padding: 0;
 	width: 100%;
 	height: 100vh;
@@ -13,35 +31,24 @@ body{
 	flex-direction: column;
 }
 
-.header{
-	margin: 0px;
-	padding: 0;
-	width: 100%;
-	height: 200px;
-	position: fixed;
-	display: inline-block;
-	background-color: gray;
-	justify-content: flex-end;
-	text-align: center;
-	padding-top: 50px;
-}
-
 .menu{
 	margin: 0;
 	padding: 0;
-	width: 500px;
+	min-width: 500px;
+	width: auto;
 	height: 50px;
 	bottom: 0;
-	border: 1px solid white;
+	border: 1px solid black;
 	display: inline-block;
 }
 
 nav{
-	width: 500px;
-	height: 50px;
+	min-width: 500px;
+	width: auto;
+	line-height: 40px;
 	margin: 0 auto;
-	position: fixed;
-	padding: 10px;
+	padding: 5px;
+	display: inline-block;
 }
 
 nav ul{
@@ -51,9 +58,9 @@ nav ul{
 	text-align: center;
 }
 nav ul li{
-  display: inline-block;
-  margin: 0 10px;
-  color: black;
+	margin: 0 10px;
+	color: black;
+	display: inline-block;
 }
 nav ul li:hover{
 	background-color: whitesmoke;
@@ -64,17 +71,17 @@ nav ul li:hover{
 	padding: 0;
 	flex : 1;
 	display: flex;
-	margin-top: 100px;
+	margin-top: 150px;
 }
 
 .sideOne, .sideTwo {
     width: 200px;
 	position: fixed;
     height: 100%;
-    background-color: darkgray;
     position: relative;
     z-index: 1;
     text-align: center;
+    border: 1px solid black;
 }
 .sideOne{
 	order: -1;
@@ -99,14 +106,17 @@ nav ul li:hover{
 .content {
 	width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     padding-top: 15px;
 }
 
 .board, .somoim, .market{
 	flex: 1;
+	min-height: 150px;
+	height: auto;
 	box-sizing: border-box;
-	margin: 0 10px;
+	margin: 15px 10px;
 	border: 1px solid black;
 	justify-content: center;
 	padding-top: 10px;
@@ -117,15 +127,31 @@ nav ul li:hover{
 
 .newcon {
 	width: 100%;
-	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+table{
+	border-collapse: collapse;
+	width: 80%;
+	min-height: 150px;
+	height: auto;
 }
 .title, .date {
 	width: 70%;
 	height: 12px;
+	text-align: left;
 }
 .date {
 	width: 30%;
 	height: 12px;
+	text-align: right;
+}
+
+
+form{	
+	bottom: 0;
 }
 
 .loginBox, .doneLogin{
@@ -145,11 +171,15 @@ nav ul li:hover{
 	box-sizing: border-box;
 }
 .loginBox button{
-	width: 100%;
+	width: 45%;
 	height: 25px;
 	color: black;
+	margin: 0 2px;
+	bottom: 2px;
 }
 
 a{
 	font-size: small;
+	text-decoration: none;
+	color: black;
 }
