@@ -134,4 +134,52 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 		return list;
 	}
 
+	public int insertChat(MessageDTO dto) {
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "INSERT INTO message (toMno, fromMno, mscontent) VALUES (?, ?, ?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getToMno());
+			pstmt.setInt(2, dto.getFromMno());
+			pstmt.setString(3, dto.getMscontent());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} close(null, pstmt, con);
+		
+		return result;
+	}
+
+	public List<MessageDTO> fromchatlist() {
+		List<MessageDTO> list = new ArrayList<MessageDTO>();
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT mscontent, "
+				+ "if(date_format(sendDate, '%Y-%m-%d') = date_format(current_timestamp(), '%Y-%m-%d'), "
+				+ "date_format(sendDate, '%H:%i'), date_format(sendDate, '%Y-%m-%d')) AS sendDate "
+				+ "FROM message WHERE fromMno = 9";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				MessageDTO e = new MessageDTO();
+				e.setMscontent(rs.getString("mscontent"));
+				e.setSendDate(rs.getString("sendDate"));
+				list.add(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, con);
+		}
+		
+		return list;
+	}
+
 }
