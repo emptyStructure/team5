@@ -67,13 +67,13 @@ public class jwrite extends HttpServlet {
 			JBoardDTO dto = new JBoardDTO();
 			dto.setJtitle(title);
 			dto.setJcontent(content);
-			dto.setJmid((String) session.getAttribute("jmid"));
+			dto.setJmid((String) session.getAttribute("mid"));
 			dto.setJip(Util.getIP(request));
 			JBoardDAO dao = new JBoardDAO();
 			int result = dao.jwrite(dto);
 			
 			if(result ==1) {
-				response.sendRedirect("./board");
+				response.sendRedirect("./jboard");
 				
 			} else {
 				response.sendRedirect("./error");

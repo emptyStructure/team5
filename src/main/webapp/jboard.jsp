@@ -78,7 +78,10 @@
 
 	</div>
 	
-	<button onclick ="url('./jwrite')"> 글쓰기</button>
+
+	
+<button onclick="window.location.href='./jwrite'">글쓰기</button>
+
 
 
 

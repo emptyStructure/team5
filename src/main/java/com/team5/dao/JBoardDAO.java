@@ -47,51 +47,6 @@ public class JBoardDAO extends AbstractDAO {
 		
 		}
 
-/*public List<JBoardDTO> jBoardList() {
-		
-		// 컨텍션을 해주고 
-		
-		List<JBoardDTO> list = new ArrayList<JBoardDTO>();
-		Connection conn = db.getConnection();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "SELECT * FROM joonggo";
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				JBoardDTO e = new JBoardDTO();
-				e.setJno(rs.getInt("jno"));
-				e.setJtitle(rs.getString("jtitle"));
-				e.setJwrite(rs.getString("jwrite"));
-				e.setJdate(rs.getString("jdate"));
-				e.setJcount(rs.getInt("jcount"));
-				list.add(e);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs, pstmt, conn);
-		}
-		return list;
-		
-		// 프리페어드 
-		// 리절트셋 
-		// 
-		
-		
-		
-		// TODO Auto-generated method stub
-		
-	}*/
-		
-
-	
-	
-	
 
 
 
@@ -160,7 +115,7 @@ public int jwrite(JBoardDTO dto) {
 	
 	Connection con = db.getConnection();
 	PreparedStatement pstmt = null; 
-	String sql = "INSERT INTO board( jtitle, jcontent, jmno, jip)"
+	String sql = "INSERT INTO joonggo( jtitle, jcontent, mno, jip)"
 			+"VALUES(?,?,(SELECT mno FROM member WHERE mid=?),?)";
 	// TODO Auto-generated method stub
 	

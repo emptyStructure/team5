@@ -25,20 +25,19 @@
 
 </head>
 <body>
+
+<div class ="container1">
 	<article>
 		<h1>글쓰기</h1>
-		<div>
+		
+			<div class ="mainStyle">
 			<form action="./jwrite" method="post">
 				<input type="text" id="title" name="title">
-				<textarea id="summernote" name=" content"> </textarea>
+				<textarea id="summernote" name="content"> </textarea>
 				<button type="submit">저장하기</button>
-
-
 			</form>
-
-		</div>
-
+			</div>
 	</article>
-
+	</div>
 </body>
 </html>
