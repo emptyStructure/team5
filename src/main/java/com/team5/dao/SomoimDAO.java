@@ -33,6 +33,7 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setSwriter(rs.getString(5));
 				dto.setMno(rs.getInt(6));
 				dto.setSdate(rs.getString(7));
+				dto.setTotal(rs.getInt(8));
 				result.add(dto);
 			}
 		} catch (SQLException e) {
@@ -65,6 +66,7 @@ public class SomoimDAO extends AbstractDAO{
 				result.setSwriter(rs.getString(5));
 				result.setMno(rs.getInt(6));
 				result.setSdate(rs.getString(7));
+				result.setTotal(rs.getInt(8));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
