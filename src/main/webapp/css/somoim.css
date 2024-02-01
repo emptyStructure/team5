@@ -27,6 +27,14 @@
 	border-radius: 12px;
 	text-align: center;
 }
+.views{
+	top: 0;
+	line-height: 250%;
+	margin: 10px;
+	box-sizing: border-box;
+	text-align: right;
+	
+}
 .info{
 	position: absolute;
 	width: calc(100% - 20px);
@@ -37,16 +45,16 @@
 	width: 50%;
 	text-align: left;
 	box-sizing: border-box;
-	float: left;
 	font-size: larger;
 }
-.views{
-	box-sizing: border-box;
-	text-align: right;
-}
-.writer{
+.writer, .date{
 	margin-top: 5px;
 	font-size: smaller;
+	width: 50%;
+	float: left;
+}
+.date{
+	text-align: right;	
 }
 .over{
 	width: calc(100% - 45px);

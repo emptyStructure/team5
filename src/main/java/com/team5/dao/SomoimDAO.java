@@ -99,4 +99,27 @@ public class SomoimDAO extends AbstractDAO{
 		return result;
 	}
 
+	public int write(String title, String content, String category) {
+		int result = 0;
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "INSERT INTO somoim (stitle, scontent, scategory, mno) VALUES (?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setString(3, category);
+			pstmt.setInt(4, 1);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
+		
+		return result;
+	}
+
 }

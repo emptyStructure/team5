@@ -18,7 +18,6 @@ $(function(){
         var name = "popup test";
         var option = "width = 600, height = 700, top = 100, left = 200, location = no"
 		window.open(url, name, option);
-		
 	});
 });
 </script>
@@ -30,14 +29,18 @@ $(function(){
 		</header>
 		<div class="main">
 			<div class="mainStyle">
+			<div>
+				<button onclick="location.href='./somoimWrite'">글 작성</button>
+			</div>
 				<c:forEach items="${list }" var="row">
 					<div class="card">
 						<div class="image">	
 							<div class="category">${row.scategory }</div>
+							<div class="views">👪${row.total } ❤️100</div>
 							<div class="info">
 								<div class="title">${row.stitle }</div>
-								<div class="views">👪${row.total } ❤️100</div>
 								<div class="writer">${row.swriter }</div>
+								<div class="date">${row.sdate }</div>
 								<input type="hidden" class="sno" value="${row.sno }">
 							</div>
 						</div>
