@@ -77,15 +77,15 @@ public class SomoimDAO extends AbstractDAO{
 		return result;
 	}
 	
-	public int join(JoinSomoimDTO dto) {
+	public int join(JoinSomoimDTO dto, String mid) {
 		int result = 0;
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO joinSomoim (mno, sno, name, ph, message) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO joinSomoim (mno, sno, name, ph, message) VALUES ((SELECT mno FROM member WHERE MID = ?),?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, dto.getMno());
+			pstmt.setString(1, mid);
 			pstmt.setInt(2, dto.getSno());
 			pstmt.setString(3, dto.getName());
 			pstmt.setString(4, dto.getPh());
@@ -96,6 +96,29 @@ public class SomoimDAO extends AbstractDAO{
 		}finally {
 			close(null, pstmt, conn);
 		}
+		return result;
+	}
+
+	public int write(SomoimDTO dto, String mid) {
+		int result = 0;
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "INSERT INTO somoim (stitle, scontent, scategory, mno) VALUES (?,?,?,(SELECT mno FROM member WHERE MID = ?))";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getStitle());
+			pstmt.setString(2, dto.getScontent());
+			pstmt.setString(3, dto.getScategory());
+			pstmt.setString(4, mid);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
+		
 		return result;
 	}
 

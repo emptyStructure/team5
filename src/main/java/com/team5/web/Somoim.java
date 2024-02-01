@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.team5.dao.SomoimDAO;
 import com.team5.dto.SomoimDTO;
@@ -25,6 +26,10 @@ public class Somoim extends HttpServlet {
 		SomoimDAO dao = new SomoimDAO();
 		List<SomoimDTO> list = dao.list();
 		request.setAttribute("list", list);
+		
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("mname"));
+		System.out.println(session.getAttribute("mid"));
 		
 		RequestDispatcher rd = request.getRequestDispatcher("somoim.jsp");
 		rd.forward(request, response);
