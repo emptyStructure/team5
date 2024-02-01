@@ -34,6 +34,7 @@ public class JBoardDAO extends AbstractDAO {
 				e.setJwrite(rs.getString("jwrite"));
 				e.setJdate(rs.getString("jdate"));
 				e.setJcount(rs.getInt("jcount"));
+				e.setJsell(rs.getString("jsell"));
 				list.add(e);
 			}
 
@@ -88,12 +89,97 @@ public class JBoardDAO extends AbstractDAO {
 	}*/
 		
 
+	
+	
+	
 
 
 
 public int totalCount() {
-		// TODO Auto-generated method stub
-		return 0;
+	Connection con =db.getConnection();
+	PreparedStatement pstmt= null;
+	ResultSet rs = null;
+	String sql = "SELECT COUNT(*) FROM joonggo";
+	
+	int result = 0;
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			result = rs.getInt(1);
+		}
+		
+	} catch(SQLException e) { 
+		e.printStackTrace();
+	} finally {
+		close(rs,pstmt,con);
 	}
+		// TODO Auto-generated method stub
+		return result;
+	}
+
+public JBoardDTO detail(int no) {
+	JBoardDTO dto = new JBoardDTO();
+	Connection con = db.getConnection();
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String sql = "SELECT j.jno, j.jtitle, j.jcontent, m.mname as jboard_wirte, m.mid,j.jdate, j.jip, "
+			+ "			(SELECT COUNT(*) FROM visitcount WHERE jno = j.jno) AS board_count "
+			+ "			FROM joonggo j JOIN member m ON j.mno=m.mno WHERE j.jno=?";
+	
+	try {
+		pstmt= con.prepareStatement(sql);
+		pstmt.setInt(1,no);
+		rs= pstmt.executeQuery();
+		
+		if(rs.next()) {
+			dto.setJno(rs.getInt("jno"));
+			dto.setJtitle(rs.getString("jtitle"));
+			dto.setJcontent(rs.getString("jcontent"));
+			dto.setJwrite(rs.getString("jwrite"));
+			dto.setJdate(rs.getString("jdate"));
+			dto.setJcount(rs.getInt("jcount"));
+			dto.setJmid(rs.getString("mid"));
+			dto.setJip(rs.getString("jip"));
+		}
+		
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	// TODO Auto-generated method stub
+	return dto;
+}
+
+public int jwrite(JBoardDTO dto) {
+	
+	int result = 0; 
+	
+	Connection con = db.getConnection();
+	PreparedStatement pstmt = null; 
+	String sql = "INSERT INTO board( jtitle, jcontent, jmno, jip)"
+			+"VALUES(?,?,(SELECT mno FROM member WHERE mid=?),?)";
+	// TODO Auto-generated method stub
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, dto.getJtitle());
+		pstmt.setString(2, dto.getJcontent());
+		pstmt.setString(3, dto.getJmid());
+		pstmt.setString(4, dto.getJip());
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally {
+		close(null,pstmt,con);
+	}
+	
+	return result;
+}
 
 }
