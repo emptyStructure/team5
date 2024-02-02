@@ -5,147 +5,92 @@ body{
 	padding: 0;
 }
 
-header{
+#container{
+	margin: 0;
+	padding: 20px;
 	width: 100%;
-	height: 50px;
-	position: fixed;
-	display: inline-block;
-	justify-content: flex-end;
+	height: 100vh;
+	background-color: wheat;
+}
+
+header{
+	padding: 20px;
+	height: 60px;
 	text-align: center;
-	padding-top: 50px;
+	background-color: skyblue;
+	vertical-align: bottom;
 }
 
 footer{
-	width: 100%;
-	height: 20px;
-	bottom: 0px;
-	border: 1px solid black;
+	clear: both;
+	font-size: small;
+	bottom: 0;
+}
+
+.side {
+    width: 180px;
+    height: calc(100vh - 140px);
+    background-color: lightgoldenrodyellow;
+}
+#left{
+	float: left;
+}
+#content {
+	width: calc(100% - 360px);
+    height: calc(100vh - 140px);
+	float: left;
+	background-color: palegreen;
+}
+#right{
+	float: right;	
+}
+
+#contents{
+	margin: auto;
+	display: flex;
+}
+
+#newBoard, #newSomoim, #newMarket{
+	width: 350px;
+	height: 400px;
+	flex: 1;
+	margin: 15px;
+	padding: 10px;
+	border: 1px solid darkslategray;
+}
+
+.newTitle{
+	width: 80%;
+	margin: 0px;
+	padding: 5px;
+	text-align: center;
+	border: 1px soid silver;
 	font-size: small;
 }
 
-.container{
-	padding: 0;
-	width: 100%;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
-
-.menu{
-	margin: 0;
-	padding: 0;
-	min-width: 500px;
-	width: auto;
-	height: 50px;
-	bottom: 0;
-	border: 1px solid black;
-	display: inline-block;
-}
-
-nav{
-	min-width: 500px;
-	width: auto;
-	line-height: 40px;
-	margin: 0 auto;
-	padding: 5px;
-	display: inline-block;
-}
-
-nav ul{
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	text-align: center;
-}
-nav ul li{
-	margin: 0 10px;
-	color: black;
-	display: inline-block;
-}
-nav ul li:hover{
-	background-color: whitesmoke;
-}
-
-.middle{
-	margin: 0;
-	padding: 0;
-	flex : 1;
-	display: flex;
-	margin-top: 150px;
-}
-
-.sideOne, .sideTwo {
-    width: 200px;
-	position: fixed;
-    height: 100%;
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    border: 1px solid black;
-}
-.sideOne{
-	order: -1;
-}
-.sideTwo{
-	order: 1;
-}
-
-.main{
-	width: calc(100% - 400px);
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	align-items: center; /* 가운데 정렬 */
-	background-color: beige;
-	z-index: 2;
-	text-align: center;
-	box-sizing: border-box;
-}
-
-.content {
-	width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-top: 15px;
-}
-
-.board, .somoim, .market{
-	flex: 1;
-	min-height: 150px;
-	height: auto;
-	box-sizing: border-box;
-	margin: 15px 10px;
-	border: 1px solid black;
-	justify-content: center;
-	padding-top: 10px;
-}
-.new{
-	width: 100%;
-}
-
-.newcon {
-	width: 100%;
+.newContents{
+	width: 80%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-size: small;
 }
 
 table{
 	border-collapse: collapse;
 	width: 80%;
-	min-height: 150px;
-	height: auto;
+	max-height: 350px;
 }
 .title, .date {
 	width: 70%;
-	height: 12px;
+	height: 15px;
+	margin: 2px;
+	padding: 2px;
 	text-align: left;
 }
 .date {
 	width: 30%;
-	height: 12px;
+	height: 15px;
 	text-align: right;
 }
 
@@ -155,13 +100,13 @@ form{
 }
 
 .loginBox, .doneLogin{
-	margin: 0 auto;
+	margin: 15px 0px;
 	width: 180px;
-	height: 140px;
+	height: 120px;
 	padding: 10px;
 	border: 1px solid black;
 	box-sizing: border-box;
-	margin-top: 15px;
+	vertical-align: top;
 }
 .loginBox input{
 	width: 100%;
@@ -182,4 +127,17 @@ a{
 	font-size: small;
 	text-decoration: none;
 	color: black;
+}
+
+.add{
+	width: 180px;
+	min-height: 300px;
+	max-height: 400px;
+	height: auto;
+	margin: 10px 0px 0px 0px;
+	background-color: azure;
+}
+
+#add1{
+	margin-top: 150px;
 }
