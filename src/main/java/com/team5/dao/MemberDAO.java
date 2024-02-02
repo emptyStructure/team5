@@ -34,4 +34,26 @@ public class MemberDAO extends AbstractDAO{
 		return dto;
 	}
 
+	public int join(MemberDTO dto) {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO member (mid, mpw, mname, memail) "
+					+ "VALUES (?, ?, ?, ?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getMid());
+			pstmt.setString(2, dto.getMpw());
+			pstmt.setString(3, dto.getMname());
+			pstmt.setString(4, dto.getMemail());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
+		return result;
+	}
+
 }
