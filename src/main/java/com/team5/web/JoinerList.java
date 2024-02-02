@@ -34,11 +34,13 @@ public class JoinerList extends HttpServlet {
 		System.out.println(Util.str2Int((request.getParameter("sno"))));
 		List<JoinSomoimDTO> list =dao.joinList((String)session.getAttribute("mid"), Util.str2Int((request.getParameter("sno"))));
 		
-		request.setAttribute("title", list.get(1).getTitle());
-		request.setAttribute("sno", list.get(1).getSno());
+		//요청이 한개도 없으면 오류남. 고쳐야되네
+		if(list.size()>0) {
+			request.setAttribute("title", list.get(0).getTitle());
+			request.setAttribute("sno", list.get(0).getSno());
+		} 
 		request.setAttribute("list", list);
 		
-		System.out.println(list);
 		RequestDispatcher rd = request.getRequestDispatcher("joinerList.jsp");
 		rd.forward(request, response);
 	}

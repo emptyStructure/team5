@@ -24,10 +24,10 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#submit").click(function(){
+	$("#done").click(function(){
 		
 		let title = $("#title").val();
-		let content = $("#content").val();
+		let content = $("#summernote").val();
 		if(title.length>20||title.length<1||content.length<1){
 			alert("작성 내용을 확인해주세요");
 		} else{
@@ -54,7 +54,7 @@ $(document).ready(function(){
 							</select>
 							<span id="textLengthCheck">( 0 / 20글자 )</span>
 							<textarea id="summernote" name="content"></textarea>
-							<button type="button" id="submit">작성하기</button>
+							<button type="button" id="done">작성하기</button>
 						</form>
 					</div>
 				</article>
