@@ -37,10 +37,8 @@ public class SomoimWrite extends HttpServlet {
 		dto.setScategory(request.getParameter("category"));
 		int result = dao.write(dto, (String)session.getAttribute("mid"));
 		if(result == 1) {
-			System.out.println("게시글 작성 성공");
 			response.sendRedirect("./somoim");
 		} else {
-			System.out.println("게시글 작성 실패");
 			response.sendRedirect("./error.jsp");
 		}
 		

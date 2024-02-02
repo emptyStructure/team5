@@ -28,8 +28,6 @@ public class Somoim extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("mname"));
-		System.out.println(session.getAttribute("mid"));
 		
 		RequestDispatcher rd = request.getRequestDispatcher("somoim.jsp");
 		rd.forward(request, response);

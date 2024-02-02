@@ -26,12 +26,8 @@ public class JoinerList extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		System.out.println("리스트 접속");
-		System.out.println(session.getAttribute("mname"));
-		System.out.println(session.getAttribute("mid"));
 		
 		SomoimDAO dao = new SomoimDAO();
-		System.out.println(Util.str2Int((request.getParameter("sno"))));
 		List<JoinSomoimDTO> list =dao.joinList((String)session.getAttribute("mid"), Util.str2Int((request.getParameter("sno"))));
 		
 		//요청이 한개도 없으면 오류남. 고쳐야되네
