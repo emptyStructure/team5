@@ -9,19 +9,29 @@ h4{
 }
 
 #infoContents{
-	margin: auto;
+	box-sizing: border-box;
+	padding: 20px;
+	text-align: center;
 }
 
 
 #chngInfo, #myMarket, #myBoard, #mySomoim {
-	width: 360px;
-	height: 200px;
+	width: 40%;
+	min-height: 200px;
+	height: auto;
 	float: left;
-	margin : auto;
+	margin : 10px;
 	padding: 10px 20px;
 }
 
-#myHistory{
-	padding: 10px 20px;
+#change {
+	margin: 10px 50px;
+	text-align: left;
 }
 
+table{
+	margin: 0 auto;
+}
+.tt{
+	text-align: left;
+}

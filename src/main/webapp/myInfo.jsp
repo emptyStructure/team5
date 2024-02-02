@@ -31,7 +31,7 @@
 			<div id="infoContents">
 				<div id="chngInfo">
 					<h4>내 정보 수정</h4>
- 					<form action="./myInfo" method="post">
+ 					<form action="./myInfo" method="post" id="change">
  							<label> 이름 <br>
 								<input type="text" value="${myInfo.mname }">
  							</label><br>
@@ -55,9 +55,9 @@
 						</tr>
 						<c:forEach items="${myBoard }" var="row">
 						<tr>
-							<td>${row.btitle }</td>
-							<td>${row.bdate }</td>
-							<td>${row.bcount }</td>
+							<td class="tt">${row.btitle }</td>
+							<td class="dd">${row.bdate }</td>
+							<td id="cc">${row.bcount }</td>
 						</tr>
 						</c:forEach>
 					</table>															

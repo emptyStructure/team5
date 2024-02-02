@@ -44,7 +44,8 @@ public class InfoDAO extends AbstractDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT bno, btitle, mno, bdate, bcount "
+		String sql = "SELECT bno, btitle, mno, bcount, "
+				+ "if(date_format(current_timestamp(),'%Y. %m. %d') = DATE_FORMAT(bdate,'%Y. %m. %d'),date_format(bdate,'%h:%i'),date_format(bdate,'%m. %d')) AS bdate "
 				+ "from board WHERE mno=(SELECT mno FROM member WHERE mid=?) LIMIT 0, 10";
 		
 		try {

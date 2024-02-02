@@ -34,7 +34,7 @@
 					<table>
 						<c:forEach items="${boardList}" var="row">
 						<tr>
-							<td class="title">${row.btitle }</td>
+							<td class="title"><a href="./detail?no=${row.bno}">${row.btitle }</a></td>
 							<td class="date">${row.bdate }</td>
 						</tr></c:forEach>
 					</table>
@@ -62,7 +62,7 @@
 					<table>
 						<c:forEach items="${marketList}" var="row">
 						<tr>
-							<td class="title">${row.get("title") }</td>
+							<td class="title"><a href="./jdetail?no=${row.jno}">${row.get("title") }</a></td>
 							<td class="date">${row.get("date") }</td>
 						</tr></c:forEach>
 					</table>			
