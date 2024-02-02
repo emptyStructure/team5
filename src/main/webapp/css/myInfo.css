@@ -1,0 +1,27 @@
+@charset "UTF-8";
+h3{
+	padding: 20px;
+	margin: 0;
+}
+h4{
+	margin: 0;
+	margin: 5px 0;
+}
+
+#infoContents{
+	margin: auto;
+}
+
+
+#chngInfo, #myMarket, #myBoard, #mySomoim {
+	width: 360px;
+	height: 200px;
+	float: left;
+	margin : auto;
+	padding: 10px 20px;
+}
+
+#myHistory{
+	padding: 10px 20px;
+}
+

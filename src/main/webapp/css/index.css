@@ -25,6 +25,7 @@ footer{
 	clear: both;
 	font-size: small;
 	bottom: 0;
+	position: fixed;
 }
 
 .side {

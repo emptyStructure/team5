@@ -17,32 +17,13 @@
 			<div id="menu">
 				<%@ include file="menu.jsp"%>
 			</div>
-		</header>					
+		</header>
 		<div class="side" id="left">
-			<div class="add" id="add1">
-			광고1
-			</div>
+			<%@ include file="leftside.jsp"%>
 		</div>
-		<div class="side" id="right"><c:choose><c:when test="${sessionScope.mname eq null}">
-			<div class="loginBox">
-				<form action="./login" method="post">
-					<input type="text" name="id">			
-					<input type="password" name="pw">
-					<button type="button"><a href="./join">회원가입</a></button>		
-					<button type="submit">로그인</button>		
-				</form>
-			</div></c:when><c:otherwise>
-			<div class="doneLogin">
-				<form action="./logout">
-					${sessionScope.mname}님<br>
-					<button type="button"><a href="./myInfo">마이페이지</a></button>
-					<button type="submit">로그아웃</button>
-				</form>					
-			</div></c:otherwise></c:choose>
-			<div class="add" id="add2">
-				<img alt="광고2" src="./img/adv.gif" width="100%">
-			</div>
-		</div>
+		<div class="side" id="right">
+			<%@ include file="rightside.jsp"%>
+		</div>			
 		<div id="content">
 			<div id="contents">
 			<div id="newBoard">	
