@@ -1,13 +1,13 @@
 package com.team5.dto;
 
 public class JoinSomoimDTO {
-	private int joinno, mno, sno, status;
-	private String name, ph, message, joindate;
-	public int getJoinno() {
-		return joinno;
+	private int jno, mno, sno, status;
+	private String name, ph, message, joindate, title;
+	public int getJno() {
+		return jno;
 	}
-	public void setJoinno(int joinno) {
-		this.joinno = joinno;
+	public void setJno(int joinno) {
+		this.jno = joinno;
 	}
 	public int getMno() {
 		return mno;
@@ -50,6 +50,12 @@ public class JoinSomoimDTO {
 	}
 	public void setJoindate(String joindate) {
 		this.joindate = joindate;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	
