@@ -25,14 +25,30 @@ public class TrashMessage extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String mid = (String) session.getAttribute("mid");
 		MessageDAO dao = new MessageDAO();
+		MessageDTO dto = new MessageDTO();
 		List<MessageDTO> namelist = new ArrayList<MessageDTO>();
 		namelist = dao.nameList();
 		List<MessageDTO> fromchatlist = new ArrayList<MessageDTO>();
-		fromchatlist = dao.fromchatlist();
-		request.setAttribute("namelist", namelist);
-		request.setAttribute("fromchatlist", fromchatlist);
+		dto.setMid(mid);
 		
+		if (request.getParameter("mno") != null) {
+			int mno = Integer.parseInt(request.getParameter("mno"));
+			dto.setMno(mno); // 클릭한 상대방의 mno값 세팅
+			fromchatlist = dao.fromchatlist();
+			request.setAttribute("fromchatlist", fromchatlist);
+			
+			response.setContentType("text/html;charset=UTF-8");
+	        PrintWriter out = response.getWriter();
+	        for (MessageDTO chat : fromchatlist) {
+	            out.println("<p>" + chat.getSendDate() + ": " + chat.getMscontent() + "</p>");
+	        }
+		}
+		
+		
+		request.setAttribute("namelist", namelist);
 		RequestDispatcher rd = request.getRequestDispatcher("trashmessage.jsp");
 		rd.forward(request, response);
 	}
@@ -43,14 +59,17 @@ public class TrashMessage extends HttpServlet {
 		MessageDAO dao = new MessageDAO();
 		MessageDTO dto = new MessageDTO();
 		int toMno = Integer.parseInt(request.getParameter("mno")); 
-		String mname = request.getParameter("mname"); 
 		String mscontent = request.getParameter("mscontent");
-		int testnum = 9;
+		
+		// 자기 Mno(FromMno)
+		String mid = (String) session.getAttribute("mid");
+		System.out.println(mid);
 		dto.setToMno(toMno);
 		dto.setMscontent(mscontent);
-		dto.setFromMno(testnum);
+		dto.setMid(mid); // 로그인 된 사람 아이디
 		int result = dao.insertChat(dto);
 		
+		response.setContentType("text/plain;charset=UTF-8");
 		PrintWriter pw = response.getWriter();
 		pw.print(result);
 		System.out.println(result);
