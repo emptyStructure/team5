@@ -55,7 +55,6 @@ public class JoinerList extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SomoimDAO dao = new SomoimDAO();
-		System.out.println("dao 진입");
 		int respon = Util.str2Int2(request.getParameter("respon"));
 		String jno = request.getParameter("jno");
 		int result = dao.respon(respon, jno);

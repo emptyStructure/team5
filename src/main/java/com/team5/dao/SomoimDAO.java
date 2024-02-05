@@ -34,6 +34,7 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setMno(rs.getInt(6));
 				dto.setSdate(rs.getString(7));
 				dto.setTotal(rs.getInt(8));
+				dto.setWaiting(rs.getInt(9));
 				result.add(dto);
 			}
 		} catch (SQLException e) {
@@ -68,6 +69,7 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setMno(rs.getInt(6));
 				dto.setSdate(rs.getString(7));
 				dto.setTotal(rs.getInt(8));
+				dto.setWaiting(rs.getInt(9));
 				result.add(dto);
 			}
 		} catch (SQLException e) {
@@ -78,8 +80,7 @@ public class SomoimDAO extends AbstractDAO{
 		
 		return result;
 	}
-	
-	
+
 	public SomoimDTO detail(int no){
 		SomoimDTO result = new SomoimDTO();
 		
@@ -197,10 +198,9 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT j.joinno, j.mno, j.sno, j.name, j.ph, j.message, j.joinDate, j.status, s.stitle "
+		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, j.joinno, j.mno, j.sno, j.name, j.ph, j.message, j.joinDate, j.status, s.stitle "
 				+ "FROM joinSomoim j JOIN somoim s ON j.sno = s.sno "
 				+ "WHERE j.sno= ? and s.mno=(SELECT mno FROM member WHERE MID = ?)";
-				System.out.println("para 없음");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, sno);
@@ -208,15 +208,16 @@ public class SomoimDAO extends AbstractDAO{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				JoinSomoimDTO dto = new JoinSomoimDTO();
-				dto.setJno(rs.getInt(1));
-				dto.setMno(rs.getInt(2));
-				dto.setSno(rs.getInt(3));
-				dto.setName(rs.getString(4));
-				dto.setPh(rs.getString(5));
-				dto.setMessage(rs.getString(6));
-				dto.setJoindate(rs.getString(7));
-				dto.setStatus(rs.getInt(8));
-				dto.setTitle(rs.getString(9));
+				dto.setNo(rs.getInt(1));
+				dto.setJno(rs.getInt(2));
+				dto.setMno(rs.getInt(3));
+				dto.setSno(rs.getInt(4));
+				dto.setName(rs.getString(5));
+				dto.setPh(rs.getString(6));
+				dto.setMessage(rs.getString(7));
+				dto.setJoindate(rs.getString(8));
+				dto.setStatus(rs.getInt(9));
+				dto.setTitle(rs.getString(10));
 				result.add(dto);
 			}
 			
@@ -235,10 +236,9 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT j.joinno, j.mno, j.sno, j.name, j.ph, j.message, j.joinDate, j.status, s.stitle "
+		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO,j.joinno, j.mno, j.sno, j.name, j.ph, j.message, j.joinDate, j.status, s.stitle "
 				+ "FROM joinSomoim j JOIN somoim s ON j.sno = s.sno "
 				+ "WHERE j.sno= ? and s.mno=(SELECT mno FROM member WHERE MID = ?) AND status =?";
-		System.out.println("para 있음");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, sno);
@@ -247,15 +247,48 @@ public class SomoimDAO extends AbstractDAO{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				JoinSomoimDTO dto = new JoinSomoimDTO();
-				dto.setJno(rs.getInt(1));
-				dto.setMno(rs.getInt(2));
-				dto.setSno(rs.getInt(3));
-				dto.setName(rs.getString(4));
-				dto.setPh(rs.getString(5));
-				dto.setMessage(rs.getString(6));
-				dto.setJoindate(rs.getString(7));
-				dto.setStatus(rs.getInt(8));
-				dto.setTitle(rs.getString(9));
+				dto.setNo(rs.getInt(1));
+				dto.setJno(rs.getInt(2));
+				dto.setMno(rs.getInt(3));
+				dto.setSno(rs.getInt(4));
+				dto.setName(rs.getString(5));
+				dto.setPh(rs.getString(6));
+				dto.setMessage(rs.getString(7));
+				dto.setJoindate(rs.getString(8));
+				dto.setStatus(rs.getInt(9));
+				dto.setTitle(rs.getString(10));
+				result.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return result;
+	}
+	
+	public List<JoinSomoimDTO> myJoinList(String mid){
+		List<JoinSomoimDTO> result = new ArrayList<JoinSomoimDTO>();
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT  ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status FROM joinSomoim j JOIN somoim s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				JoinSomoimDTO dto = new JoinSomoimDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setTitle(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setPh(rs.getString(4));
+				dto.setMessage(rs.getString(5));
+				dto.setJoindate(rs.getString(6));
+				dto.setStatus(rs.getInt(7));
 				result.add(dto);
 			}
 			

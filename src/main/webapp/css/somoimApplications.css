@@ -21,9 +21,32 @@ body {
 	color: white;
 	padding-left: 20px;
 }
+nav{
+	margin-top: 50px;
+}
+nav ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	overflow: hidden;
+}
+nav > ul > li {
+	margin: 0;
+	padding: 0;
+	margin: 5px 10px;
+	padding: 10px 0px;
+	text-align: left;
+	padding-left: 5px;
+	width: 150px;
+	overflow: hidden;
+}
+nav > ul > li:hover{
+	background-color: #333333;
+	color: white; 
+}
 table{
 	border-color: yellow;
-	width: 965px;
+	width: 80%;
 }
 th{
 	text-align: center;
@@ -35,38 +58,20 @@ td{
 	width: 3.5%;
 }
 .tname{
-	width: 8%;	
+	width: 11%;	
+}
+.ttitle{
+	width: 14%;
 }
 .tph{
-	width: 14%;
+	width: 10%;
 }
 .tmsg{
 	width: 43%;
 }
 .tdate{
-	width: 11%;
+	width: 10.5%;
 }
 .tstatus{
-	width: 12%;
-}
-.status-list{
-	width: 420px;
-	margin-bottom: 5px;
-}
-.status-list ul{
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	background-color: grey;
-	height: 30px;
-	line-height: 30px;
-}
-.status-list ul li{
-	width: 100px;
-	display: inline-block;
-	text-align: center;
-}
-.status-list ul li:hover {
-	font-weight: bold;
-	color: black
+	width: 8%;
 }

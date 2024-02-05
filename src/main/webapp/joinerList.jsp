@@ -17,8 +17,8 @@ $(function(){
 	
 	$('.accept').click(function(){
 		if(confirm("승인하시겠습니까?")){
-			let jno = $(this).parents(".select").siblings('.jno').text();
 			let tr = $(this).parents(".select").parents("tr");
+			let jno = tr.siblings('.jno').val();
 			$(this).parents(".select").text("🟢 승인");
 			
 			$.ajax({
@@ -80,19 +80,20 @@ $(function(){
 					<table border="1">
 						<thead>
 							<tr>
-								<th class="tno">jno</th>
-								<th class="tname">name</th>
-								<th class="tph">ph</th>
-								<th class="tmsg">message</th>
-								<th class="tdate">joindate</th>
-								<th class="tstatus">status</th>
+								<th class="tno">No.</th>
+								<th class="tname">이름</th>
+								<th class="tph">연락처</th>
+								<th class="tmsg">메세지</th>
+								<th class="tdate">신청일</th>
+								<th class="tstatus">상태</th>
 							</tr>
 						</thead>
 						<c:if test="${fn:length(list) gt 0 }">
 							<tbody>
 								<c:forEach items="${list }" var="row">
+									<input class="jno" value="${row.jno }" type="hidden">
 									<tr>
-										<td class="jno">${row.jno }</td>
+										<td class="no">${row.no }</td>
 										<td>${row.name }</td>
 										<td>${row.ph }</td>
 										<td>${row.message }</td>

@@ -42,7 +42,8 @@ $(document).ready(function(){
 			$('#textLengthCheck').text("( "+length+" / 100글자 )");
 			$('#textLengthCheck').css("color","black");
 			if(length>100){
-				$('#textLengthCheck').text("( "+length+" / 100글자 ) 100글자까지만 입력 가능합니다.");
+				$('#textLengthChec
+						k').text("( "+length+" / 100글자 ) 100글자까지만 입력 가능합니다.");
 				$('#textLengthCheck').css("color","red");
 			}
 		});
