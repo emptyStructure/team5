@@ -11,30 +11,41 @@
 <head>
 <meta charset="UTF-8">
 <title>중고거래</title>
+
+
+<script type="text/javascript">
+		function paging(no){
+			location.href="./jboard?page="+no;
+		}	
+	</script>
+
+
+
+
 </head>
 <body>
 
 	<table>
-    <tr>
-        <td>번호</td>
-        <td>제목</td>
-        <td>글쓴이</td>
-        <td>날짜</td>
-        <td>읽음</td>
-        <td>판매</td>
-    </tr>
-    <c:forEach items="${list}" var="row">
-        <tr>
-            <td>${row.jno}</td>
-            <td>${row.jtitle}</td>
-            <td>${row.jwrite}</td>
-            <td>${row.jdate}</td>
-            <td>${row.jcount}</td>
-            <td>${row.jsell}</td>
-        </tr>
-    </c:forEach>
-</table>
-	
+		<tr>
+			<td>번호</td>
+			<td>제목</td>
+			<td>글쓴이</td>
+			<td>날짜</td>
+			<td>읽음</td>
+			<td>판매</td>
+		</tr>
+		<c:forEach items="${list}" var="row">
+			<tr>
+				<td>${row.jno}</td>
+				<td><a href="./jdetail?page=${page}&no=${row.jno}">${row.jtitle}</a></td>
+				<td>${row.jwrite}</td>
+				<td>${row.jdate}</td>
+				<td>${row.jcount}</td>
+				<td>${row.jsell}</td>
+			</tr>
+		</c:forEach>
+	</table>
+
 	<c:set var="totalPage" value="${totalCount / 10 }" />
 	<fmt:parseNumber integerOnly="true" value="${totalPage }"
 		var="totalPage" />
@@ -50,6 +61,8 @@
 		<c:set var="endPage" value="${totalPage }" />
 	</c:if>
 
+
+
 	<div class="paging">
 		<button onclick="paging(1)">⏮️</button>
 		<button <c:if test="${page - 10 lt 1 }">disabled="disabled"</c:if>
@@ -64,6 +77,11 @@
 		<button onclick="paging(${totalPage })">⏭️</button>
 
 	</div>
+	
+
+	
+<button onclick="window.location.href='./jwrite'">글쓰기</button>
+
 
 
 

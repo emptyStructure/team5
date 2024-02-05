@@ -2,7 +2,7 @@ package com.team5.dto;
 
 public class MemberDTO {
 	private int mno, mgrade, count;
-	private String mid, mpw, mname, mdate;
+	private String mid, mpw, mname, mdate, memail;
 	public int getMno() {
 		return mno;
 	}
@@ -44,6 +44,12 @@ public class MemberDTO {
 	}
 	public void setCount(int count) {
 		this.count = count;
+	}
+	public String getMemail() {
+		return memail;
+	}
+	public void setMemail(String memail) {
+		this.memail = memail;
 	}
 	
 }

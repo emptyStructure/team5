@@ -53,26 +53,31 @@
 	overflow: hidden;
 	border-bottom: 1px solid black;
 }
-.form{
+#form{
 	width: calc(100% - 80px);
-	height: 220px;
+	height: 240px;
 	margin: 10px 20px; 
 	padding: 10px 20px;
 	background-color: #F9F7C9;
 	overflow: hidden;
 	border: 1px solid black;
 }
-.form textarea{
+#form textarea{
 	width: 100%;
 	height: 130px;
-	margin: 5px 0;
+	margin-top: 5px;
 	padding: 0;
 	resize : none;
 	box-sizing: border-box;
 }
+#textLengthCheck{
+	font-size: smaller;
+	color: black;
+}
 .name, .ph{
 	width: 50%;
 	float: left;
+	margin-top: -10;
 }
 .ph{
 	text-align: right;

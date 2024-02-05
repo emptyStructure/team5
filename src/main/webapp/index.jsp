@@ -8,88 +8,77 @@
 <meta charset="UTF-8">
 <title>index</title>
 <link href="./css/index.css" rel="stylesheet"/>
-<script type="text/javascript">
-	function url(url){location.href=url;}
-</script>
+<link href="./css/menu.css" rel="stylesheet"/>
+<script type="text/javascript" src="./js/menu.js"></script>
+<style type="text/css">
+#content{
+	display: flex;
+	align-items: center;
+}
+</style>
 </head>
 <body>	
-	<div class="container">
-		<div class="header">
-			<div class="menu">
+	<div id="container">
+		<header>
+			<div id="menu">
 				<%@ include file="menu.jsp"%>
 			</div>
-		</div>	
-		<div class="middle">				
-			<div class="sideOne">
-				왼사이드<br>
-				광고1
-			</div>
-			<div class="sideTwo"><c:choose><c:when test="${sessionScope.mname eq null}">
-				<div class="loginBox">
-					<form action="./login" method="post">
-						<input type="text" name="id">			
-						<input type="password" name="pw">
-						<button type="submit">로그인</button>		
-					</form>
-					<a href="./join">회원가입</a>	
-				</div></c:when><c:otherwise>
-				<div class="doneLogin">
-					${sessionScope.mname}님<br>
-					<a href="./message">내쪽지함</a>
-				</div></c:otherwise></c:choose>
-				<div>
-					광고2
+		</header>
+		<div class="side" id="left">
+			<%@ include file="leftside.jsp"%>
+		</div>
+		<div class="side" id="right">
+			<%@ include file="rightside.jsp"%>
+		</div>			
+		<div id="content">
+			<div id="contents">
+			<div id="newBoard">	
+				<div class="newTitle">
+				새로 올라온 게시판 글
+				</div>
+				<div class="newContents">
+					<table>
+						<c:forEach items="${boardList}" var="row">
+						<tr>
+							<td class="title"><a href="./detail?no=${row.bno}">${row.btitle }</a></td>
+							<td class="date">${row.bdate }</td>
+						</tr></c:forEach>
+					</table>
+				</div>	
+			</div>			
+			<div id="newSomoim">
+				<div class="newTitle">
+					새로 생겨난 소모임						
+				</div>
+				<div class="newContents">
+					<table>
+						<c:forEach items="${somList}" var="row">
+						<tr>
+							<td class="title"><a href="./soDetail?sno=${row.sno}">${row.stitle }</a></td>
+							<td class="date">${row.sdate }</td>
+						</tr></c:forEach>
+					</table>
 				</div>
 			</div>
-			<div class="main">
-				<div class="content">
-					<div class="board">	
-						<div class="new">
-						새로 올라온 게시판 글
-						</div>
-						<div class="newcon">
-							<table>
-								<c:forEach items="${boardList}" var="row">
-								<tr>
-									<td class="title">${row.btitle }</td>
-									<td class="date">${row.bdate }</td>
-								</tr></c:forEach>
-							</table>
-						</div>	
-					</div>			
-					<div class="somoim">
-						<div class="new">
-							새로 생겨난 소모임						
-						</div>
-						<div class="newcon">
-							<table>
-								<c:forEach items="${somList}" var="row">
-								<tr>
-									<td class="title"><a href="./soDetail?sno=${row.sno}">${row.stitle }</a></td>
-									<td class="date">${row.sdate }</td>
-								</tr></c:forEach>
-							</table>
-						</div>
-					</div>
-					<div class="market">
-						<div class="new">
-						갓 올라온 중고상품
-						</div>
-						<div class="newcon">
-							<table>
-								<c:forEach items="${marketList}" var="row">
-								<tr>
-									<td class="title">${row.get("title") }</td>
-									<td class="date">${row.get("date") }</td>
-								</tr></c:forEach>
-							</table>			
-						</div>
-					</div>
+			<div id="newMarket">
+				<div class="newTitle">
+				갓 올라온 중고상품
 				</div>
+				<div class="newContents">
+					<table>
+						<c:forEach items="${marketList}" var="row">
+						<tr>
+							<td class="title"><a href="./jdetail?no=${row.jno}">${row.get("title") }</a></td>
+							<td class="date">${row.get("date") }</td>
+						</tr></c:forEach>
+					</table>			
+				</div>
+			</div>
 			</div>
 		</div>
-	</div>
-	
-
+	<footer>
+		푸터푸터푸터  foot은 발바닥
+	</footer>
+</div>
 </body>
 </html>

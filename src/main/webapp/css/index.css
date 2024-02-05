@@ -10,15 +10,15 @@ body{
 	padding: 20px;
 	width: 1340px;
 	height: 100vh;
-	background-color: wheat;
+/*	background-color: wheat;*/
 }
 
 header{
 	padding: 5px;
-	height: 100px;
+	height: 130px;
 	text-align: center;
-	background-color: skyblue;
-	vertical-align: bottom;
+	/*background-color: skyblue;*/
+	background-image: url("../img/headerex.png");
 }
 
 footer{
@@ -30,7 +30,7 @@ footer{
 
 .side {
     width: 180px;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 170px);
     background-color: lightgoldenrodyellow;
 }
 #left{
@@ -38,26 +38,28 @@ footer{
 }
 #content {
 	width: calc(100% - 360px);
-    height: calc(100vh - 140px);
+    height: calc(100vh - 170px);
 	float: left;
-	background-color: palegreen;
+	background-color: lightsteelblue;
 }
+
 #right{
 	float: right;	
 }
 
 #contents{
-	margin: auto;
+	margin: 20px auto;
+	width: 100%;
 	display: flex;
 }
 
 #newBoard, #newSomoim, #newMarket{
-	width: 350px;
+	width: 30%;
 	height: 400px;
 	flex: 1;
 	margin: 15px;
 	padding: 10px;
-	border: 1px solid darkslategray;
+	border: 1px solid gray;
 }
 
 .newTitle{
@@ -65,8 +67,6 @@ footer{
 	margin: 10px 0px;
 	padding: 5px;
 	text-align: center;
-	border: 1px soid silver;
-	font-size: small;
 }
 
 .newContents{
@@ -102,7 +102,7 @@ table{
 	width: 180px;
 	height: 120px;
 	padding: 10px;
-	border: 1px solid black;
+	border: 1px solid gray;
 	box-sizing: border-box;
 	vertical-align: top;
 }
@@ -146,7 +146,7 @@ a{
 	max-height: 400px;
 	height: auto;
 	margin: 10px 0px 0px 0px;
-	background-color: azure;
+/*	background-color: azure;*/
 }
 
 #add1{

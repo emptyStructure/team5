@@ -43,10 +43,11 @@ public class JBoardLIst extends HttpServlet {
 		//List<JBoardDTO> list = dao.jBoardList(page);
 		List<JBoardDTO> list = dao.jBoardList(page);
 				
-		//int totalCount = dao.totalCount();
+		int totalCount = dao.totalCount();
 
 		request.setAttribute("list", list);
-		//request.setAttribute("totalCount", totalCount);
+		request.setAttribute("page", page);
+		request.setAttribute("totalCount", totalCount);
 		//request.setAttribute("page", page);
 		System.out.println(list);
 		RequestDispatcher rd = request.getRequestDispatcher("jboard.jsp");

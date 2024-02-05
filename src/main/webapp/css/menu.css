@@ -3,18 +3,17 @@
 #menu{
 	margin: 0;
 	padding: 0;
-	margin-top: 48px;
+	margin-top: 80px;
 	min-width: 500px;
 	width: auto;
 	height: 50px;
-	border: 2px solid black;
 	display: inline-block;
 }
 
 nav{
 	min-width: 500px;
 	width: auto;
-	line-height: 40px;
+	line-height: 45px;
 	margin: 0 auto;
 	padding: 5px;
 	display: inline-block;
@@ -28,10 +27,12 @@ nav ul{
 }
 nav ul li{
 	margin: 0 10px;
-	color: black;
+	color: darkgreen;
 	display: inline-block;
 	font-size: large;
+	font-weight: bold;
 }
 nav ul li:hover{
-	background-color: whitesmoke;
+	font-size: larger;
+	font-weight: bolder;
 }

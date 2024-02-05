@@ -1,0 +1,62 @@
+@charset "UTF-8";
+h3{
+	padding: 20px 30px;
+	margin: 30px 5px 5px 5px;
+}
+h4{
+	margin: 0;
+	margin-bottom: 5px;
+	padding: 15px;
+}
+
+#infoContents{
+	margin: 0 30px;
+	padding: 20px;
+}
+
+.infoBox{
+	margin: 0;
+	padding: 10px;
+	width: auto;
+	max-width: 800px;
+	min-height: 200px;
+	height: auto;
+}
+.closeBtn{
+	margin: 0 20px;
+}
+
+#change {
+	margin: 10px 20px;
+	width: 300px;
+	line-height: 30px;
+}
+
+#change button{
+	margin: 15px 0;
+}
+
+table{
+	width: 500px;
+	margin: 0px 20px;
+	margin-bottom: 20px;
+}
+th, td{
+	border-bottom: 1px solid gainsboro;
+	border-collapse: collapse;
+	padding: 5px;
+}
+td{
+	padding: 5px 10px;
+}
+.w5{
+	width: 50%;
+}
+.w2{
+	width: 20%;
+	text-align: center;
+}
+.w1{
+	width: 10%;
+	text-align: center;
+}
