@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
+
+import com.team5.dao.BoardDAO;
+import com.team5.dto.BoardDTO;
+import com.team5.util.Util;
+
 
 @WebServlet("/write")
 public class Write extends HttpServlet {
@@ -31,8 +35,35 @@ public class Write extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("mid") == null || session.getAttribute("mname") == null) {
+			response.sendRedirect("./login?login=nologin");
+		} else {
+			String btitle = request.getParameter("btitle");
+			String bcontent = request.getParameter("bcontent");
+			
+			
+			
+			BoardDTO dto = new BoardDTO();
+			dto.setBtitle(btitle);
+			dto.setBcontent(bcontent);
+			dto.setMid((String) session.getAttribute("mid"));
+			dto.setBip(Util.getIP(request));
+			
+			BoardDAO dao = new BoardDAO();
+			int result = dao.bwrite(dto);
+			
+
+			
+			if (result == 1) {
+				response.sendRedirect("./board");
+			} else {
+				response.sendRedirect("./error");
+			}
+		}
 
 	}
 

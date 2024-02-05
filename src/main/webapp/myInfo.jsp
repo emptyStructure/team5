@@ -26,6 +26,11 @@ $(function(){
 		$(this).parents('.infoBox').prev().css('color', 'black');
 		$(this).parents('.infoBox').hide();
 	});
+	
+	
+	$
+	
+	
 
 });
 </script>
@@ -50,13 +55,13 @@ $(function(){
 				<div id="chngInfo" class="infoBox">
  					<form action="./myInfo" method="post" id="change">
  							<label> 닉네임 <br>
-								<input type="text" value="${myInfo.mname }">
+								<input type="text" id="mName" name="mName" value="${myInfo.mname }">
  							</label><br>
 							<label> 비밀번호 <br>
-								<input type="text" value="${myInfo.mpw }">
+								<input type="password" id="mPW" name="mPW" value="${myInfo.mpw }">
 							</label><br>
-					<button type="submit"> 변경사항 저장</button>
-					<button type="reset"> 취소</button>
+					<button type="submit">변경사항 저장</button>
+					<button type="reset">취소</button>
 					<input type="hidden" name="no" value="${myInfo.mno }">
 					</form>
 				<button type="button" class="closeBtn"> 닫기 </button>
@@ -68,14 +73,12 @@ $(function(){
 							<th class="w5">제목</th>
 							<th class="w2">날짜</th>
 							<th class="w2">조회수</th>
-							<th class="w1">삭제</th>
 						</tr>
 						<c:forEach items="${myBoard }" var="row">
 						<tr>
-							<td class="w5">${row.btitle }</td>
+							<td class="w5"><a href="./detail?no=${row.bno}">${row.btitle }</a></td>
 							<td class="w2">${row.bdate }</td>
 							<td class="w2">${row.bcount }</td>
-							<td class="w1">${row.bcount }</td>
 						</tr>
 						</c:forEach>
 					</table>															
@@ -84,12 +87,11 @@ $(function(){
 				<h4 class="infoBtn">내 댓글</h4>
 				<div class="infoBox">
 					<table>
-						<c:forEach items="${myBoard }" var="row">
+						<c:forEach items="${myComments }" var="row">
 						<tr>
 							<td class="w5">${row.btitle }</td>
 							<td class="w2">${row.bdate }</td>
 							<td class="w2">${row.bcount }</td>
-							<td class="w1">1</td>
 						</tr>
 						</c:forEach>
 					</table>															
@@ -99,7 +101,7 @@ $(function(){
 				<h4 class="infoBtn">내 거래내역</h4>
 				<div id="myMarket" class="infoBox">
 					<button type="button" class="closeBtn">닫기</button>
-				</div>		
+				</div>	
 			</div>
 		</div>
 	<footer>

@@ -14,6 +14,7 @@ import com.team5.dto.MemberDTO;
 
 public class InfoDAO extends AbstractDAO{
 	
+	//내정보 불러오기
 	public MemberDTO myInfo(String mid) {
 		MemberDTO dto = new MemberDTO();
 		Connection con = db.getConnection();
@@ -103,6 +104,30 @@ public class InfoDAO extends AbstractDAO{
 		}
 						
 		return list;
+	}
+
+	//내 정보 수정
+	public int changeInfo(MemberDTO dto) {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE member SET mpw=?, mname=? WHERE mid=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getMpw());
+			pstmt.setString(2, dto.getMname());
+			pstmt.setString(3, dto.getMid());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
+		
+		
+		return result;
 	}
 	
 	
