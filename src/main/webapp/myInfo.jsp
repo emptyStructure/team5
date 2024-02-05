@@ -97,19 +97,7 @@ $(function(){
 					</table>															
 					<button type="button" class="closeBtn">닫기</button>
 				</div>
-				<h4 class="infoBtn">참여중인 소모임</h4>
-				<div id="mySomoim" class="infoBox">
-					<table>
-						<c:forEach items="${mysomoim }" var="row">
-						<tr>
-							<td class="w5"><a href="./soDetail?sno=${row.get('sno')}">${row.get('stitle') }</a></td>
-							<td class="w2">${row.get('scategory') }</td>
-							<td class="w2">${row.get('joinDate') }</td>
-						</tr>
-						</c:forEach>
-					</table>					
-					<button type="button" class="closeBtn">닫기</button>
-				</div>
+				<h4 class="infoBtn"><a href="./somoimAdmin">소모임 관리</a></h4>
 				<h4 class="infoBtn">내 거래내역</h4>
 				<div id="myMarket" class="infoBox">
 					<button type="button" class="closeBtn">닫기</button>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,11 +49,18 @@ $(document).ready(function(){
 					<div>
 						<form action="./somoimWrite" method="post" id="somoim">
 							<input type="text" id="title" name="title" placeholder="입력">
+							카테고리 : 
 							<select class="category" name="category">
 								<option>식사</option>
 								<option>게임</option>
 								<option>공부</option>
 								<option>유흥</option>
+							</select>
+							 정원 : 
+							<select class="personnel" name="personnel">
+								<c:forEach var="i" begin="1" end="20">
+								<option>${i }명</option>
+								</c:forEach>
 							</select>
 							<span id="textLengthCheck">( 0 / 20글자 )</span>
 							<textarea id="summernote" name="content"></textarea>

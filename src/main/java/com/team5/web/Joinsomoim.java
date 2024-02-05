@@ -32,16 +32,19 @@ public class Joinsomoim extends HttpServlet {
 		
 		JoinSomoimDTO dto = new JoinSomoimDTO();
 		SomoimDAO dao = new SomoimDAO();
-		
-		dto.setSno(Util.str2Int2(request.getParameter("sno")));
-		dto.setName(request.getParameter("name"));
-		dto.setPh(request.getParameter("ph"));
-		dto.setMessage(request.getParameter("msg"));
-		
-		int result = dao.join(dto, (String)session.getAttribute("mid"));
-		
-		PrintWriter pw = response.getWriter();
-		pw.print(result);
+		if(session.getAttribute("mname")==null) {
+			response.sendRedirect("login");
+		} else {
+			dto.setSno(Util.str2Int2(request.getParameter("sno")));
+			dto.setName(request.getParameter("name"));
+			dto.setPh(request.getParameter("ph"));
+			dto.setMessage(request.getParameter("msg"));
+			
+			int result = dao.join(dto, (String)session.getAttribute("mid"));
+			
+			PrintWriter pw = response.getWriter();
+			pw.print(result);
+		}
 		
 	}
 

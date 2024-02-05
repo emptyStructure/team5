@@ -11,16 +11,11 @@
 <script>function url(url) {window.location.href = url;}</script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
-<link href="./css/somoimAdmin.css" rel="stylesheet"/>
+<link href="./css/somoimApplications.css" rel="stylesheet"/>
+<script type="text/javascript" src="./js/menu.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('.title').click(function(){
-		let sno = $(this).prev().text();
-		var url = "./joinerList?sno="+sno;
-        var name = "popup test";
-        var option = "width = 1050, height = 700, top = 100, left = 200, location = no"
-		window.open(url, name, option);
-	});
+
 });
 </script>
 </head>
@@ -36,27 +31,41 @@ $(function(){
 		</div>
 		<div class="main">
 			<article>
-				<h2>신청자 관리</h2>
-				<table>
+				<h2>내 신청 목록</h2>
+				<table border="1">
 					<thead>
 						<tr>
-							<th>글 번호</th>
-							<th>제목</th>
-							<th>카테고리</th>
-							<th>작성일</th>
-							<th>현재 인원</th>
-							<th>대기 인원</th>
+							<th class="tno">No.</th>
+							<th class="ttitle">제목</th>
+							<th class="tname">이름</th>
+							<th class="tph">연락처</th>
+							<th class="tmsg">메세지</th>
+							<th class="tdate">신청일</th>
+							<th class="tstatus">상태</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${list }" var="row">
 							<tr>
-								<td>${row.sno }</td>
-								<td class="title">${row.stitle }</td>
-								<td>${row.scategory }</td>
-								<td>${row.sdate }</td>
-								<td>${row.total }명</td>
-								<td>${row.waiting }명</td>
+								<td>${row.no }</td>
+								<td class="title">${row.title }</td>
+								<td>${row.name }</td>
+								<td>${row.ph }</td>
+								<td>${row.message }</td>
+								<td>${row.joindate }</td>
+								<td>
+									<c:choose>
+										<c:when test = "${row.status eq 0}">
+										❌ 거절
+										</c:when>
+										<c:when test = "${row.status eq 1}">
+										🟢 승인
+										</c:when>
+										<c:otherwise>
+										🧾 대기중
+										</c:otherwise>
+									</c:choose>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
