@@ -12,6 +12,23 @@
 <link href="./css/menu.css" rel="stylesheet"/>
 <link href="./css/myInfo.css" rel="stylesheet"/>
 <script type="text/javascript" src="./js/menu.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+$(function(){
+	$('.infoBox').hide();
+	
+	$('.infoBtn').click(function(){
+		$(this).css('color', 'dimgray');
+		$(this).next().show();
+	});
+	
+	$('.closeBtn').click(function(){
+		$(this).parents('.infoBox').prev().css('color', 'black');
+		$(this).parents('.infoBox').hide();
+	});
+
+});
+</script>
 </head>
 <body>	
 	<div id="container">
@@ -29,42 +46,73 @@
 		<div id="content">
 			<h3>마이 페이지</h3>
 			<div id="infoContents">
-				<div id="chngInfo">
-					<h4>내 정보 수정</h4>
+				<h4 class="infoBtn">내 정보 수정</h4>
+				<div id="chngInfo" class="infoBox">
  					<form action="./myInfo" method="post" id="change">
- 							<label> 이름 <br>
+ 							<label> 닉네임 <br>
 								<input type="text" value="${myInfo.mname }">
  							</label><br>
 							<label> 비밀번호 <br>
 								<input type="text" value="${myInfo.mpw }">
 							</label><br>
-					<button type="submit">저장</button>
+					<button type="submit"> 변경사항 저장</button>
+					<button type="reset"> 취소</button>
 					<input type="hidden" name="no" value="${myInfo.mno }">
 					</form>
+				<button type="button" class="closeBtn"> 닫기 </button>
 				</div>
-				<div id="myMarket">
-					<h4>내 거래내역</h4>
-				</div>					
-				<div id="myBoard">
-					<h4>내가 쓴 글, 댓글</h4>
+				<h4 class="infoBtn">내가 쓴 글</h4>
+				<div class="infoBox">
 					<table>
 						<tr>
-							<th>제목</th>
-							<th>날짜</th>
-							<th>조회수</th>
+							<th class="w5">제목</th>
+							<th class="w2">날짜</th>
+							<th class="w2">조회수</th>
+							<th class="w1">삭제</th>
 						</tr>
 						<c:forEach items="${myBoard }" var="row">
 						<tr>
-							<td class="tt">${row.btitle }</td>
-							<td class="dd">${row.bdate }</td>
-							<td id="cc">${row.bcount }</td>
+							<td class="w5">${row.btitle }</td>
+							<td class="w2">${row.bdate }</td>
+							<td class="w2">${row.bcount }</td>
+							<td class="w1">${row.bcount }</td>
 						</tr>
 						</c:forEach>
 					</table>															
+					<button type="button" class="closeBtn">닫기</button>
 				</div>
-				<div id="mySomoim">
-					<h4>참여중인 소모임</h4>
+				<h4 class="infoBtn">내 댓글</h4>
+				<div class="infoBox">
+					<table>
+						<c:forEach items="${myBoard }" var="row">
+						<tr>
+							<td class="w5">${row.btitle }</td>
+							<td class="w2">${row.bdate }</td>
+							<td class="w2">${row.bcount }</td>
+							<td class="w1">1</td>
+						</tr>
+						</c:forEach>
+					</table>															
+					<button type="button" class="closeBtn">닫기</button>
+				</div>
+				<h4 class="infoBtn">참여중인 소모임</h4>
+				<div id="mySomoim" class="infoBox">
+					<table>
+						<c:forEach items="${mysomoim }" var="row">
+						<tr>
+							<td class="w5">${row.get('stitle') }</td>
+							<td class="w2">${row.get('scategory') }</td>
+							<td class="w2">${row.get('joinDate') }</td>
+							<td class="w1">1</td>
+						</tr>
+						</c:forEach>
+					</table>					
+					<button type="button" class="closeBtn">닫기</button>
 				</div>			
+				<h4 class="infoBtn">내 거래내역</h4>
+				<div id="myMarket" class="infoBox">
+					<button type="button" class="closeBtn">닫기</button>
+				</div>		
 			</div>
 		</div>
 	<footer>

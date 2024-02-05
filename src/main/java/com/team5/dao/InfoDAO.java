@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.team5.dto.BoardDTO;
 import com.team5.dto.MemberDTO;
@@ -68,6 +70,38 @@ public class InfoDAO extends AbstractDAO{
 			close(rs, pstmt, con);
 		}		
 		
+		return list;
+	}
+
+	public List<Map<String, Object>> mySomoim(String mid) {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT j.joinno, s.sno, s.stitle, s.scategory, DATE_FORMAT(j.joinDate,'%Y. %m. %d') AS joinDate "
+				+ "FROM ( somoim s join joinSomoim j on (s.sno = j.sno)) "
+				+ "WHERE j.mno=(SELECT mno FROM member WHERE mid=?) AND sdel='1' ORDER BY j.joinDate DESC";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Map<String, Object> e = new HashMap<String, Object>();
+				e.put("joinno", rs.getInt("joinno"));
+				e.put("sno", rs.getInt("sno"));
+				e.put("stitle", rs.getString("stitle"));
+				e.put("scategory", rs.getString("scategory"));
+				e.put("joinDate", rs.getString("joinDate"));
+				list.add(e);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, con);
+		}
+						
 		return list;
 	}
 	

@@ -1,37 +1,62 @@
 @charset "UTF-8";
 h3{
-	padding: 20px;
-	margin: 0;
+	padding: 20px 30px;
+	margin: 30px 5px 5px 5px;
 }
 h4{
 	margin: 0;
-	margin: 5px 0;
+	margin-bottom: 5px;
+	padding: 15px;
 }
 
 #infoContents{
-	box-sizing: border-box;
+	margin: 0 30px;
 	padding: 20px;
-	text-align: center;
 }
 
-
-#chngInfo, #myMarket, #myBoard, #mySomoim {
-	width: 40%;
+.infoBox{
+	margin: 0;
+	padding: 10px;
+	width: auto;
+	max-width: 800px;
 	min-height: 200px;
 	height: auto;
-	float: left;
-	margin : 10px;
-	padding: 10px 20px;
+}
+.closeBtn{
+	margin: 0 20px;
 }
 
 #change {
-	margin: 10px 50px;
-	text-align: left;
+	margin: 10px 20px;
+	width: 300px;
+	line-height: 30px;
+}
+
+#change button{
+	margin: 15px 0;
 }
 
 table{
-	margin: 0 auto;
+	width: 500px;
+	margin: 0px 20px;
+	margin-bottom: 20px;
 }
-.tt{
-	text-align: left;
+th, td{
+	border-bottom: 1px solid gainsboro;
+	border-collapse: collapse;
+	padding: 5px;
+}
+td{
+	padding: 5px 10px;
+}
+.w5{
+	width: 50%;
+}
+.w2{
+	width: 20%;
+	text-align: center;
+}
+.w1{
+	width: 10%;
+	text-align: center;
 }
