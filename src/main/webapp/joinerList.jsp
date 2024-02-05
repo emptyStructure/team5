@@ -18,7 +18,7 @@ $(function(){
 	$('.accept').click(function(){
 		if(confirm("승인하시겠습니까?")){
 			let tr = $(this).parents(".select").parents("tr");
-			let jno = tr.siblings('.jno').val();
+			let jno = tr.prev().val();
 			$(this).parents(".select").text("🟢 승인");
 			
 			$.ajax({
@@ -40,8 +40,8 @@ $(function(){
 	
 	$('.refuse').click(function(){
 		if(confirm("거절하시겠습니까?")){
-			let jno = $(this).parents(".select").siblings('.jno').text();
 			let tr = $(this).parents(".select").parents("tr");
+			let jno = tr.prev().val();			
 			$(this).parents(".select").text("❌ 거절");
 		
 			$.ajax({

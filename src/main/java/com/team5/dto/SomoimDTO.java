@@ -1,7 +1,7 @@
 package com.team5.dto;
 
 public class SomoimDTO {
-	private int sno, mno, sdel, total, waiting;
+	private int sno, mno, sdel, total, waiting, personnel;
 	private String stitle, scontent, sdate, scategory, swriter;
 	public int getSno() {
 		return sno;
@@ -62,6 +62,12 @@ public class SomoimDTO {
 	}
 	public void setWaiting(int waiting) {
 		this.waiting = waiting;
+	}
+	public int getPersonnel() {
+		return personnel;
+	}
+	public void setPersonnel(int personnel) {
+		this.personnel = personnel;
 	}
 
 	

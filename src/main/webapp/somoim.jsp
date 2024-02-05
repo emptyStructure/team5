@@ -13,6 +13,7 @@
 <link href="./css/menu.css" rel="stylesheet"/>
 <link href="./css/index.css" rel="stylesheet"/>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="./js/menu.js"></script>
 <script type="text/javascript">
 $(function(){
 	
@@ -42,17 +43,17 @@ $(function(){
 		<div id="content">
 			<h1>소모임 출력</h1>
 			<div class="main">
-				<div class="mainStyle">
 				<div>
 					<c:if test="${sessionScope.mname ne null }">
 						<button onclick="location.href='./somoimWrite'">글 작성</button>
 					</c:if>
 				</div>
+				<div class="mainStyle">
 					<c:forEach items="${list }" var="row">
 						<div class="scard">
 							<div class="simage">	
 								<div class="scategory">${row.scategory }</div>
-								<div class="sviews">👪${row.total } ❤️100</div>
+								<div class="sviews">👪 ${row.total }/${row.personnel } ❤️ 100</div>
 								<div class="sinfo">
 									<div class="stitle">${row.stitle }</div>
 									<div class="swriter">${row.swriter }</div>

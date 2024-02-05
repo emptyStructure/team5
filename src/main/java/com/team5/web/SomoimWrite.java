@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.team5.dao.SomoimDAO;
 import com.team5.dto.SomoimDTO;
+import com.team5.util.Util;
 
 @WebServlet("/somoimWrite")
 public class SomoimWrite extends HttpServlet {
@@ -43,7 +44,8 @@ public class SomoimWrite extends HttpServlet {
 			dto.setStitle(request.getParameter("title"));
 			dto.setScontent(request.getParameter("content"));
 			dto.setScategory(request.getParameter("category"));
-			int result = dao.write(dto, (String)session.getAttribute("mid"));
+			dto.setPersonnel(Util.str2Int2(request.getParameter("personnel")));
+			int result = dao.write(dto, (String)session.getAttribute("mid"), (String)session.getAttribute("mname"));
 			if(result == 1) {
 				response.sendRedirect("./somoim");
 			} else {

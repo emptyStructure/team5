@@ -32,7 +32,7 @@ public class JoinerList extends HttpServlet {
 		
 		
 		//요청이 한개도 없으면 오류남. 고쳐야되네
-		if(dao.wirterBool(Util.str2Int(request.getParameter("sno")),(String)session.getAttribute("mid") )==1) {
+		if(dao.writerBool(Util.str2Int(request.getParameter("sno")),(String)session.getAttribute("mid") )==1) {
 			List<JoinSomoimDTO> list = new ArrayList<JoinSomoimDTO>();
 			if(request.getParameter("status")==null||request.getParameter("status")=="") {
 				list =dao.joinList((String)session.getAttribute("mid"), Util.str2Int(request.getParameter("sno")));

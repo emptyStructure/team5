@@ -13,6 +13,8 @@
 $(document).ready(function(){
 		$("#form").hide();
 		
+
+		<c:if test="${detail.total lt detail.personnel}">
 		$(".order").click(function(){
 			$("#form").slideToggle("slow");
 		});
@@ -42,14 +44,15 @@ $(document).ready(function(){
 			$('#textLengthCheck').text("( "+length+" / 100글자 )");
 			$('#textLengthCheck').css("color","black");
 			if(length>100){
-				$('#textLengthChec
-						k').text("( "+length+" / 100글자 ) 100글자까지만 입력 가능합니다.");
+				$('#textLengthCheck').text("( "+length+" / 100글자 ) 100글자까지만 입력 가능합니다.");
 				$('#textLengthCheck').css("color","red");
 			}
 		});
 		
+		
 		/*신청서 제출*/
-		$("#form").submit(function(){
+		
+		$("#sub").click(function(){
 			event.preventDefault();
 				let name = $("#name").val();
 				let ph = "010-"+$("#ph1").val()+"-"+$("#ph2").val();
@@ -70,7 +73,7 @@ $(document).ready(function(){
 								$("#form")[0].reset();
 								$("#form").slideToggle("slow");
 							} else {
-								alert("신청에 실패했습니다. 관리자에게 문의하세요");
+								alert("이미 지원한 모임입니다.");
 							}
 						},
 						error: function(request, status, error){ //통신오류
@@ -80,10 +83,13 @@ $(document).ready(function(){
 				}
 			} else {
 				alert("신청서를 다시 확인해주세요.");
+				$("#ph1").val("");
+				$("#ph2").val("");
 			}
 		});
+		</c:if>
 });
-</script>
+</script> 
 </head>
 <body>
 	<article>
@@ -99,16 +105,22 @@ $(document).ready(function(){
 			<div class="body">
 				<div class="info">
 					<div class="writer">${detail.swriter }</div>
-					<div class="view">👪 ${detail.total } / ❤️ 100</div>
+					<div class="view">👪 ${detail.total }/${detail.personnel}  ❤️ 100</div>
 				</div>
 				<div class="conStyle">
 					<div class="content">${detail.scontent }</div>
 				</div>
 				<c:if test="${sessionScope.mname ne null }">
-					<button class="order">신청하기</button>
+					<c:if test="${detail.total lt detail.personnel}">
+						<button class="order">신청하기</button>
+					</c:if>
 				</c:if>
 			</div>
+			<c:if test="${detail.total ge detail.personnel}">
+				이미 마감된 모임입니다.
+			</c:if>
 			<c:if test="${sessionScope.mname ne null }">
+				<c:if test="${detail.total lt detail.personnel}">
 				<form action="./join" method="post" onsubmit="return check()" id="form">
 					<div class="name"> 
 						이름 : <input type="text" placeholder="이름을 입력하세요." id="name">
@@ -125,12 +137,13 @@ $(document).ready(function(){
 							<span id="textLengthCheck">( 0 / 100글자 )</span>
 						<div class="buttons">
 							<button type="reset">초기화</button>
-							<button type="submit" value="${detail.sno }">참가 요청</button>
+							<button type="button" id="sub" value="${detail.sno }">참가 요청</button>
 							<input type="hidden" value="${detail.sno }" id="sno">
 							<input type="hidden" value="${detail.mno }" id="mno">
 						</div>
 					</div>
 				</form>
+				</c:if>
 			</c:if>
 		</div>
 	</article>
