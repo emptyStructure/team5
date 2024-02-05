@@ -138,12 +138,12 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "INSERT INTO message (toMno, fromMno, mscontent) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO message (toMno, fromMno, mscontent) VALUES (?, (SELECT mno FROM member WHERE mid=?), ?)";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, dto.getToMno());
-			pstmt.setInt(2, dto.getFromMno());
+			pstmt.setString(2, dto.getMid());
 			pstmt.setString(3, dto.getMscontent());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -155,16 +155,20 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 
 	public List<MessageDTO> fromchatlist() {
 		List<MessageDTO> list = new ArrayList<MessageDTO>();
+		MessageDTO dto = new MessageDTO();
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT mscontent, "
 				+ "if(date_format(sendDate, '%Y-%m-%d') = date_format(current_timestamp(), '%Y-%m-%d'), "
 				+ "date_format(sendDate, '%H:%i'), date_format(sendDate, '%Y-%m-%d')) AS sendDate "
-				+ "FROM message WHERE fromMno = 9";
+				+ "FROM message WHERE fromMno = (SELECT mno FROM member WHERE mid=?) "
+				+ "AND toMno = ?";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getMid());
+			pstmt.setInt(2, dto.getMno());
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -180,6 +184,58 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 		}
 		
 		return list;
+	}
+
+	public List<MessageDTO> chatList() {
+		List<MessageDTO> list = new ArrayList<>();
+		MessageDTO dto = new MessageDTO();
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT mname, mscontent, "
+				+ "if(date_format(sendDate, '%Y-%m-%d') = date_format(current_timestamp(), '%Y-%m-%d'), "
+				+ "date_format(sendDate, '%H:%i'), date_format(sendDate, '%Y-%m-%d')) AS sendDate "
+				+ "FROM message ms JOIN member m ON ms.fromMno=m.mno";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getMname());
+			pstmt.setString(2, dto.getMscontent());
+			pstmt.setString(3, dto.getSendDate());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MessageDTO e = new MessageDTO();
+				e.setMname(rs.getString("mname"));
+				e.setMscontent(rs.getString("mscontent"));
+				e.setSendDate(rs.getString("sendDate"));
+				list.add(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	finally {
+			close(rs, pstmt, con);
+		}
+		return list;
+	}
+
+	public int chatting(MessageDTO dto) {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO message (fromMno, mscontent) VALUES ((SELECT mno FROM member WHERE mid=?), ?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getMid());
+			pstmt.setString(2, dto.getMscontent());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} close(null, pstmt, con);
+		
+		return result;
+		
 	}
 
 }
