@@ -23,10 +23,49 @@ body {
 }
 table{
 	border-color: yellow;
+	width: 965px;
 }
 th{
 	text-align: center;
 }
 td{
 	text-align: center;
+}
+.tno{
+	width: 3.5%;
+}
+.tname{
+	width: 8%;	
+}
+.tph{
+	width: 14%;
+}
+.tmsg{
+	width: 43%;
+}
+.tdate{
+	width: 11%;
+}
+.tstatus{
+	width: 12%;
+}
+.status-list{
+	width: 500px;
+	background-color: #c0c0c0;
+	margin-bottom: 5px;
+}
+.status-list ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	height: 30px;
+	line-height: 30px;
+}
+.status-list ul li{
+	width: 100px;
+	display: inline-block;
+	text-align: center;
+}
+.status-list ul li:hover {
+	background-color: skyblue;
 }

@@ -200,7 +200,7 @@ public class SomoimDAO extends AbstractDAO{
 		String sql = "SELECT j.joinno, j.mno, j.sno, j.name, j.ph, j.message, j.joinDate, j.status, s.stitle "
 				+ "FROM joinSomoim j JOIN somoim s ON j.sno = s.sno "
 				+ "WHERE j.sno= ? and s.mno=(SELECT mno FROM member WHERE MID = ?)";
-		
+				System.out.println("para 없음");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, sno);
@@ -228,6 +228,46 @@ public class SomoimDAO extends AbstractDAO{
 		
 		return result;
 	}
+	
+	public List<JoinSomoimDTO> joinList(String mid, int sno, String status) {
+		List<JoinSomoimDTO> result = new ArrayList<JoinSomoimDTO>();
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT j.joinno, j.mno, j.sno, j.name, j.ph, j.message, j.joinDate, j.status, s.stitle "
+				+ "FROM joinSomoim j JOIN somoim s ON j.sno = s.sno "
+				+ "WHERE j.sno= ? and s.mno=(SELECT mno FROM member WHERE MID = ?) AND status =?";
+		System.out.println("para 있음");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, sno);
+			pstmt.setString(2, mid);
+			pstmt.setString(3, status);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				JoinSomoimDTO dto = new JoinSomoimDTO();
+				dto.setJno(rs.getInt(1));
+				dto.setMno(rs.getInt(2));
+				dto.setSno(rs.getInt(3));
+				dto.setName(rs.getString(4));
+				dto.setPh(rs.getString(5));
+				dto.setMessage(rs.getString(6));
+				dto.setJoindate(rs.getString(7));
+				dto.setStatus(rs.getInt(8));
+				dto.setTitle(rs.getString(9));
+				result.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return result;
+	}
+	
 	public int respon(int respon, String jno) {
 		int result = 0;
 		
@@ -247,5 +287,29 @@ public class SomoimDAO extends AbstractDAO{
 		
 		return result;
 	}
+	public int wirterBool(int sno, String mid) {
+		int result = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "Select count(*) from somoim WHERE sno=? AND mno=(SELECT mno FROM member WHERE MID = ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, sno);
+			pstmt.setString(2, mid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return result;
+	}
+	
 
 }

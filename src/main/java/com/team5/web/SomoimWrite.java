@@ -22,26 +22,34 @@ public class SomoimWrite extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	RequestDispatcher rd = request.getRequestDispatcher("./somoimWrite.jsp");
-	rd.forward(request, response);
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("mname")==null) {
+			response.sendRedirect("login");
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("./somoimWrite.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		
-		SomoimDAO dao = new SomoimDAO();
-		SomoimDTO dto = new SomoimDTO();
-		dto.setStitle(request.getParameter("title"));
-		dto.setScontent(request.getParameter("content"));
-		dto.setScategory(request.getParameter("category"));
-		int result = dao.write(dto, (String)session.getAttribute("mid"));
-		if(result == 1) {
-			response.sendRedirect("./somoim");
+		if(session.getAttribute("mname")==null) {
+			response.sendRedirect("login");
 		} else {
-			response.sendRedirect("./error.jsp");
+			SomoimDAO dao = new SomoimDAO();
+			SomoimDTO dto = new SomoimDTO();
+			dto.setStitle(request.getParameter("title"));
+			dto.setScontent(request.getParameter("content"));
+			dto.setScategory(request.getParameter("category"));
+			int result = dao.write(dto, (String)session.getAttribute("mid"));
+			if(result == 1) {
+				response.sendRedirect("./somoim");
+			} else {
+				response.sendRedirect("./error.jsp");
+			}
 		}
-		
 	}
 
 }

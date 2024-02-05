@@ -82,6 +82,9 @@
 .ph{
 	text-align: right;
 }
+.phn{
+	width: 50px;
+}
 .msg{
 	clear: both;
 	margin-top: 30px;

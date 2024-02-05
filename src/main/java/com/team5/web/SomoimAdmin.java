@@ -24,13 +24,17 @@ public class SomoimAdmin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		SomoimDAO dao = new SomoimDAO();
-		
-		List<SomoimDTO> list =dao.list((String)session.getAttribute("mid"));
-		request.setAttribute("list", list);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("somoimAdmin.jsp");
-		rd.forward(request, response);
+		if(session.getAttribute("mname")==null) {
+			response.sendRedirect("login");
+		} else {
+			SomoimDAO dao = new SomoimDAO();
+			List<SomoimDTO> list =dao.list((String)session.getAttribute("mid"));
+			request.setAttribute("list", list);
+
+			RequestDispatcher rd = request.getRequestDispatcher("somoimAdmin.jsp");
+			rd.forward(request, response);
+		}
+			
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

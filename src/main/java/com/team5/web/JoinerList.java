@@ -2,6 +2,7 @@ package com.team5.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -28,17 +29,28 @@ public class JoinerList extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		SomoimDAO dao = new SomoimDAO();
-		List<JoinSomoimDTO> list =dao.joinList((String)session.getAttribute("mid"), Util.str2Int((request.getParameter("sno"))));
+		
 		
 		//요청이 한개도 없으면 오류남. 고쳐야되네
-		if(list.size()>0) {
-			request.setAttribute("title", list.get(0).getTitle());
-			request.setAttribute("sno", list.get(0).getSno());
-		} 
-		request.setAttribute("list", list);
+		if(dao.wirterBool(Util.str2Int(request.getParameter("sno")),(String)session.getAttribute("mid") )==1) {
+			List<JoinSomoimDTO> list = new ArrayList<JoinSomoimDTO>();
+			if(request.getParameter("status")==null||request.getParameter("status")=="") {
+				list =dao.joinList((String)session.getAttribute("mid"), Util.str2Int(request.getParameter("sno")));
+			} else {
+				list =dao.joinList((String)session.getAttribute("mid"), Util.str2Int(request.getParameter("sno")),request.getParameter("status"));
+			}
+			int sno = Util.str2Int(request.getParameter("sno"));
+			String title = dao.detail(sno).getStitle();
+			request.setAttribute("list", list);
+			request.setAttribute("title", title);
+			request.setAttribute("sno", Util.str2Int(request.getParameter("sno")));
+			
+			RequestDispatcher rd = request.getRequestDispatcher("joinerList.jsp");
+			rd.forward(request, response);
+		} else {
+			response.sendRedirect("error.jsp");
+		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("joinerList.jsp");
-		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

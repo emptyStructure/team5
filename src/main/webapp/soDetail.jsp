@@ -17,6 +17,26 @@ $(document).ready(function(){
 			$("#form").slideToggle("slow");
 		});
 		
+		let p1 = 0;
+		let p2 = 0;
+		$("#ph1").keyup(function(){
+			let p1Leng = $("#ph1").val().length;
+			if(p1Leng == 4 && !isNaN( $("#ph1").val() )) {
+				p1 = 1;
+			} else {
+				p2 = 0;
+			}
+		});
+		
+		$("#ph2").keyup(function(){
+			let p2Leng = $("#ph2").val().length;
+			if(p2Leng == 4 && !isNaN( $("#ph2").val() )) {
+				p2 = 1;
+			} else {
+				p2 = 0;
+			}
+		});
+		
 		$("#message").keyup(function(){
 			let length = $("#message").val().length;
 			$('#textLengthCheck').text("( "+length+" / 100글자 )");
@@ -25,21 +45,19 @@ $(document).ready(function(){
 				$('#textLengthCheck').text("( "+length+" / 100글자 ) 100글자까지만 입력 가능합니다.");
 				$('#textLengthCheck').css("color","red");
 			}
-			
 		});
 		
 		/*신청서 제출*/
 		$("#form").submit(function(){
 			event.preventDefault();
 				let name = $("#name").val();
-				let ph = $("#ph").val();
+				let ph = "010-"+$("#ph1").val()+"-"+$("#ph2").val();
 				let msg = $("#message").val();
 
-			if(msg.length<=100 && name.length>1 && ph.length>1){
+			if(msg.length<=100 && name.length>1 && p1==1 && p2==1){
 				if(confirm("신청하시겠습니까?")){
 					let sno = $("#sno").val();
 					let mno = $("#mno").val();
-					
 					$.ajax({
 						url:'./joinsomoim',
 						type:'post',
@@ -85,27 +103,34 @@ $(document).ready(function(){
 				<div class="conStyle">
 					<div class="content">${detail.scontent }</div>
 				</div>
-				<button class="order">신청하기</button>
+				<c:if test="${sessionScope.mname ne null }">
+					<button class="order">신청하기</button>
+				</c:if>
 			</div>
-			<form action="./join" method="post" onsubmit="return check()" id="form">
-				<div class="name"> 
-					이름 <input type="text" placeholder="이름을 입력하세요." id="name">
-				</div>
-				<div class="ph">
-					연락처 <input type="text" placeholder="전화번호를 입력하세요." id="ph">
-				</div>
-				<div class="msg">
-						메세지 <br>
-						<textarea placeholder="Host에게 전할 말을 적어주세요." id="message"></textarea>
-						<span id="textLengthCheck">( 0 / 100글자 )</span>
-					<div class="buttons">
-						<button type="reset">초기화</button>
-						<button type="submit" value="${detail.sno }">참가 요청</button>
-						<input type="hidden" value="${detail.sno }" id="sno">
-						<input type="hidden" value="${detail.mno }" id="mno">
+			<c:if test="${sessionScope.mname ne null }">
+				<form action="./join" method="post" onsubmit="return check()" id="form">
+					<div class="name"> 
+						이름 : <input type="text" placeholder="이름을 입력하세요." id="name">
 					</div>
-				</div>
-			</form>
+					<div class="ph">
+						연락처 : 010 -  
+						<input type="text" id="ph1" class="phn">
+						-
+						<input type="text" id="ph2" class="phn">
+					</div>
+					<div class="msg">
+							메세지 <br>
+							<textarea placeholder="Host에게 전할 말을 적어주세요." id="message"></textarea>
+							<span id="textLengthCheck">( 0 / 100글자 )</span>
+						<div class="buttons">
+							<button type="reset">초기화</button>
+							<button type="submit" value="${detail.sno }">참가 요청</button>
+							<input type="hidden" value="${detail.sno }" id="sno">
+							<input type="hidden" value="${detail.mno }" id="mno">
+						</div>
+					</div>
+				</form>
+			</c:if>
 		</div>
 	</article>
 </body>
