@@ -49,7 +49,15 @@ public class Login extends HttpServlet {
 				session.setAttribute("mname", dto.getMname());//mname이라는 이름으로 세션만들기
 				session.setAttribute("mid", dto.getMid());//mid라는 이름으로 세션 만듬
 				
-				response.sendRedirect("./index");
+				// Referer 헤더를 확인하여 이전 페이지로 Redirect
+	            String referer = request.getHeader("Referer");
+	            if (referer != null && !referer.contains("LoginServlet")) {
+	                response.sendRedirect(referer);
+	            } else {
+	                // Referer가 없거나 로그인 페이지에서 왔다면 기본적으로 index 페이지로 Redirect
+	            	//response이기 때문에 request값을 공유 하지 않음
+	                response.sendRedirect("index.jsp");
+	            }
 			} else {
 				//에러페이지? 파라미터값 = 4567
 				response.sendRedirect("./login?error=4567");

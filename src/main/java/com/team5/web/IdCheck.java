@@ -8,31 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/logout")
-public class Logout extends HttpServlet {
+@WebServlet("/idCheck")
+public class IdCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-  
-    public Logout() {
+    
+    public IdCheck() {
         super();
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();
-		if (session.getAttribute("mname") != null) {
-			session.removeAttribute("mname");
-		}
-		if (session.getAttribute("mid") != null) {
-			session.removeAttribute("mid");
-		}
-		session.invalidate();
-		//로그아웃후 인덱스페이지로 갑니다.
-		response.sendRedirect("./index");
+		RequestDispatcher rd = request.getRequestDispatcher("idCheck.jsp");
+		rd.forward(request, response);
 	}
 
 	
