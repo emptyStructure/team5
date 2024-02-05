@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import com.team5.dao.JBoardDAO;
 import com.team5.dto.JBoardDTO;
@@ -34,10 +34,19 @@ public class JDetail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//오는 no 잡기 
+		
+		HttpSession session = request.getSession();
 		int no = Util.str2Int(request.getParameter("no"));
 		
 		JBoardDAO dao = new JBoardDAO();
 		JBoardDTO dto = dao.detail(no);
+		
+
+		if (session.getAttribute("mid") != null) {
+			// bno, mno
+			dao.countUp(no, (String) session.getAttribute("mid"));
+		}
+
 		
 		/*
 		 * if(no == 0 || dto.getJcontent() == null) { //null이면 에러로
