@@ -14,8 +14,8 @@ body{
 }
 
 header{
-	padding: 20px;
-	height: 60px;
+	padding: 5px;
+	height: 100px;
 	text-align: center;
 	background-color: skyblue;
 	vertical-align: bottom;
@@ -96,9 +96,6 @@ table{
 }
 
 
-form{	
-	bottom: 0;
-}
 
 .loginBox, .doneLogin{
 	margin: 15px 0px;
@@ -124,8 +121,21 @@ form{
 	bottom: 2px;
 }
 
+.loginBox > form{
+	line-height: 30px;
+}
+.doneLogin > form{
+	line-height: 50px;
+}
+
+.doneLogin button{
+	width: auto;
+	height: 25px;
+	color: black;
+}
+
+
 a{
-	font-size: small;
 	text-decoration: none;
 	color: black;
 }

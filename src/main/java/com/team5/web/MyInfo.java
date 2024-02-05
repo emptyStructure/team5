@@ -2,6 +2,7 @@ package com.team5.web;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,7 +44,10 @@ public class MyInfo extends HttpServlet {
 			request.setAttribute("myBoard", myBoard);			
 			
 			//내가 참여중인 소모임
+			List<Map<String, Object>> mysomoim = dao.mySomoim(mid);
+			request.setAttribute("mysomoim", mysomoim);
 			
+			//내가 주도하는 소모임
 			
 			
 			//내 중고거래내역 보기  내가 판 물건, 내가 산 물건

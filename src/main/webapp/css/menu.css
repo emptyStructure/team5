@@ -3,11 +3,11 @@
 #menu{
 	margin: 0;
 	padding: 0;
+	margin-top: 48px;
 	min-width: 500px;
 	width: auto;
 	height: 50px;
-	vertical-align: bottom;
-	border: 1px solid black;
+	border: 2px solid black;
 	display: inline-block;
 }
 
@@ -30,6 +30,7 @@ nav ul li{
 	margin: 0 10px;
 	color: black;
 	display: inline-block;
+	font-size: large;
 }
 nav ul li:hover{
 	background-color: whitesmoke;

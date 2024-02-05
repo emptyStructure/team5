@@ -42,7 +42,8 @@ public class Join extends HttpServlet {
 		if(result == 1) {
 			response.sendRedirect("./login");
 		} else {
-			response.sendRedirect("./error.jsp");
+			//오류고치면 풀 예정입니다.
+			//response.sendRedirect("./error.jsp");
 			System.out.println("회원가입 오류입니다.");
 		}
 	}
