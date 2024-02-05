@@ -10,6 +10,12 @@
 <link href="./css/index.css" rel="stylesheet"/>
 <link href="./css/menu.css" rel="stylesheet"/>
 <script type="text/javascript" src="./js/menu.js"></script>
+<style type="text/css">
+#content{
+	display: flex;
+	align-items: center;
+}
+</style>
 </head>
 <body>	
 	<div id="container">

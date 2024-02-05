@@ -26,14 +26,14 @@ public class SomoimDAO extends AbstractDAO{
 			
 			while(rs.next()) {
 				SomoimDTO dto = new SomoimDTO();
-				dto.setSno(rs.getInt(1));
-				dto.setStitle(rs.getString(2));
-				dto.setScontent(rs.getString(3));
-				dto.setScategory(rs.getString(4));
-				dto.setSwriter(rs.getString(5));
-				dto.setMno(rs.getInt(6));
-				dto.setSdate(rs.getString(7));
-				dto.setTotal(rs.getInt(8));
+				dto.setSno(rs.getInt("sno"));
+				dto.setStitle(rs.getString("stitle"));
+				dto.setScontent(rs.getString("scontent"));
+				dto.setScategory(rs.getString("scategory"));
+				dto.setSwriter(rs.getString("switer"));
+				dto.setMno(rs.getInt("mno"));
+				dto.setSdate(rs.getString("sdate"));
+				dto.setTotal(rs.getInt("total"));
 				result.add(dto);
 			}
 		} catch (SQLException e) {
