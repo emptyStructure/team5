@@ -42,13 +42,33 @@ public class Chatting extends HttpServlet {
 		MessageDAO dao = new MessageDAO();
 		MessageDTO dto = new MessageDTO();
 		String mid = (String) session.getAttribute("mid");
-		System.out.println(mid);
-		dto.setMid(mid); // 로그인 세션의 id값
-		dto.setMscontent(request.getParameter("mscontent")); //ajax를 통해 받은 채팅값
-		int result = dao.chatting(dto);
-		System.out.println(result);
-		PrintWriter pw = response.getWriter();
-		pw.print(result);
+		if (mid != null) {
+			dto.setMid(mid); // 로그인 세션의 id값
+			String mscontent = request.getParameter("mscontent");
+			mscontent = mscontent.replaceAll("<br>", "");
+			mscontent = mscontent.replaceAll("<script>", "");
+			mscontent = mscontent.replaceAll("</script>", "");
+			mscontent = mscontent.replaceAll("<style>", "");
+			mscontent = mscontent.replaceAll("</style>", "");
+			mscontent = mscontent.replaceAll("<a>", "");
+			mscontent = mscontent.replaceAll("</a>", "");
+			mscontent = mscontent.replaceAll("<form>", "");
+			mscontent = mscontent.replaceAll("</form>", "");
+			mscontent = mscontent.replaceAll("<button>", "");
+			mscontent = mscontent.replaceAll("</button>", "");
+			mscontent = mscontent.replaceAll("<input>", "");
+			mscontent = mscontent.replaceAll("</input>", "");
+			mscontent = mscontent.replaceAll("자바", "아잉");
+			mscontent = mscontent.replaceAll("코딩", "아잉");
+			mscontent = mscontent.replaceAll("html", "아잉");
+			mscontent = mscontent.replaceAll("css", "아잉");
+			dto.setMscontent(mscontent); //ajax를 통해 받은 채팅값
+			int result = dao.chatting(dto);
+			PrintWriter pw = response.getWriter();
+			pw.print(result);
+		}
+
+		
 	}
 
 }

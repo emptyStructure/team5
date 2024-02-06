@@ -60,7 +60,48 @@ $(function(){
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
+  
+  //말풍선 길이 변경
   adjustBackgroundLength();
+  
+  //테마 변경
+  
+  $("#themeBtn").click(function() {
+	  toggleTheme();
+  });
+  
+  let themeApplied = loadThemePreference() == 'dark';
+  
+  function toggleTheme() {
+	  themeApplied = !themeApplied;
+	  
+	  if(themeApplied) {
+		  applyDarkTheme();
+		  saveThemePreference('dark');
+	  } else {
+		  applyOriginalTheme();
+		  saveThemePreference('original');
+	  }
+  }
+  
+  if(themeApplied) {
+	  applyDarkTheme();
+  } else {
+	  applyOriginalTheme();
+  }
+  
+  function applyDarkTheme() {
+	$(".chat").css({
+		"background-image": "url('img/friends4.gif')"
+	});
+  }
+  
+  function applyOriginalTheme() {
+	  $(".chat").css({
+			"background-image": "url('img/friends3.gif')"
+		});
+	  }
+  
   
   $("#chatting").keydown(function(event) {
       if (event.keyCode === 13) {  // Enter 키 코드
@@ -96,6 +137,8 @@ $(document).ready(function() {
 	  });
   }
   //여기까지
+  
+  
    $('#mscontent').on('scroll', function() {
     const chatContainer = document.getElementById("mscontent");
     autoScroll = chatContainer.scrollHeight - chatContainer.clientHeight <= chatContainer.scrollTop + 1;
@@ -112,28 +155,30 @@ $(document).ready(function() {
 
     $(".mscontent h5").each(function() {
       var textLength = $(this).text().length;
-      var dynamicWidth = (textLength / 50) * 63; // 30자를 기준으로 계산
+      var dynamicWidth = (textLength / 50) * 70; // 30자를 기준으로 계산
 
       $(this).css("width", dynamicWidth + "%");
     });
   }
 });
+function saveThemePreference(theme) {
+	localStorage.setItem('themePreference', theme);
+}
+function loadThemePreference() {
+	return localStorage.getItem('themePreference') || 'original';
+}
 </script>
 <style>
 #main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-45%, -50%);
-    text-align: center;
-    width: 1000px;
+    margin: auto;
+	width: 70%;
+	height: 85%;
   }
  .chat {
-//  	background-image : url('img/kakao.jpg');
- 	background-image: url('img/friends.gif');
+ 	background-image: url('img/friends3.gif');
   	background-size : cover;
   	width : 100%;
-  	height: 500px;
+  	height: 80vh;
   }
 .mscontent {
 	text-align: left;
@@ -141,18 +186,19 @@ $(document).ready(function() {
 	height: 98%;
 	padding : 5px;
 }
- #container{
- 	background-size: cover;
- 	background-repeat: no-repeat;
- }
  #chatting {
  	width: 80%;
- 	height: 50px;
+ 	height: 5vh;
  	box-sizing: border-box;
  }
  #chattingBtn {
- 	width: 20%;
- 	height: 50px;
+ 	width: 15%;
+ 	height: 5vh;
+ 	box-sizing: border-box;
+ }
+ #themeBtn {
+ 	width: 5%;
+ 	height: 5vh;
  	box-sizing: border-box;
  }
  .write {
@@ -161,8 +207,8 @@ $(document).ready(function() {
  }
  .mscontent h5 {
  	position: relative;
- 	background-color: #007bff;
- 	color: #fff;
+ 	background-color: #000000;
+ 	color: #ffffff;
  	border-radius: 8px;
  	padding: 10px;
  	max-width: 70%;
@@ -170,8 +216,14 @@ $(document).ready(function() {
  	margin-bottom: 1px;
  }
  .mscontent h5 small {
- 	color: #555;
- 	margin-top : 5px;
+ 	color: #ffff00;
+ 	margin-left: 5px;
+ }
+ h4 {
+ 	color: #ffffff;
+ }
+ .user{
+ color: black;
  }
 </style>
 </head>
@@ -184,6 +236,12 @@ $(document).ready(function() {
 		</header>
 		<div class="side" id="left">
 			<%@ include file="leftside.jsp"%>
+			<div class="user">
+				<p> 접속자</p>
+				<c:forEach var="login" items="${loginlist }">
+					<p><i class="xi-user"></i> ${login.mname }<p>
+				</c:forEach>
+			</div>
 		</div>
 		<div class="side" id="right">
 			<%@ include file="rightside.jsp"%>
@@ -194,14 +252,14 @@ $(document).ready(function() {
 					<div class="mscontent" id="mscontent">
 					<c:forEach var="chat" items="${chatlist }">
 					<h4><i class="xi-user"></i> ${chat.mname }</h4>
-					<h5>${chat.mscontent }<small> ${chat.sendDate }</small></h5>
+					<h5>${chat.mscontent }<small>${chat.sendDate }</small></h5>
 					<br>
 					</c:forEach>
 					</div>
 				</div>
 				<div class="write">
-				<textarea name="chatting" id="chatting" placeholder="이곳에 입력하세요. Enter 눌러도 입력됩니다."></textarea>
-				<button type="submit" id="chattingBtn">전송</button>
+				<textarea name="chatting" id="chatting" placeholder="이곳에 입력하세요. Enter 눌러도 입력됩니다. 금지어[자바, 코딩, html, css]"></textarea>
+				<button type="submit" id="chattingBtn">전송</button><button id="themeBtn"><i class="xi-palette"></i></button>
 				</div>
 			</article>
 		</div>
