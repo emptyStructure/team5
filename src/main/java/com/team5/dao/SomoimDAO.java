@@ -106,6 +106,7 @@ public class SomoimDAO extends AbstractDAO{
 				result.setMno(rs.getInt(7));
 				result.setSdate(rs.getString(8));
 				result.setTotal(rs.getInt(9));
+				result.setMid(rs.getString(11));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -414,6 +415,49 @@ public class SomoimDAO extends AbstractDAO{
 			close(rs, pstmt, conn);
 		}
 		
+		return result;
+	}
+	public int update(SomoimDTO dto, String mid) {
+		int result = 0;
+		System.out.println("업데이트 통과");
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "UPDATE somoim SET stitle=?, scontent=?, scategory=?, personnel=? WHERE sno=? AND mno=(SELECT mno from member where mid = ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getStitle());
+			pstmt.setString(2, dto.getScontent());
+			pstmt.setString(3, dto.getScategory());
+			pstmt.setInt(4, dto.getPersonnel());
+			pstmt.setInt(5, dto.getSno());
+			pstmt.setString(6, mid);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
+		
+		return result;
+	}
+	public int del(int sno, String mid) {
+		int result = 0;
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE somoim SET sdel=? WHERE sno=? AND mno=(SELECT mno from member where mid = ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "0");
+			pstmt.setInt(2, sno);
+			pstmt.setString(3, mid);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
 		return result;
 	}
 	

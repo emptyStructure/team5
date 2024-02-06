@@ -95,5 +95,8 @@
 .done{
 	text-align: center;
 	color: red;
-	
+}
+.buttons{
+	margin: 0px 20px;
+	float: right;
 }
