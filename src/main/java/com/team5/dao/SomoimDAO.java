@@ -12,16 +12,17 @@ import com.team5.dto.SomoimDTO;
 
 public class SomoimDAO extends AbstractDAO{
 	//전체 글
-	public List<SomoimDTO> list(){
+	public List<SomoimDTO> list(int page){
 		List<SomoimDTO> result = new ArrayList<SomoimDTO>();
 		
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT * FROM somoimView";
+		String sql = "SELECT * FROM somoimView limit ?,12";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (page-1)*12);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -42,6 +43,25 @@ public class SomoimDAO extends AbstractDAO{
 			e.printStackTrace();
 		} finally {
 			close(rs, pstmt, conn);
+		}
+		
+		return result;
+	}
+	
+	public int totalCount() {
+		int result = 0;
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) from somoimView";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		
 		return result;

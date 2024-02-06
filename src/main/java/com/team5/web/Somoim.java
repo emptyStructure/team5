@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.team5.dao.SomoimDAO;
 import com.team5.dto.SomoimDTO;
+import com.team5.util.Util;
 
 @WebServlet("/somoim")
 public class Somoim extends HttpServlet {
@@ -23,11 +24,20 @@ public class Somoim extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+
 		SomoimDAO dao = new SomoimDAO();
-		List<SomoimDTO> list = dao.list();
+		int page = 1;
+		if(request.getParameter("page")!=null) {
+			page = Util.str2Int2(request.getParameter("page"));
+		}
+		int totalCount = dao.totalCount();
+		List<SomoimDTO> list = dao.list(page);
+		
+		request.setAttribute("totalCount", totalCount);
+		request.setAttribute("page", page);
 		request.setAttribute("list", list);
 		
-		HttpSession session = request.getSession();
 		
 		RequestDispatcher rd = request.getRequestDispatcher("somoim.jsp");
 		rd.forward(request, response);
