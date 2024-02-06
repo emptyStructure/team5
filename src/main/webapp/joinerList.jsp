@@ -19,17 +19,25 @@ $(function(){
 		if(confirm("승인하시겠습니까?")){
 			let tr = $(this).parents(".select").parents("tr");
 			let jno = tr.prev().val();
-			$(this).parents(".select").text("🟢 승인");
+			let sno = ${param.sno };
+			let total = $('#info').children(".total").children();
+			var num = Number(total.text());
 			
 			$.ajax({
 				url:'./joinerList',
 				type:'post',
 				dataType:'text',
-				data: {'jno':jno,'respon':1},
+				data: {'jno':jno,'respon':1, 'sno':sno},
 				success: function(result){
-					<c:if test="${param.status ne null}">
-						tr.hide();
-					</c:if>
+					if(result==1){
+						$(this).parents(".select").text("🟢 승인");
+						<c:if test="${param.status ne null}">
+							tr.hide();
+							total.text(num+1);
+						</c:if>
+					} else {
+						alert("이미 정원이 가득찼습니다.");
+					}
 				}, error: function(request, status, error){
 					alert("통신 오류");
 				}
@@ -41,15 +49,16 @@ $(function(){
 	$('.refuse').click(function(){
 		if(confirm("거절하시겠습니까?")){
 			let tr = $(this).parents(".select").parents("tr");
-			let jno = tr.prev().val();			
-			$(this).parents(".select").text("❌ 거절");
+			let jno = tr.prev().val();		
+			let sno = ${param.sno };
 		
 			$.ajax({
 				url:'./joinerList',
 				type:'post',
 				dataType:'text',
-				data: {'jno':jno,'respon':0},
+				data: {'jno':jno,'respon':0, 'sno':sno},
 				success: function(result){
+					$(this).parents(".select").text("❌ 거절");
 					<c:if test="${param.status ne null}">
 						tr.hide();
 					</c:if>
@@ -68,7 +77,8 @@ $(function(){
 <body>
 	<div class="main">
 		<article>
-			<h2>${sno }번 글 : ${title }</h2>
+			<h2>${detail.sno }번 글 : ${detail.stitle }</h2>
+				<div class="header">
 					<div class="status-list">
 						<ul>
 							<li onclick="location.href='./joinerList?sno=${sno }'"> 전체</li>
@@ -77,6 +87,20 @@ $(function(){
 							<li onclick="location.href='./joinerList?sno=${sno }&status=0'"> 거절</li>
 						</ul>
 					</div>
+					<div id="info">
+							<div class="emoji">👪</div>
+						<ul class="total">
+							<li>${detail.total } </li>
+						</ul>
+						<ul class="personnel">
+							<li> / ${detail.personnel}</li>
+						</ul>
+						<ul class="views">
+							<li>❤️ 100</li>
+						</ul>
+					</div>
+				</div>
+				<div>
 					<table border="1">
 						<thead>
 							<tr>
@@ -118,6 +142,7 @@ $(function(){
 					<c:if test="${fn:length(list) lt 1 }">
 						<h1>There is no contents</h1>
 					</c:if>
+				</div>
 		</article>
 	</div>
 </body>
