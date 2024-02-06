@@ -56,7 +56,7 @@ public class Login extends HttpServlet {
 	            } else {
 	                // Referer가 없거나 로그인 페이지에서 왔다면 기본적으로 index 페이지로 Redirect
 	            	//response이기 때문에 request값을 공유 하지 않음
-	                response.sendRedirect("index.jsp");
+	                response.sendRedirect("./index");
 	            }
 			} else {
 				//에러페이지? 파라미터값 = 4567
