@@ -51,7 +51,19 @@ $(function(){
 				<div class="mainStyle">
 					<c:forEach items="${list }" var="row">
 						<div class="scard">
-							<div class="simage">	
+							<div class="simage">
+								<c:if test="${row.scategory eq  '공부'}">
+									<img alt="사진" src="./img/study.jpg" class="backimage">	
+								</c:if>
+								<c:if test="${row.scategory eq  '유흥'}">
+									<img alt="사진" src="./img/beer.jpg" class="backimage">	
+								</c:if>
+								<c:if test="${row.scategory eq  '게임'}">
+									<img alt="사진" src="./img/game.jpeg" class="backimage">	
+								</c:if>
+								<c:if test="${row.scategory eq  '식사'}">
+									<img alt="사진" src="./img/chicken.jpg" class="backimage">	
+								</c:if>
 								<div class="scategory">${row.scategory }</div>
 								<div class="sviews">👪 ${row.total }/${row.personnel } ❤️ 100</div>
 								<div class="sinfo">
