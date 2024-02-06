@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.team5.dao.SomoimDAO;
 import com.team5.dto.JoinSomoimDTO;
+import com.team5.dto.SomoimDTO;
 import com.team5.util.Util;
 
 @WebServlet("/joinerList")
@@ -40,9 +41,9 @@ public class JoinerList extends HttpServlet {
 				list =dao.joinList((String)session.getAttribute("mid"), Util.str2Int(request.getParameter("sno")),request.getParameter("status"));
 			}
 			int sno = Util.str2Int(request.getParameter("sno"));
-			String title = dao.detail(sno).getStitle();
+			SomoimDTO detail = dao.detail(sno);
 			request.setAttribute("list", list);
-			request.setAttribute("title", title);
+			request.setAttribute("detail", detail);
 			request.setAttribute("sno", Util.str2Int(request.getParameter("sno")));
 			
 			RequestDispatcher rd = request.getRequestDispatcher("joinerList.jsp");
@@ -55,9 +56,19 @@ public class JoinerList extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SomoimDAO dao = new SomoimDAO();
+
+		int result = 0;
+		int sno = Util.str2Int(request.getParameter("sno"));
 		int respon = Util.str2Int2(request.getParameter("respon"));
 		String jno = request.getParameter("jno");
-		int result = dao.respon(respon, jno);
+		
+		SomoimDTO dto = dao.detail(sno);
+		
+		if(dto.getTotal() < dto.getPersonnel()) {
+			result = dao.respon(respon, jno);
+		} else {
+			result = 0;
+		}
 		
 		PrintWriter pw = response.getWriter();
 		pw.print(result);
