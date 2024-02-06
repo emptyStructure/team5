@@ -92,3 +92,8 @@
 .buttons{
 	text-align: right;
 }
+.done{
+	text-align: center;
+	color: red;
+	
+}

@@ -1,6 +1,7 @@
 package com.team5.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.team5.dao.SomoimDAO;
 import com.team5.dto.JoinSomoimDTO;
-import com.team5.dto.SomoimDTO;
+import com.team5.util.Util;
 
 @WebServlet("/somoimApplications")
 public class SomoimApplications extends HttpServlet {
@@ -29,7 +30,12 @@ public class SomoimApplications extends HttpServlet {
 			response.sendRedirect("login");
 		} else {
 			SomoimDAO dao = new SomoimDAO();
-			List<JoinSomoimDTO> list =dao.myJoinList((String)session.getAttribute("mid"));
+			List<JoinSomoimDTO> list = new ArrayList<JoinSomoimDTO>();
+			if(request.getParameter("status")!=null&&request.getParameter("status")!="") {
+				list = dao.myJoinList((String)session.getAttribute("mid"), Util.str2Int2(request.getParameter("status")));
+			} else {
+				list =dao.myJoinList((String)session.getAttribute("mid"));
+			}
 			request.setAttribute("list", list);
 
 			RequestDispatcher rd = request.getRequestDispatcher("somoimApplications.jsp");

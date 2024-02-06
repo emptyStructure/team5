@@ -14,7 +14,12 @@ function openIdCheck() {
     window.name = "join";
     
     // window.open("open할 window", "자식창 이름", "팝업창 옵션");
-    openWin = window.open("./idCheck", "idCheck", "width=570, height=350, resizable = no, scrollbars = no");    
+    openWin = window.open("./idCheck", "idCheck", "width=570, height=350, resizable = no, scrollbars = no");
+    
+    //아이디를 입력받으면 비활성화
+    if (document.getElementById("id").value != ""){
+		document.getElementById("id").disabled = true;
+    } 
 }
 
 $(document).ready(function(){
@@ -61,7 +66,6 @@ $(document).ready(function(){
         <div class="password2">
 	        <label for="password2">비밀번호 확인:</label>
 	        <input type="password" id="pw2" name="pw2" class="inputPw2" placeholder="비밀번호 확인">
-	        <i class="xi-eye-off-o"></i>
         </div>
         
         <label for="email">이메일:</label>
