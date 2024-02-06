@@ -26,9 +26,16 @@ public class Chatting extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		String mid = (String) session.getAttribute("mid");
+		MessageDAO dao = new MessageDAO();
+		
+		List<MessageDTO> loginlist = dao.loginList(mid);
+		System.out.println("실행");
+		request.setAttribute("loginlist", loginlist);
+		System.out.println(loginlist);
+		
 		
 		// 화면에 나올 전체 채팅 목록 chatlist
-		MessageDAO dao = new MessageDAO();
 		List<MessageDTO> chatlist = new ArrayList<MessageDTO>();
 		chatlist = dao.chatList();
 		request.setAttribute("chatlist", chatlist);

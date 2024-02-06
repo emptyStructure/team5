@@ -116,6 +116,10 @@ $(document).ready(function() {
   //추가2
   setInterval(updateChat, 1000);
   
+   $('#mscontent').on('scroll', function() {
+    const chatContainer = document.getElementById("mscontent");
+    autoScroll = chatContainer.scrollHeight - chatContainer.clientHeight <= chatContainer.scrollTop + 1;
+  });
   //추가3
   function updateChat() {
 	  $.ajax({
@@ -139,10 +143,6 @@ $(document).ready(function() {
   //여기까지
   
   
-   $('#mscontent').on('scroll', function() {
-    const chatContainer = document.getElementById("mscontent");
-    autoScroll = chatContainer.scrollHeight - chatContainer.clientHeight <= chatContainer.scrollTop + 1;
-  });
   
   
   $("#chatting").on("input", function() {
@@ -263,7 +263,9 @@ function loadThemePreference() {
 				</div>
 			</article>
 		</div>
-		
 		</div>
+		<footer>
+		<%@ include file="footer.jsp"%>
+	</footer>
 </body>
 </html>
