@@ -32,7 +32,12 @@ public class jwrite extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		// 이전 페이지의 URL을 세션에 저장하는 코드 : 전전 페이지 이동에 필요함! <삭제하지 마세요>
 		HttpSession session =request.getSession();
+		String originalReferer = request.getHeader("Referer");
+		session.setAttribute("originalReferer", originalReferer);
+
 		
 		if(session.getAttribute("mname")==null ) {
 			response.sendRedirect("./login");
