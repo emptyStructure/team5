@@ -1,6 +1,7 @@
 package com.team5.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.team5.dao.JBoardDAO;
+import com.team5.dao.JCommentDAO;
 import com.team5.dto.JBoardDTO;
+import com.team5.dto.JCommentDTO;
 import com.team5.util.Util;
 
 /**
@@ -39,6 +42,7 @@ public class JDetail extends HttpServlet {
 		int no = Util.str2Int(request.getParameter("no"));
 		
 		JBoardDAO dao = new JBoardDAO();
+		JCommentDAO dao1 = new JCommentDAO();
 		JBoardDTO dto = dao.detail(no);
 		
 
@@ -56,7 +60,13 @@ public class JDetail extends HttpServlet {
 			//내용 가져오기
 			request.setAttribute("jdetail", dto);
 			
-		
+			List<JCommentDTO> commentList = dao1.commentList(no);
+			
+		if(commentList.size()>0) {
+			request.setAttribute( "commentList",commentList);
+		}
+			
+			
 			RequestDispatcher rd = request.getRequestDispatcher("jdetail.jsp");
 			rd.forward(request, response);
 		}
