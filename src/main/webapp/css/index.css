@@ -15,9 +15,8 @@ body{
 
 header{
 	padding: 5px;
-	height: 130px;
+	height: 180px;
 	text-align: center;
-	/*background-color: skyblue;*/
 	background-image: url("../img/headerex.png");
 }
 
@@ -29,18 +28,19 @@ footer{
 }
 
 .side {
+	margin-top: 10px;
     width: 180px;
-    height: calc(100vh - 170px);
-    background-color: lightgoldenrodyellow;
+    height: calc(100vh - 240px);
+/*    background-color: lightgoldenrodyellow;*/
 }
 #left{
 	float: left;
 }
 #content {
 	width: calc(100% - 360px);
-    height: calc(100vh - 170px);
+    height: calc(100vh - 240px);
 	float: left;
-	background-color: lightsteelblue;
+/*	background-color: lightsteelblue;*/
 }
 
 #right{
@@ -48,7 +48,7 @@ footer{
 }
 
 #contents{
-	margin: 20px auto;
+	margin: 20px 10px;
 	width: 100%;
 	display: flex;
 }
@@ -98,11 +98,11 @@ table{
 
 
 .loginBox, .doneLogin{
-	margin: 15px 0px;
 	width: 180px;
 	height: 120px;
 	padding: 10px;
-	border: 1px solid gray;
+/*	border: 1px solid gray;*/
+	background-color: darkgrey;
 	box-sizing: border-box;
 	vertical-align: top;
 }

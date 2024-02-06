@@ -10,10 +10,29 @@
 <link href="./css/index.css" rel="stylesheet"/>
 <link href="./css/menu.css" rel="stylesheet"/>
 <script type="text/javascript" src="./js/menu.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$('.title').each(function(){
+		var thistitle = $(this);
+		var titleC = thistitle.text();
+		var titleE = thistitle.html();
+		var start = titleE.indexOf(">");
+		var end = titleE.indexOf("<", 2);
+ 		if(titleC.length > 13) {
+			var shortTitle = titleE.substr(0, start + 1) + titleC.substr(0, 12) + "..." + titleE.substr(end);
+			thistitle.html(shortTitle);
+		}
+	})
+	
+});
+
+</script>
 <style type="text/css">
 #content{
 	display: flex;
-	align-items: center;
+/* 	align-items: center; */
 }
 </style>
 </head>
@@ -38,9 +57,9 @@
 				</div>
 				<div class="newContents">
 					<table>
-						<c:forEach items="${boardList}" var="row">
+					<c:forEach items="${boardList}" var="row">
 						<tr>
-							<td class="title"><a href="./detail?no=${row.bno}">${row.btitle }</a></td>
+							<td class="title"><a href="./detail?bno=${row.bno}">${row.btitle }</a></td>
 							<td class="date">${row.bdate }</td>
 						</tr></c:forEach>
 					</table>
@@ -77,7 +96,7 @@
 			</div>
 		</div>
 	<footer>
-		푸터푸터푸터  foot은 발바닥
+		<%@ include file="footer.jsp"%>
 	</footer>
 </div>
 </body>
