@@ -31,8 +31,18 @@ public class Logout extends HttpServlet {
 			session.removeAttribute("mid");
 		}
 		session.invalidate();
-		//로그아웃후 인덱스페이지로 갑니다.
-		response.sendRedirect("./index");
+		
+		
+		/// 이전 페이지의 URL 가져오기
+        String referer = request.getHeader("referer");
+
+        // 이전 페이지가 존재하면 해당 페이지로 리다이렉트, 없으면 기본 페이지로 이동
+        if (referer != null && !referer.isEmpty()) {
+            response.sendRedirect(referer);
+        } else {
+            response.sendRedirect("./index"); // 기본 페이지로 리다이렉트
+        }
+		
 	}
 
 	

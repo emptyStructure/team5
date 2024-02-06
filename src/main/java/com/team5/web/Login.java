@@ -47,10 +47,16 @@ public class Login extends HttpServlet {
 			    HttpSession session = request.getSession();
 			    session.setAttribute("mname", dto.getMname()); // mname이라는 이름으로 세션 만들기
 			    session.setAttribute("mid", dto.getMid()); // mid라는 이름으로 세션 만듬
-
-			    // Referer 헤더를 확인하여 이전 페이지로 Redirect
+			    
+				// Referer 헤더를 확인하여 이전 페이지로 Redirect
 			    String referer = request.getHeader("Referer");
-			    if (referer != null && !referer.contains("/login")) {
+			    String originalReferer = (String) session.getAttribute("originalReferer");
+
+			    // 원래의 이전 페이지로 Redirect
+			    if (originalReferer != null && !originalReferer.contains("/login")) {
+			        response.sendRedirect(originalReferer);
+			    } else if (referer != null && !referer.contains("/login")) {
+			        // 현재 페이지의 Referer가 로그인 페이지가 아닌 경우에는 이전 페이지로 Redirect
 			        response.sendRedirect(referer);
 			    } else {
 			        // Referer가 없거나 로그인 페이지에서 왔다면 기본적으로 index 페이지로 Redirect
@@ -61,6 +67,8 @@ public class Login extends HttpServlet {
 			    // 에러페이지로 Redirect
 			    response.sendRedirect("./login?error=4567");
 			}
+
+			
 
 			
 		}

@@ -8,7 +8,8 @@
 <title>중하하 로그인</title>
 <style type="text/css">
 body {
-	background-color: #1BBC9B;
+	background-image: url("./img/login3.gif");
+	background-size: cover;
 }
 
 h1 {
@@ -60,7 +61,7 @@ function err() {
 		<div class="main">
 			<div class="mainStyle">
 				<article>
-					<h1>login</h1>
+					<h1>&nbsp;</h1>
 					<c:if test="${param.error ne null }">
 						<script type="text/javascript">
 							alert("올바른 암호와 아이디를 입력하세요.");
