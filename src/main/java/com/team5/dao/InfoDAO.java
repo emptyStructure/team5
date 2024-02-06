@@ -44,6 +44,7 @@ public class InfoDAO extends AbstractDAO{
 		return dto;
 	}
 
+	//내가 쓴 글 불러오기
 	public List<BoardDTO> myBoard(String mid) {
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		Connection con = db.getConnection();
@@ -76,7 +77,8 @@ public class InfoDAO extends AbstractDAO{
 		return list;
 	}
 
-	public List<Map<String, Object>> mySomoim(String mid) {
+	//내 소모임
+/*	public List<Map<String, Object>> mySomoim(String mid) {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -106,7 +108,7 @@ public class InfoDAO extends AbstractDAO{
 		}
 						
 		return list;
-	}
+	}*/
 
 	//내 정보 수정
 	public int changeInfo(MemberDTO dto) {
@@ -131,6 +133,38 @@ public class InfoDAO extends AbstractDAO{
 		
 		
 		return result;
+	}
+
+	//내 댓글보기
+	public List<Map<String, Object>> myComments(String mid) {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT cno, bno, ccontent, DATE_FORMAT(cdate, '%Y. %m. %d') AS cdate, "
+				+ "cip FROM bcomment WHERE mno=(SELECT mno FROM member WHERE mid=?) AND cdel='1' "
+				+ "ORDER BY cno DESC";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> e = new HashMap<String, Object>();
+				e.put("cno", rs.getInt("cno"));
+				e.put("bno", rs.getInt("bno"));
+				e.put("ccontent", rs.getString("ccontent"));
+				e.put("cdate", rs.getString("cdate"));
+				e.put("cip", rs.getString("cip"));
+				list.add(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, con);
+		}			
+		
+		return list;
 	}
 	
 	

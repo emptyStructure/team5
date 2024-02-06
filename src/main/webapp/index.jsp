@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -14,6 +15,7 @@
 <script type="text/javascript">
 $(function(){
 	
+	//제목이 12자 이상인 경우 ... 처리
 	$('.title').each(function(){
 		var thistitle = $(this);
 		var titleC = thistitle.text();
@@ -25,6 +27,14 @@ $(function(){
 			thistitle.html(shortTitle);
 		}
 	})
+	
+	
+	$('.date').each(function(){
+		var thisDate = $(this);
+		
+		
+	})
+	
 	
 });
 
@@ -51,6 +61,8 @@ $(function(){
 		</div>			
 		<div id="content">
 			<div id="contents">
+			<c:set var="now" value="<%=new Date() %>"/>
+			<fmt:formatDate var="today" value="${now }" pattern="yyyy-MM-dd"/>
 			<div id="newBoard">	
 				<div class="newTitle">
 				새로 올라온 게시판 글
@@ -60,7 +72,18 @@ $(function(){
 					<c:forEach items="${boardList}" var="row">
 						<tr>
 							<td class="title"><a href="./detail?bno=${row.bno}">${row.btitle }</a></td>
-							<td class="date">${row.bdate }</td>
+							<td class="date">
+							<fmt:parseDate value="${row.bdate }" var="bdate" pattern="yyyy. MM. dd. hh:mm"/>
+							<fmt:formatDate value="${bdate}" var="chdate" pattern="yyyy-MM-dd"/>
+							<c:choose>
+							<c:when test="${chdate eq today}">
+							<fmt:formatDate value="${bdate}" var="ddate" pattern="hh:mm"/>&#127381;${ddate }			
+							</c:when>
+							<c:otherwise>
+							<fmt:formatDate value="${bdate}" var="ddate" pattern="MM/dd"/>${ddate }
+							</c:otherwise>
+							</c:choose>																					
+							</td>
 						</tr></c:forEach>
 					</table>
 				</div>	

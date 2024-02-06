@@ -69,11 +69,6 @@ $(function(){
 				<h4 class="infoBtn">내가 쓴 글</h4>
 				<div class="infoBox">
 					<table>
-						<tr>
-							<th class="w5">제목</th>
-							<th class="w2">날짜</th>
-							<th class="w2">조회수</th>
-						</tr>
 						<c:forEach items="${myBoard }" var="row">
 						<tr>
 							<td class="w5"><a href="./detail?bno=${row.bno}">${row.btitle }</a></td>
@@ -89,9 +84,8 @@ $(function(){
 					<table>
 						<c:forEach items="${myComments }" var="row">
 						<tr>
-							<td class="w5">${row.btitle }</td>
-							<td class="w2">${row.bdate }</td>
-							<td class="w2">${row.bcount }</td>
+							<td class="w5" id="cBno"><a href="./detail?bno=${row.get('bno')}">${row.get('ccontent')}</a></td>
+							<td class="w2">${row.get('cdate') }</td>
 						</tr>
 						</c:forEach>
 					</table>															

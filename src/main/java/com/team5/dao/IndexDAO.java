@@ -21,7 +21,7 @@ public class IndexDAO extends AbstractDAO{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT bno, btitle, "
-				+ "if(date_format(current_timestamp(),'%Y. %m. %d') = DATE_FORMAT(bdate,'%Y. %m. %d'),date_format(bdate,'%h:%i'),date_format(bdate,'%m. %d')) AS bdate "	
+				+ "DATE_FORMAT(bdate,'%Y. %m. %d. %h:%i') AS bdate "	
 				+ "FROM board ORDER BY bno desc LIMIT 0, 10";
 		
 		try {
@@ -97,7 +97,7 @@ public class IndexDAO extends AbstractDAO{
 			e.printStackTrace();
 		} finally {
 			close(rs, pstmt, con);
-		}		
+		}
 		
 		return list;
 	}

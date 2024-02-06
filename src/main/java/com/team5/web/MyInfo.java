@@ -43,9 +43,14 @@ public class MyInfo extends HttpServlet {
 			List<BoardDTO> myBoard = dao.myBoard(mid);
 			request.setAttribute("myBoard", myBoard);
 			
+			//내가 쓴 댓글
+			List<Map<String, Object>> mycomments = dao.myComments(mid);
+			request.setAttribute("myComments", mycomments);
+			
+			
 			//내가 참여중인 소모임
-			List<Map<String, Object>> mysomoim = dao.mySomoim(mid);
-			request.setAttribute("mysomoim", mysomoim);
+			//List<Map<String, Object>> mysomoim = dao.mySomoim(mid);
+			//request.setAttribute("mysomoim", mysomoim);
 			
 			
 			//내 중고거래내역 보기  내가 판 물건, 내가 산 물건
