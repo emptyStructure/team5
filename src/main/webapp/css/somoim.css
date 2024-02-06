@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.mainStyle{
+	position: relative;
+}
 .scard{
 	width: calc(33% - 10px);
 	float: left;
@@ -87,4 +90,24 @@
 }
 .sdate{
 	text-align: right;	
+}
+.leftArrow{
+	position: fixed; /* 요소를 화면에 고정 */
+	top: 500px;
+	opacity: 0.6;
+	z-index: 999; /* 다른 요소 위에 떠있도록 쌓임 순서 조절 */
+}
+.rightArrow{
+	position: fixed; /* 요소를 화면에 고정 */
+	top: 500px;
+	opacity: 0.6;
+	right: 195px; /* 우측 정렬 */
+	text-align: right; /* 텍스트 우측 정렬 */
+	z-index: 999; /* 다른 요소 위에 떠있도록 쌓임 순서 조절 */
+}
+.rightArrow:hover{
+	opacity: 0.8;
+}
+.leftArrow:hover{
+	opacity: 0.8;
 }

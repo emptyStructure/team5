@@ -24,6 +24,7 @@ $(function(){
         var option = "width = 600, height = 700, top = 100, left = 200, location = no";
 		window.open(url, name, option);
 	});
+	
 });
 </script>
 </head>
@@ -75,6 +76,19 @@ $(function(){
 							</div>
 						</div>
 					</c:forEach>
+					<c:set var="totalPage" value="${totalCount/12 }"/>
+					
+					<fmt:parseNumber integerOnly="true" value="${totalPage }" var="totalPage"/>
+					<c:if test="${totalCount%12 gt 0 }">
+						<c:set var="totalPage" value="${totalPage+1 }"/>
+					</c:if>
+					<c:set var="startPage" value="1"/>
+					<c:set var="endPage" value="${totalPage }"/>
+					
+					<div class="leftArrow"><img alt="left" src="./img/leftArrow.png" class="leftImg" 
+					<c:if test="${page gt startPage }">onclick="url('./somoim?page=${page-1 }')"</c:if>></div>
+					<div class="rightArrow"><img alt="right" src="./img/rightArrow.png" class="rightImg"
+					<c:if test="${page lt endPage }">onclick="url('./somoim?page=${page+1 }')"</c:if>></div>
 				</div>
 			</div>
 		</div>
