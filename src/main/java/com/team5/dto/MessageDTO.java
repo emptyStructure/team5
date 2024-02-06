@@ -2,7 +2,7 @@ package com.team5.dto;
 
 public class MessageDTO {
 	private int mno, msno, toMno, fromMno, msdel;
-	private String mname, mscontent, sendDate, mid;
+	private String mname, mscontent, sendDate, mid, mgrade;
 	public int getMsno() {
 		return msno;
 	}
@@ -56,5 +56,11 @@ public class MessageDTO {
 	}
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+	public String getMgrade() {
+		return mgrade;
+	}
+	public void setMgrade(String mgrade) {
+		this.mgrade = mgrade;
 	}
 }

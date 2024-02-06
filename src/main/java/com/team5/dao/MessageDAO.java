@@ -194,7 +194,7 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 		ResultSet rs = null;
 		String sql = "SELECT mname, mscontent, "
 				+ "if(date_format(sendDate, '%Y-%m-%d') = date_format(current_timestamp(), '%Y-%m-%d'), "
-				+ "date_format(sendDate, '%H:%i'), date_format(sendDate, '%Y-%m-%d')) AS sendDate "
+				+ "date_format(sendDate, '%H:%i'), date_format(sendDate, '%m-%d')) AS sendDate "
 				+ "FROM message ms JOIN member m ON ms.fromMno=m.mno";
 		
 		try {
@@ -236,6 +236,33 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 		
 		return result;
 		
+	}
+
+	public List<MessageDTO> loginList(String mid) {
+		List<MessageDTO> list = new ArrayList<>();
+		MessageDTO dto = new MessageDTO();
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT mname FROM member WHERE mid=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MessageDTO e = new MessageDTO();
+				e.setMname(rs.getString("mname"));
+				list.add(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, con);
+		}
+		
+		return list;
 	}
 
 }
