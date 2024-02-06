@@ -16,9 +16,10 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-
+	let length = $("#title").val().length;
+	$('#textLengthCheck').text("( "+length+" / 20글자 )");
+	
 	$("#title").keyup(function(){
-		let length = $("#title").val().length;
 		$('#textLengthCheck').text("( "+length+" / 20글자 )");
 		$('#textLengthCheck').css("color","black");
 		if(length>20){
@@ -34,7 +35,12 @@ $(document).ready(function(){
 		if(title.length>20||title.length<1||content.length<1){
 			alert("작성 내용을 확인해주세요");
 		} else{
+			let personnel = $(".personnel").val();
+			if(${detail.total} > personnel){
+				alert("정원을 현재 모임 인원보다 적게 설정 할 수 없습니다.");
+			} else {
 			$('#somoim').submit();
+			}
 		}
 	});
 });
@@ -47,23 +53,29 @@ $(document).ready(function(){
 				<article>
 					<h1>글 작성</h1>
 					<div>
-						<form action="./somoimWrite" method="post" id="somoim">
-							<input type="text" id="title" name="title" placeholder="입력">
+						<form action="./somoimUpdate" method="post" id="somoim">
+							<input type="text" id="title" name="title" placeholder="입력" value="${detail.stitle }">
 							카테고리 : 
+							<input type="hidden" name="sno" value="${detail.sno }">
 							<select class="category" name="category">
-								<option>식사</option>
-								<option>게임</option>
-								<option>공부</option>
-								<option>유흥</option>
+								<option <c:if test="${detail.scategory eq '식사'}">selected="selected"</c:if>
+								>식사</option>
+								<option <c:if test="${detail.scategory eq '게임'}">selected="selected"</c:if>
+								> 게임</option>
+								<option <c:if test="${detail.scategory eq '공부'}">selected="selected"</c:if>
+								>공부</option>
+								<option <c:if test="${detail.scategory eq '유흥'}">selected="selected"</c:if>
+								>유흥</option>
 							</select>
-							 정원 : 
+							 정원 :
 							<select class="personnel" name="personnel">
 								<c:forEach var="i" begin="1" end="20">
-								<option>${i }명</option>
+								<option <c:if test="${i eq detail.personnel }">selected="selected"</c:if>
+								 value="${i }">${i }명</option>
 								</c:forEach>
 							</select>
 							<span id="textLengthCheck">( 0 / 20글자 )</span>
-							<textarea id="summernote" name="content"></textarea>
+							<textarea id="summernote" name="content">${detail.scontent }</textarea>
 							<button type="button" id="done">작성하기</button>
 						</form>
 					</div>

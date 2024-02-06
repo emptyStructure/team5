@@ -17,7 +17,7 @@ $(function(){
 	$('.title').click(function(){
 		let sno = $(this).prev().text();
 		var url = "./joinerList?sno="+sno;
-        var name = "popup test";
+        var name = "joinerList";
         var option = "width = 1050, height = 700, top = 100, left = 200, location = no"
 		window.open(url, name, option);
 	});

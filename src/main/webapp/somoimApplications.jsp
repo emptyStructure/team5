@@ -18,7 +18,7 @@ $(function(){
 	$('.title').click(function(){
 		let sno = $(this).prev().children(".sno").val();
 		var url = "./soDetail?sno="+sno;
-        var name = "popup test";
+        var name = "detail from admin";
         var option = "width = 600, height = 700, top = 100, left = 200, location = no";
 		window.open(url, name, option);
 	});

@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="./js/menu.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 		<c:if test="${detail.stitle eq null || detail.scategory eq null}">
@@ -22,6 +23,11 @@ $(document).ready(function(){
 		<c:if test="${detail.total lt detail.personnel}">
 		$(".order").click(function(){
 			$("#form").slideToggle("slow");
+			if($('.order').text()=="신청하기"){
+				$('.order').text("신청창 닫기");
+			} else {
+				$('.order').text("신청하기");
+			}
 		});
 		
 		let p1 = 0;
@@ -56,7 +62,6 @@ $(document).ready(function(){
 		
 		
 		/*신청서 제출*/
-		
 		$("#sub").click(function(){
 			event.preventDefault();
 				let name = $("#name").val();
@@ -93,6 +98,18 @@ $(document).ready(function(){
 			}
 		});
 		</c:if>
+		
+		$(".del").click(function(){
+			if(confirm("글을 삭제하시겠습니까?")){
+				url('./somoimDel?sno=${detail.sno}');
+			}
+		});
+		
+		$(".update").click(function(){
+			if(confirm("글을 수정하시겠습니까?")){
+				url('./somoimUpdate?sno=${detail.sno}');
+			}
+		});
 });
 </script> 
 </head>
@@ -116,15 +133,7 @@ $(document).ready(function(){
 					<div class="conStyle">
 						<div class="content">${detail.scontent }</div>
 					</div>
-					<c:if test="${sessionScope.mname ne null }">
-						<c:if test="${detail.total lt detail.personnel}">
-							<button class="order">신청하기</button>
-						</c:if>
-					</c:if>
 				</div>
-				<c:if test="${detail.total ge detail.personnel}">
-					<h2 class="done">이미 마감된 모임입니다.</h2>
-				</c:if>
 				<c:if test="${sessionScope.mname ne null }">
 					<c:if test="${detail.total lt detail.personnel}">
 					<form action="./join" method="post" onsubmit="return check()" id="form">
@@ -149,7 +158,23 @@ $(document).ready(function(){
 							</div>
 						</div>
 					</form>
-					</c:if>
+				</c:if>
+					<div class="buttons">
+						<c:if test="${sessionScope.mname ne null }">
+							<c:if test="${detail.total lt detail.personnel}">
+								<button class="order">신청하기</button>
+							</c:if>
+						</c:if>
+						<c:if test="${sessionScope.mid eq detail.mid }">
+							<button class="update">수정하기</button>
+							<button class="del" >글 삭제</button>
+						</c:if>
+					</div>
+				</c:if>
+				<c:if test="${detail.total ge detail.personnel}">
+					<div class="done">
+						<h2>이미 마감된 모임입니다.</h2>
+					</div>
 				</c:if>
 			</div>
 		</c:if>

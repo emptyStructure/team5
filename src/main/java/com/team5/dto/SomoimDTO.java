@@ -2,7 +2,7 @@ package com.team5.dto;
 
 public class SomoimDTO {
 	private int sno, mno, sdel, total, waiting, personnel;
-	private String stitle, scontent, sdate, scategory, swriter;
+	private String stitle, scontent, sdate, scategory, swriter, mid;
 	public int getSno() {
 		return sno;
 	}
@@ -68,6 +68,12 @@ public class SomoimDTO {
 	}
 	public void setPersonnel(int personnel) {
 		this.personnel = personnel;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 
 	
