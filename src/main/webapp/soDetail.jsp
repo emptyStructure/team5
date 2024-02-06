@@ -11,6 +11,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+		<c:if test="${detail.stitle eq null || detail.scategory eq null}">
+			alert("게시글 삭제등의 이유로 접근 할 수 없습니다.");
+			window.close();
+		</c:if>
+	
 		$("#form").hide();
 		
 
@@ -93,59 +98,61 @@ $(document).ready(function(){
 </head>
 <body>
 	<article>
-		<div class="detail">
-			<div class="soheader">
-				<div class="title">
-					${detail.stitle }
+		<c:if test="${detail.stitle ne null && detail.scategory ne null}">
+			<div class="detail">
+				<div class="soheader">
+					<div class="title">
+						${detail.stitle }
+					</div>
+					<div class="category">
+						${detail.scategory }
+					</div>
 				</div>
-				<div class="category">
-					${detail.scategory }
+				<div class="body">
+					<div class="info">
+						<div class="writer">${detail.swriter }</div>
+						<div class="view">👪 ${detail.total }/${detail.personnel}  ❤️ 100</div>
+					</div>
+					<div class="conStyle">
+						<div class="content">${detail.scontent }</div>
+					</div>
+					<c:if test="${sessionScope.mname ne null }">
+						<c:if test="${detail.total lt detail.personnel}">
+							<button class="order">신청하기</button>
+						</c:if>
+					</c:if>
 				</div>
-			</div>
-			<div class="body">
-				<div class="info">
-					<div class="writer">${detail.swriter }</div>
-					<div class="view">👪 ${detail.total }/${detail.personnel}  ❤️ 100</div>
-				</div>
-				<div class="conStyle">
-					<div class="content">${detail.scontent }</div>
-				</div>
+				<c:if test="${detail.total ge detail.personnel}">
+					<h2 class="done">이미 마감된 모임입니다.</h2>
+				</c:if>
 				<c:if test="${sessionScope.mname ne null }">
 					<c:if test="${detail.total lt detail.personnel}">
-						<button class="order">신청하기</button>
+					<form action="./join" method="post" onsubmit="return check()" id="form">
+						<div class="name"> 
+							이름 : <input type="text" placeholder="이름을 입력하세요." id="name">
+						</div>
+						<div class="ph">
+							연락처 : 010 -  
+							<input type="text" id="ph1" class="phn">
+							-
+							<input type="text" id="ph2" class="phn">
+						</div>
+						<div class="msg">
+								메세지 <br>
+								<textarea placeholder="Host에게 전할 말을 적어주세요." id="message"></textarea>
+								<span id="textLengthCheck">( 0 / 100글자 )</span>
+							<div class="buttons">
+								<button type="reset">초기화</button>
+								<button type="button" id="sub" value="${detail.sno }">참가 요청</button>
+								<input type="hidden" value="${detail.sno }" id="sno">
+								<input type="hidden" value="${detail.mno }" id="mno">
+							</div>
+						</div>
+					</form>
 					</c:if>
 				</c:if>
 			</div>
-			<c:if test="${detail.total ge detail.personnel}">
-				이미 마감된 모임입니다.
-			</c:if>
-			<c:if test="${sessionScope.mname ne null }">
-				<c:if test="${detail.total lt detail.personnel}">
-				<form action="./join" method="post" onsubmit="return check()" id="form">
-					<div class="name"> 
-						이름 : <input type="text" placeholder="이름을 입력하세요." id="name">
-					</div>
-					<div class="ph">
-						연락처 : 010 -  
-						<input type="text" id="ph1" class="phn">
-						-
-						<input type="text" id="ph2" class="phn">
-					</div>
-					<div class="msg">
-							메세지 <br>
-							<textarea placeholder="Host에게 전할 말을 적어주세요." id="message"></textarea>
-							<span id="textLengthCheck">( 0 / 100글자 )</span>
-						<div class="buttons">
-							<button type="reset">초기화</button>
-							<button type="button" id="sub" value="${detail.sno }">참가 요청</button>
-							<input type="hidden" value="${detail.sno }" id="sno">
-							<input type="hidden" value="${detail.mno }" id="mno">
-						</div>
-					</div>
-				</form>
-				</c:if>
-			</c:if>
-		</div>
+		</c:if>
 	</article>
 </body>
 </html>

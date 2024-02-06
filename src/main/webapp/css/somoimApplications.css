@@ -75,3 +75,24 @@ td{
 .tstatus{
 	width: 8%;
 }
+.sList{
+	width: 450px;
+	height: 30px;
+	float: left;
+}
+.sList ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	background-color: grey;
+	line-height: 30px;
+}
+.sList ul li{
+	display: inline-block;
+	width: 24%;
+	text-align: center;
+}
+.sList ul li:hover{
+	color: black;
+	font-weight: bold;
+}

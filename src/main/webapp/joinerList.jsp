@@ -70,6 +70,14 @@ $(function(){
 		}
 	});
 	
+	$(".title").click(function(){
+		var sno = ${detail.sno};
+		var url = "./soDetail?sno="+sno;
+        var name = "detail from admin";
+        var option = "width = 600, height = 700, top = 100, left = 200, location = no";
+		window.open(url, name, option);
+	});
+	
 	
 });
 </script>
@@ -77,7 +85,7 @@ $(function(){
 <body>
 	<div class="main">
 		<article>
-			<h2>${detail.sno }번 글 : ${detail.stitle }</h2>
+			<h2 class="title">${detail.sno }번 글 : ${detail.stitle }</h2>
 				<div class="header">
 					<div class="status-list">
 						<ul>

@@ -21,7 +21,7 @@ $(function(){
 		let sno = $(this).children().children(".sno").val();
 		var url = "./soDetail?sno="+sno;
         var name = "popup test";
-        var option = "width = 600, height = 700, top = 100, left = 200, location = no"
+        var option = "width = 600, height = 700, top = 100, left = 200, location = no";
 		window.open(url, name, option);
 	});
 });

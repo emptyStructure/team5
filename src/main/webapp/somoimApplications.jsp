@@ -15,6 +15,13 @@
 <script type="text/javascript" src="./js/menu.js"></script>
 <script type="text/javascript">
 $(function(){
+	$('.title').click(function(){
+		let sno = $(this).prev().children(".sno").val();
+		var url = "./soDetail?sno="+sno;
+        var name = "popup test";
+        var option = "width = 600, height = 700, top = 100, left = 200, location = no";
+		window.open(url, name, option);
+	});
 
 });
 </script>
@@ -32,6 +39,14 @@ $(function(){
 		<div class="main">
 			<article>
 				<h2>내 신청 목록</h2>
+				<div class="sList">
+					<ul>
+						<li onclick="url('./somoimApplications')">전체보기</li>
+						<li onclick="url('./somoimApplications?status=1')">승인</li>
+						<li onclick="url('./somoimApplications?status=2')">대기</li>
+						<li onclick="url('./somoimApplications?status=0')">거절</li>
+					</ul>
+				</div>
 				<table border="1">
 					<thead>
 						<tr>
@@ -47,7 +62,8 @@ $(function(){
 					<tbody>
 						<c:forEach items="${list }" var="row">
 							<tr>
-								<td>${row.no }</td>
+								<td>${row.no }
+								<input value="${row.jno }" type="hidden" class="sno"></td>
 								<td class="title">${row.title }</td>
 								<td>${row.name }</td>
 								<td>${row.ph }</td>

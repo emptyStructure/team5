@@ -312,7 +312,7 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT  ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status FROM joinSomoim j JOIN somoim s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?)";
+		String sql = "SELECT  ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status, j.sno FROM joinSomoim j JOIN somoim s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
@@ -326,6 +326,41 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setMessage(rs.getString(5));
 				dto.setJoindate(rs.getString(6));
 				dto.setStatus(rs.getInt(7));
+				dto.setJno(rs.getInt(8));
+				result.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return result;
+	}
+	
+	public List<JoinSomoimDTO> myJoinList(String mid, int status){
+		List<JoinSomoimDTO> result = new ArrayList<JoinSomoimDTO>();
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT  ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status, j.sno FROM joinSomoim j JOIN somoim s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?) AND j.status=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setInt(2, status);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				JoinSomoimDTO dto = new JoinSomoimDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setTitle(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setPh(rs.getString(4));
+				dto.setMessage(rs.getString(5));
+				dto.setJoindate(rs.getString(6));
+				dto.setStatus(rs.getInt(7));
+				dto.setJno(rs.getInt(8));
 				result.add(dto);
 			}
 			
