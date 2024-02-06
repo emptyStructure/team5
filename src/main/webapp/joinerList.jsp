@@ -17,7 +17,8 @@ $(function(){
 	
 	$('.accept').click(function(){
 		if(confirm("승인하시겠습니까?")){
-			let tr = $(this).parents(".select").parents("tr");
+			let select = $(this).parents(".select");
+			let tr = select.parents("tr");
 			let jno = tr.prev().val();
 			let sno = ${param.sno };
 			let total = $('#info').children(".total").children();
@@ -30,10 +31,10 @@ $(function(){
 				data: {'jno':jno,'respon':1, 'sno':sno},
 				success: function(result){
 					if(result==1){
-						$(this).parents(".select").text("🟢 승인");
+						select.text("🟢 승인");
+						total.text(num+1);
 						<c:if test="${param.status ne null}">
 							tr.hide();
-							total.text(num+1);
 						</c:if>
 					} else {
 						alert("이미 정원이 가득찼습니다.");
@@ -48,7 +49,8 @@ $(function(){
 	
 	$('.refuse').click(function(){
 		if(confirm("거절하시겠습니까?")){
-			let tr = $(this).parents(".select").parents("tr");
+			let select = $(this).parents(".select");
+			let tr = select.parents("tr");
 			let jno = tr.prev().val();		
 			let sno = ${param.sno };
 		
@@ -58,7 +60,7 @@ $(function(){
 				dataType:'text',
 				data: {'jno':jno,'respon':0, 'sno':sno},
 				success: function(result){
-					$(this).parents(".select").text("❌ 거절");
+					select.text("❌ 거절");
 					<c:if test="${param.status ne null}">
 						tr.hide();
 					</c:if>
