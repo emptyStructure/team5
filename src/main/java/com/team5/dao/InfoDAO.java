@@ -20,7 +20,7 @@ public class InfoDAO extends AbstractDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT mid, mname, mdate, mno, mpw FROM member WHERE mid=?";
+		String sql = "SELECT mid, mname, mdate, mno, mpw, memail FROM member WHERE mid=?";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -32,6 +32,8 @@ public class InfoDAO extends AbstractDAO{
 				dto.setMname(rs.getString("mname"));
 				dto.setMdate(rs.getString("mdate"));
 				dto.setMno(rs.getInt("mno"));
+				dto.setMpw(rs.getString("mpw"));
+				dto.setMemail(rs.getString("memail"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -111,13 +113,14 @@ public class InfoDAO extends AbstractDAO{
 		int result = 0;
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE member SET mpw=?, mname=? WHERE mid=?";
+		String sql = "UPDATE member SET mpw=?, mname=?, memail=? WHERE mid=?";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getMpw());
 			pstmt.setString(2, dto.getMname());
-			pstmt.setString(3, dto.getMid());
+			pstmt.setString(3, dto.getMemail());
+			pstmt.setString(4, dto.getMid());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

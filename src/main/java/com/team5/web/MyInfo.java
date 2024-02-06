@@ -26,6 +26,7 @@ public class MyInfo extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
 		if (session.getAttribute("mid") != null && !session.getAttribute("mid").equals("")) {			
@@ -74,6 +75,7 @@ public class MyInfo extends HttpServlet {
 			dto.setMid((String)(session.getAttribute("mid")));
 			dto.setMname(request.getParameter("mName"));
 			dto.setMpw(request.getParameter("mPW"));
+			dto.setMemail(request.getParameter("mEmail"));
 			
 			InfoDAO dao = new InfoDAO();
 			int result = dao.changeInfo(dto);
@@ -82,7 +84,7 @@ public class MyInfo extends HttpServlet {
 				System.out.println("통신 성공");
 				response.sendRedirect("./myInfo");
 			} else {
-				System.out.println("에러");
+				response.sendRedirect("./error.jsp");
 			}
 			
 		} else {

@@ -122,7 +122,7 @@ public JBoardDTO detail(int no) {
 			dto.setJno(rs.getInt("jno"));
 			dto.setJtitle(rs.getString("jtitle"));
 			dto.setJcontent(rs.getString("jcontent"));
-			dto.setJwrite(rs.getString("m.jboard_write"));
+			dto.setJwrite(rs.getString("jboard_write"));
 			dto.setJdate(rs.getString("jdate"));
 			dto.setJcount(rs.getInt( "jboard_count"));
 			dto.setJmid(rs.getString("jmid"));
@@ -144,8 +144,8 @@ public int jwrite(JBoardDTO dto) {
 	
 	Connection con = db.getConnection();
 	PreparedStatement pstmt = null; 
-	String sql = "INSERT INTO joonggo( jtitle, jcontent, mno, jip)"
-			+"VALUES(?,?,(SELECT mno FROM member WHERE mid=?),?)";
+	String sql = "INSERT INTO joonggo( jtitle, jcontent, mno, jwrite, jip)"
+			+"VALUES(?,?,(SELECT mno FROM member WHERE mid=?),(SELECT mid FROM member WHERE mid=?) ,?)";
 	// TODO Auto-generated method stub
 	
 	try {
@@ -153,7 +153,8 @@ public int jwrite(JBoardDTO dto) {
 		pstmt.setString(1, dto.getJtitle());
 		pstmt.setString(2, dto.getJcontent());
 		pstmt.setString(3, dto.getJmid());
-		pstmt.setString(4, dto.getJip());
+		pstmt.setString(4, dto.getJmid());
+		pstmt.setString(5, dto.getJip());
 		
 		result = pstmt.executeUpdate();
 	} catch (SQLException e) {
@@ -255,5 +256,36 @@ public int delete(JBoardDTO dto) {
 	
 	
 }
+
+
+
+
+public int jupdate(JBoardDTO dto) {
+	
+	int result =0;
+	
+	Connection con =DBConnection.getInstance().getConnection();
+	PreparedStatement pstmt = null ;
+	String sql = "UPDATE joonggo SET jtitle=?, jcontent=? WHERE jno =? AND mno=(SELECT mno FROM member WHERE mid =?) ";
+	
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1,dto.getJtitle() );
+		pstmt.setString(2,dto.getJcontent() );
+		pstmt.setInt(3,dto.getJno() );
+		pstmt.setString(4,dto.getJmid() );
+		result = pstmt.executeUpdate();
+	} catch(SQLException e) { 
+		e.printStackTrace();
+	}	finally { 
+		close(null,pstmt,con);
+	}
+	
+	return result;
+}
+
+
+
 
 }
