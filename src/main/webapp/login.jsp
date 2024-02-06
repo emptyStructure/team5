@@ -20,7 +20,7 @@ h1 {
 
 .login {
 	margin: 0 auto;
-	width: 300px;
+	width: 350px ;
 	min-height: 100px;
 	
 	padding: 10px;
@@ -77,7 +77,7 @@ function err() {
 							<button type="submit">로그인</button>
 							<div id="errorMSG"></div>
 						</form>
-						<a href="./join">회원가입</a>
+						<a href="./join">회원가입</a>&ensp;|&ensp;<a href="./findId">아이디 찾기</a>&ensp;|&ensp;<a href="./findPw">비밀번호 찾기</a>
 					</div>
 
 				</article>
