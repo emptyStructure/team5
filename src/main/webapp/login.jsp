@@ -46,6 +46,9 @@ h1 {
 	font-size: large;
 	background-color: #9b9b9b;
 }
+* {
+	cursor: url("./img/porori.png") 12 12, auto;
+}
 </style>
 <script type="text/javascript">
 function err() {
@@ -54,6 +57,7 @@ function err() {
 	errBox.style.color = 'white';
 	
 }
+
 </script>
 </head>
 <body>
