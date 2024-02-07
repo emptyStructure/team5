@@ -21,10 +21,13 @@ header{
 }
 
 footer{
-	clear: both;
-	font-size: small;
+/*	clear: both;
+	font-size: small;*/
 	bottom: 0;
 	position: fixed;
+	width: 100%;
+	height: 30px;
+	margin: 0;
 }
 
 .side {
@@ -64,7 +67,7 @@ footer{
 
 .newTitle{
 	width: 100%;
-	margin: 10px 0px;
+	margin: 10px 0px 20px 0px;
 	padding: 5px;
 	text-align: center;
 }

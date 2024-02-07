@@ -54,8 +54,6 @@ public class MyInfo extends HttpServlet {
 			
 			
 			//내 중고거래내역 보기  내가 판 물건, 내가 산 물건
-			
-			
 
 			RequestDispatcher rd = request.getRequestDispatcher("/myInfo.jsp");
 			rd.forward(request, response);

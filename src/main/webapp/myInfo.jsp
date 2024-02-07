@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +13,7 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
+
 	$('.infoBox').hide();
 	
 	$('.infoBtn').click(function(){
@@ -25,12 +24,14 @@ $(function(){
 	$('.closeBtn').click(function(){
 		$(this).parents('.infoBox').prev().css('color', 'black');
 		$(this).parents('.infoBox').hide();
+	});	
+	
+	$('#moreList').click(function(){
+		$('.full').removeAttr("hidden");
+		$(this).hide();
 	});
 	
-/* 	$('#mPW').text("*"); */
-
 });
-
 </script>
 </head>
 <body>	
@@ -67,15 +68,25 @@ $(function(){
 				</div>
 				<h4 class="infoBtn">내가 쓴 글</h4>
 				<div class="infoBox">
-					<table>
-						<c:forEach items="${myBoard }" var="row">
-						<tr>
-							<td class="w5"><a href="./detail?bno=${row.bno}">${row.btitle }</a></td>
-							<td class="w2">${row.bdate }</td>
-							<td class="w2">${row.bcount }</td>
-						</tr>
-						</c:forEach>
-					</table>															
+					<div class="boardTable">
+						<table>
+							<c:forEach items="${myBoard }" var="row" begin="0" end="9">
+							<tr id="recent">
+								<td class="w5"><a href="./detail?bno=${row.bno}">${row.btitle }</a></td>
+								<td class="w2">${row.bdate }</td>
+								<td class="w1">${row.bcount }</td> 
+							</tr>
+							</c:forEach>
+							<c:forEach items="${myBoard }" var="row" varStatus="status" begin="10" end="${fn:length(myBoard) - 1 }">
+							<tr class="full" hidden="hidden">
+								<td class="w5"><a href="./detail?bno=${row.bno}">${row.btitle }</a></td>
+								<td class="w2">${row.bdate }</td>
+								<td class="w1">${row.bcount }</td> 
+							</tr>
+							</c:forEach>
+						</table>
+						<button type="button" id="moreList">더보기</button>													
+					</div>
 					<button type="button" class="closeBtn">닫기</button>
 				</div>
 				<h4 class="infoBtn">내 댓글</h4>
