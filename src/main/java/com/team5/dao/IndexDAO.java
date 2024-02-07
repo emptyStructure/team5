@@ -51,7 +51,7 @@ public class IndexDAO extends AbstractDAO{
 		ResultSet rs = null;
 		String sql = "SELECT sno, stitle, "
 				+ "DATE_FORMAT(sdate,'%Y. %m. %d. %h:%i') AS sdate "
-				+ "FROM somoim ORDER BY sno desc LIMIT 0, 10";
+				+ "FROM somoim where sdel='1' ORDER BY sno desc LIMIT 0, 10";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
