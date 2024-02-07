@@ -50,7 +50,7 @@ public class IndexDAO extends AbstractDAO{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT sno, stitle, "
-				+ "if(date_format(current_timestamp(),'%Y. %m. %d') = DATE_FORMAT(sdate,'%Y. %m. %d'),date_format(sdate,'%h:%i'),date_format(sdate,'%m. %d')) AS sdate "
+				+ "DATE_FORMAT(sdate,'%Y. %m. %d. %h:%i') AS sdate "
 				+ "FROM somoim ORDER BY sno desc LIMIT 0, 10";
 		
 		try {
@@ -80,7 +80,7 @@ public class IndexDAO extends AbstractDAO{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT jno, jtitle, "
-				+ "if(date_format(CURRENT_TIMESTAMP(),'%Y. %m. %d') = DATE_FORMAT(jdate,'%Y. %m. %d'),date_format(jdate,'%h:%i'),date_format(jdate,'%m. %d')) AS jdate "
+				+ "DATE_FORMAT(jdate,'%Y. %m. %d. %h:%i') AS jdate "
 				+ "FROM joonggo ORDER BY jno DESC LIMIT 0, 10";
 		
 		try {
@@ -89,8 +89,8 @@ public class IndexDAO extends AbstractDAO{
 			while(rs.next()) {
 				Map<String, Object> e = new HashMap<String, Object>();
 				e.put("jno", rs.getInt("jno"));
-				e.put("title", rs.getString("jtitle"));
-				e.put("date", rs.getString("jdate"));
+				e.put("jtitle", rs.getString("jtitle"));
+				e.put("jdate", rs.getString("jdate"));
 				list.add(e);
 			}
 		} catch (SQLException e) {

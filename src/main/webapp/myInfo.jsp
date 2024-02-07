@@ -84,8 +84,8 @@ $(function(){
 					<table>
 						<c:forEach items="${myComments }" var="row">
 						<tr>
-							<td class="w5" id="cBno"><a href="./detail?bno=${row.get('bno')}">${row.get('ccontent')}</a></td>
-							<td class="w2">${row.get('cdate') }</td>
+							<td class="w5" id="cBno"><a href="./detail?bno=${row.bno}">${row.ccontent}</a></td>
+							<td class="w2">${row.cdate }</td>
 						</tr>
 						</c:forEach>
 					</table>															

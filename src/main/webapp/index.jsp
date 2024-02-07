@@ -28,14 +28,6 @@ $(function(){
 		}
 	})
 	
-	
-	$('.date').each(function(){
-		var thisDate = $(this);
-		
-		
-	})
-	
-	
 });
 
 </script>
@@ -74,13 +66,13 @@ $(function(){
 							<td class="title"><a href="./detail?bno=${row.bno}">${row.btitle }</a></td>
 							<td class="date">
 							<fmt:parseDate value="${row.bdate }" var="bdate" pattern="yyyy. MM. dd. hh:mm"/>
-							<fmt:formatDate value="${bdate}" var="chdate" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${bdate}" var="dateOne" pattern="yyyy-MM-dd"/>
 							<c:choose>
-							<c:when test="${chdate eq today}">
-							<fmt:formatDate value="${bdate}" var="ddate" pattern="hh:mm"/>&#127381;${ddate }			
+							<c:when test="${dateOne eq today}">
+							<fmt:formatDate value="${bdate}" var="bodate" pattern="hh:mm"/>&#127381;${bodate }			
 							</c:when>
 							<c:otherwise>
-							<fmt:formatDate value="${bdate}" var="ddate" pattern="MM/dd"/>${ddate }
+							<fmt:formatDate value="${bdate}" var="bodate" pattern="MM/dd"/>${bodate }
 							</c:otherwise>
 							</c:choose>																					
 							</td>
@@ -97,7 +89,18 @@ $(function(){
 						<c:forEach items="${somList}" var="row">
 						<tr>
 							<td class="title"><a href="./soDetail?sno=${row.sno}">${row.stitle }</a></td>
-							<td class="date">${row.sdate }</td>
+							<td class="date">
+							<fmt:parseDate value="${row.sdate }" var="sdate" pattern="yyyy. MM. dd. hh:mm"/>
+							<fmt:formatDate value="${sdate}" var="dateTwo" pattern="yyyy-MM-dd"/>
+							<c:choose>
+							<c:when test="${dateTwo eq today}">
+							<fmt:formatDate value="${sdate}" var="sodate" pattern="hh:mm"/>&#127381;${sodate }			
+							</c:when>
+							<c:otherwise>
+							<fmt:formatDate value="${sdate}" var="sodate" pattern="MM/dd"/>${sodate }
+							</c:otherwise>
+							</c:choose>																				
+							</td>
 						</tr></c:forEach>
 					</table>
 				</div>
@@ -110,8 +113,19 @@ $(function(){
 					<table>
 						<c:forEach items="${marketList}" var="row">
 						<tr>
-							<td class="title"><a href="./jdetail?no=${row.jno}">${row.get("title") }</a></td>
-							<td class="date">${row.get("date") }</td>
+							<td class="title"><a href="./jdetail?no=${row.jno}">${row.jtitle }</a></td>
+							<td class="date">
+							<fmt:parseDate value="${row.jdate }" var="jdate" pattern="yyyy. MM. dd. hh:mm"/>
+							<fmt:formatDate value="${jdate}" var="dateThr" pattern="yyyy-MM-dd"/>
+							<c:choose>
+							<c:when test="${dateThr eq today}">
+							<fmt:formatDate value="${jdate}" var="mkdate" pattern="hh:mm"/>&#127381;${mkdate }
+							</c:when>
+							<c:otherwise>
+							<fmt:formatDate value="${jdate}" var="mkdate" pattern="MM/dd"/>${mkdate }
+							</c:otherwise>
+							</c:choose>							
+							</td>
 						</tr></c:forEach>
 					</table>			
 				</div>
