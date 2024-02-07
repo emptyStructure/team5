@@ -39,8 +39,6 @@ $(function(){
 		<div class="menu">
 			<nav>
 				<ul>
-					<li onclick="location.href='./somoimAdmin'"><i class="xi-calendar-check"></i> 신청자 관리</li>
-					<li onclick="location.href='./somoimApplications'"><i class="xi-list"></i> 내 신청 목록</li>
 					<li onclick="url('./letter')"><i class="xi-mail"></i> 쪽지 전체보기</li>
 					<li onclick="url('./receivedLetter')"><i class="xi-reply"></i> 받은 쪽지함</li>
 					<li onclick="url('./sentLetter')"><i class="xi-share"></i> 보낸 쪽지함</li>
@@ -55,10 +53,10 @@ $(function(){
 				<table border="1">
 					<thead>
 						<tr>
-							<td class="date">날짜</td>
-							<td class="person">받는 사람</td>
-							<td class="title">제목</td>
-							<td class="content">내용</td>
+							<th class="date">날짜</th>
+							<th class="title">제목</th>
+							<th class="person">받는 사람</th>
+							<th class="content">내용</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -66,8 +64,8 @@ $(function(){
 						<tr class="row">
 							<td class="d">${row.date }
 							<input type="hidden" class="lno" value="${row.lno }"></td>
-							<td>${row.receiver }</td>
 							<td class="rowTitle">${row.ltitle }</td>
+							<td>${row.receiver }</td>
 							<td>${row.msg }</td>
 						</tr>
 						</c:forEach>

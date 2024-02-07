@@ -48,15 +48,18 @@ table{
 	width: 100%;
 	text-align: center;
 }
+table td{
+	border-color: yellow;
+}
 table .date{
 	width: 15%;
 }
 table .person{
-	width: 15%;
+	width: 10%;
 }
 table .title{
 	width: 20%;
 }
 table .content{
-	width: 50%;
+	width: 55%;
 }

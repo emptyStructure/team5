@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.team5.dto.JoinSomoimDTO;
 import com.team5.dto.LetterDTO;
 
 public class LetterDAO extends AbstractDAO {
@@ -131,6 +132,27 @@ public class LetterDAO extends AbstractDAO {
 			pstmt.setString(2, dto.getLtitle());
 			pstmt.setString(3, dto.getMsg());
 			pstmt.setString(4, dto.getWriter());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
+		return result;
+	}
+	
+	public int autoGreeting(JoinSomoimDTO dto, String writer, String msg) {
+		int result = 0;
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO letter (receiver,ltitle, msg, writer) VALUES (?,?,?,?)";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getMid());
+			pstmt.setString(2, dto.getTitle()+" 모임의 쪽지");
+			pstmt.setString(3, msg);
+			pstmt.setString(4, writer);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

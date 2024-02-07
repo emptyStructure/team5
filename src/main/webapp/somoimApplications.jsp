@@ -7,12 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>쪽지함</title>
+<title>소모임 관리</title>
 <script>function url(url) {window.location.href = url;}</script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <link href="./css/somoimApplications.css" rel="stylesheet"/>
-<script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/header.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.title').click(function(){
@@ -85,11 +85,7 @@ $(function(){
 				<ul>
 					<li onclick="location.href='./somoimAdmin'"><i class="xi-calendar-check"></i> 신청자 관리</li>
 					<li onclick="location.href='./somoimApplications'"><i class="xi-list"></i> 내 신청 목록</li>
-					<li onclick="url('./letter')"><i class="xi-mail"></i> 쪽지 전체보기</li>
-					<li onclick="url('./receivedLetter')"><i class="xi-reply"></i> 받은 쪽지함</li>
-					<li onclick="url('./sentLetter')"><i class="xi-share"></i> 보낸 쪽지함</li>
 					<li class="msgWrite"><i class="xi-send"></i> 쪽지 쓰기</li>
-					<li onclick="url('./chatting')"><i class="xi-forum"></i> 채팅</li>
 				</ul>
 			</nav>
 		</div>
