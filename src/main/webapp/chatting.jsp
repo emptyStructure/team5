@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="./css/menu.css" rel="stylesheet"/>
+<link href="./css/header.css" rel="stylesheet"/>
 <link href="./css/index.css" rel="stylesheet"/>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <title>채팅</title>
@@ -15,14 +15,9 @@ $(function(){
 	
 	$(".personalChatBtn").click(function(){
 		let personalChat = $(this).val();
-		 // 팝업 창 열기
-	    let popupUrl = "./personalchat?toMno=" + personalChat;
-	    let popup = window.open(popupUrl, "PersonalChatPopup", "width=600, height=700, resizable=no, scrollbars=yes");
-		
-	    popup.onload = function() {
-			popup.personalChatValue = personalChat;
-		};
-	    // 현재 페이지에서 이동하지 않도록 false 반환
+
+		window.location.href = "./personalchat?toMno=" + personalChat;
+	    
 	    return false;
 	})
 	
@@ -109,6 +104,7 @@ $(document).ready(function() {
 		"background-image": "url('img/friends4.gif')"
 	});
   }
+  
   
   function applyOriginalTheme() {
 	  $(".chat").css({
@@ -248,14 +244,13 @@ function loadThemePreference() {
 <body>
 	<div id="container">
 		<header>
-			<div id="menu">
-				<%@ include file="menu.jsp"%>
-			</div>
+				<%@ include file="header.jsp"%>
 		</header>
 		<div class="side" id="left">
 			<%@ include file="leftside.jsp"%>
 				<h2>참가자</h2>
 			<div class="user">
+				<p><i class="xi-user"></i> 전체채팅 <button onclick="url('./chatting')">채팅</button></p>
 				<c:forEach var="user" items="${userlist }">
 				<p><i class="xi-user"></i> ${user.mname } <button class="personalChatBtn" value="${user.mno }">채팅</button></p>
 				</c:forEach>

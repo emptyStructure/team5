@@ -47,7 +47,7 @@ public class Login extends HttpServlet {
 			    HttpSession session = request.getSession();
 			    session.setAttribute("mname", dto.getMname()); // mname이라는 이름으로 세션 만들기
 			    session.setAttribute("mid", dto.getMid()); // mid라는 이름으로 세션 만듬
-			    
+			    session.setAttribute("mno", dto.getMno());
 				// Referer 헤더를 확인하여 이전 페이지로 Redirect
 			    String referer = request.getHeader("Referer");
 			    String originalReferer = (String) session.getAttribute("originalReferer");

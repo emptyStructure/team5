@@ -188,7 +188,6 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 
 	public List<MessageDTO> chatList() {
 		List<MessageDTO> list = new ArrayList<>();
-		MessageDTO dto = new MessageDTO();
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -200,9 +199,6 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, dto.getMname());
-			pstmt.setString(2, dto.getMscontent());
-			pstmt.setString(3, dto.getSendDate());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -264,6 +260,61 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 		}
 		
 		return list;
+	}
+
+	public List<MessageDTO> personalChatList(MessageDTO dto) {
+		List<MessageDTO> list = new ArrayList<>();
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT mscontent, member.mname, "
+				+ "if(date_format(sendDate, '%Y-%m-%d') = date_format(current_timestamp(), '%Y-%m-%d'), "
+				+ "date_format(sendDate, '%H:%i'), date_format(sendDate, '%m-%d')) AS sendDate "
+				+ "FROM message JOIN member ON message.fromMno = member.mno "
+				+ "WHERE (toMno = ? AND fromMno = ?) OR (toMno = ? AND fromMno = ?) "
+				+ "ORDER BY sendDate";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getToMno());
+			pstmt.setInt(2, dto.getFromMno());
+			pstmt.setInt(3, dto.getFromMno());
+			pstmt.setInt(4, dto.getToMno());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MessageDTO e = new MessageDTO();
+				e.setMscontent(rs.getString("mscontent"));
+				e.setMname(rs.getString("mname"));
+				e.setSendDate(rs.getString("sendDate"));
+				list.add(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, con);
+		}
+		return list;
+	}
+
+	public int personalChatting(MessageDTO dto) {
+		int result = 0;
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO message (fromMno, mscontent, toMno) VALUES (?, ?, ?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getFromMno());
+			pstmt.setString(2, dto.getMscontent());
+			pstmt.setInt(3, dto.getToMno());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} close(null, pstmt, con);
+		
+		return result;
+		
 	}
 
 }
