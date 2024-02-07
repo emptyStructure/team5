@@ -53,10 +53,10 @@ $(function(){
 				<table border="1">
 					<thead>
 						<tr>
-							<td class="date">날짜</td>
-							<td class="person">받는 사람</td>
-							<td class="title">제목</td>
-							<td class="content">내용</td>
+							<th class="date">날짜</th>
+							<th class="title">제목</th>
+							<th class="person">받는 사람</th>
+							<th class="content">내용</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -64,8 +64,8 @@ $(function(){
 						<tr class="row">
 							<td class="d">${row.date }
 							<input type="hidden" class="lno" value="${row.lno }"></td>
-							<td>${row.receiver }</td>
 							<td class="rowTitle">${row.ltitle }</td>
+							<td>${row.receiver }</td>
 							<td>${row.msg }</td>
 						</tr>
 						</c:forEach>

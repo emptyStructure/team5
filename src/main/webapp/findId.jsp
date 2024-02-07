@@ -9,14 +9,23 @@
 <meta charset="UTF-8">
 <title>마이 페이지</title>
 <link href="./css/index.css" rel="stylesheet"/>
-<link href="./css/menu.css" rel="stylesheet"/>
-<link href="./css/myInfo.css" rel="stylesheet"/>
+<link href="./css/header.css" rel="stylesheet"/>
 <script type="text/javascript" src="./js/menu.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
-$('.name').click(function (){
+$(function (){
+	$('.namefinder').hide();
+	$('.emailfinder').hide();
 	
-});	
+	$('.name').click(function (){
+		$('.namefinder').toggle();
+	});	
+
+	$('.email').click(function (){
+		$('.emailfinder').toggle();
+	});	
+	
+});
 
 </script>
 <style type="text/css">
@@ -28,9 +37,7 @@ $('.name').click(function (){
 <body>	
 	<div id="container">
 		<header>
-			<div id="menu">
-				<%@ include file="menu.jsp"%>
-			</div>
+			<%@ include file="header.jsp"%>		
 		</header>
 		<div class="side" id="left">
 			<%@ include file="leftside.jsp"%>
@@ -39,20 +46,22 @@ $('.name').click(function (){
 			<%@ include file="rightside.jsp"%>
 		</div>					
 		<div id="content">
-			<h3>아이디 찾기</h3>
+			<h2>&ensp;</h2>
+			<h2>아이디 찾기</h2><br>
 			<div id="infoContents">
-				<form action="./findId" method="post">
-				
+				<form method="post">
+					<label class="name">이름으로 찾기</label>
 					<div class="namefinder">
 						<label class="name">이름</label>
-	    				<input type="text" id="namefinder" name="namefinder" placeholder="아이디">
-	    				<button type="submit" id="namefinder">아이디 확인하기</button>
+	    				<input type="text" id="namefinder" name="namefinder" placeholder="이름을 입력해주세요">
+	    				<button type="submit" formaction="./findIdName">아이디 확인하기</button>
     				</div>
     				<br><br><br>
+    				<label class="email">이메일로 찾기</label>
     				<div class="emailfinder">
 						<label>이메일</label>
-    					<input type="text" id="emailfinder" name="emailfinder" placeholder="이메일">
-    					<button type="submit" id="emailfinder">아이디 확인하기</button>
+    					<input type="email" id="emailfinder" name="emailfinder" placeholder="이메일을 @를 포함해서 입력해주세요" >
+    					<button type="submit" formaction="./findIdEmail">아이디 확인하기</button>
     				</div>
 				</form>
 			</div>

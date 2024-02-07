@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.team5.dto.MemberDTO;
 
@@ -78,6 +80,56 @@ public class MemberDAO extends AbstractDAO{
 			close(null, pstmt, con);
 		}
 		return result;
+	}
+
+	public List<MemberDTO> namefinder(MemberDTO dto) {
+		List<MemberDTO> list = new ArrayList<>();
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql ="SELECT mid, mdate FROM member WHERE mname=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getMname());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				dto.setMid(rs.getString("mid"));
+				dto.setMdate(rs.getString("mdate"));
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, con);
+		}
+		return list;
+	}
+
+	public List<MemberDTO> emailFinder(MemberDTO dto) {
+		List<MemberDTO> list = new ArrayList<>();
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql ="SELECT mid, mdate FROM member WHERE memail=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getMemail());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				dto.setMid(rs.getString("mid"));
+				dto.setMdate(rs.getString("mdate"));
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, con);
+		}
+		return list;
 	}
 
 }

@@ -7,12 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>쪽지함</title>
+<title>소모임 관리</title>
 <script>function url(url) {window.location.href = url;}</script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <link href="./css/somoimApplications.css" rel="stylesheet"/>
-<script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/header.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.title').click(function(){

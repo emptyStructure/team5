@@ -52,11 +52,11 @@ $(function(){
 				<table border="1">
 					<thead>
 						<tr>
-							<td class="date">날짜</td>
-							<td class="person">보낸 이</td>
-							<td class="person">받는 이</td>
-							<td class="title">제목</td>
-							<td class="content">내용</td>
+							<th class="date">날짜</th>
+							<th class="person">보낸 이</th>
+							<th class="person">받는 이</th>
+							<th class="title">제목</th>
+							<th class="content">내용</th>
 						</tr>
 					</thead>
 					<tbody>

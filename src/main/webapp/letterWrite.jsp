@@ -43,7 +43,7 @@ $(document).ready(function(){
 				success: function(result){
 					if(result==1){
 						alert("발송 성공");
-						widow.close();
+						window.close();
 					} else {
 						alert("존재하지 않은 사용자입니다. 수신자을 확인해주세요.");
 						$('#receiver').focus();

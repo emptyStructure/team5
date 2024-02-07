@@ -179,6 +179,10 @@ function loadThemePreference() {
 }
 </script>
 <style>
+* {
+    cursor: url("./img/pngegg(1)(1).png") 12 12, auto;
+}
+
 #main {
     margin: auto;
 	width: 70%;

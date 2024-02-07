@@ -456,26 +456,42 @@ public class SomoimDAO extends AbstractDAO{
 		return result;
 	}
 	
-	public int respon(int respon, String jno) {
+	public int respon(int respon, JoinSomoimDTO dto, String writer) {
 		int result = 0;
-		
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE joinSomoim SET status=? WHERE joinno=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, respon);
-			pstmt.setString(2, jno);
+			pstmt.setInt(2, dto.getJno());
 			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(null, pstmt, conn);
 		}
+		
+		String greeting = "";
 		switch(respon) {
 		case 1:
-			
+			greeting = dto.getTitle()+" 모임에 참여하신걸 환영합니다!";
+			break;
+		case 0:
+			greeting = dto.getTitle()+" 모임에 거절되었습니다.";
+			break;
+		case 4:
+			greeting = dto.getTitle()+" 모임에서 추방당했습니다.";
+			break;
+		default :
+			greeting = "";
 		}
+		if(greeting!="") {
+			LetterDAO dao = new LetterDAO();
+			result = dao.autoGreeting(dto, writer, greeting);
+		}
+		
 		return result;
 	}
 	public int writerBool(int sno, String mid) {

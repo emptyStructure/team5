@@ -26,7 +26,7 @@ $(document).ready(function(){
 			</div>
 			<div class="body">
 				<div class="info">
-					<div class="writer">보낸 사람 : ${detail.writer } </div>
+					<div class="writer">보낸 사람 : ${detail.writer } | 받는 사람 : ${detail.receiver }</div>
 					<div class="date">${detail.date }</div>
 				</div>
 				<div class="conStyle">

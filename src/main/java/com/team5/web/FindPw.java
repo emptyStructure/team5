@@ -21,7 +21,7 @@ public class FindPw extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("findId.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("findPw.jsp");
 		rd.forward(request, response);
 	}
 
