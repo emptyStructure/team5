@@ -9,9 +9,9 @@
 <meta charset="UTF-8">
 <title>마이 페이지</title>
 <link href="./css/index.css" rel="stylesheet"/>
-<link href="./css/menu.css" rel="stylesheet"/>
+<link href="./css/header.css" rel="stylesheet"/>
 <link href="./css/myInfo.css" rel="stylesheet"/>
-<script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/header.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -30,14 +30,13 @@ $(function(){
 /* 	$('#mPW').text("*"); */
 
 });
+
 </script>
 </head>
 <body>	
 	<div id="container">
 		<header>
-			<div id="menu">
-				<%@ include file="menu.jsp"%>
-			</div>
+			<%@ include file="header.jsp"%>
 		</header>
 		<div class="side" id="left">
 			<%@ include file="leftside.jsp"%>
@@ -84,8 +83,8 @@ $(function(){
 					<table>
 						<c:forEach items="${myComments }" var="row">
 						<tr>
-							<td class="w5" id="cBno"><a href="./detail?bno=${row.get('bno')}">${row.get('ccontent')}</a></td>
-							<td class="w2">${row.get('cdate') }</td>
+							<td class="w5" id="cBno"><a href="./detail?bno=${row.bno}">${row.ccontent}</a></td>
+							<td class="w2">${row.cdate }</td>
 						</tr>
 						</c:forEach>
 					</table>															

@@ -46,11 +46,72 @@ $(document).ready(function(){
 });
 </script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style type="text/css">
+body {
+    background-color: #f2f2f2; /* 배경 색상 */
+    font-family: Arial, sans-serif; /* 글꼴 */
+}
 
-</style>    
+h2 {
+    color: #125ACA; /* 제목 색상 */
+    text-align: center;
+}
+
+form {
+    background-color: #ffffff; /* 폼 배경 색상 */
+    max-width: 400px; /* 폼의 최대 너비 */
+    padding: 20px; /* 폼 주위의 간격 */
+    margin: 0 auto; /* 폼 가운데 정렬 */
+    border-radius: 5px; /* 둥근 모서리 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 */
+}
+
+label {
+    color: #333333; /* 라벨 색상 */
+    font-weight: bold; /* 굵은 글꼴 */
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+button[type="submit"] {
+    width: 100%; /* 전체 너비 */
+    padding: 10px; /* 안쪽 간격 */
+    margin-bottom: 15px; /* 하단 여백 */
+    border: 1px solid #cccccc; /* 테두리 */
+    border-radius: 3px; /* 둥근 모서리 */
+    box-sizing: border-box; /* 상자 크기 */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+    outline: none; /* 외곽선 제거 */
+    border-color: #125ACA; /* 포커스 시 테두리 색상 */
+}
+
+button[type="submit"] {
+    background-color: #125ACA; /* 버튼 배경 색상 */
+    color: #ffffff; /* 버튼 텍스트 색상 */
+    cursor: pointer; /* 커서 스타일 */
+}
+
+button[type="submit"]:hover {
+    background-color: #0b3e86; /* 호버 시 더 어두운 색상 */
+}
+
+.error_text {
+    color: #ff0000; /* 오류 텍스트 색상 */
+    margin-top: -10px; /* 음수 상단 여백 */
+    margin-bottom: 15px; /* 하단 여백 */
+}
+
+</style>      
 </head>
 <body>
+	<h1>&nbsp;</h1>
+	<h1>&nbsp;</h1>
     <h2>회원가입</h2>
     
     <form action="./join" method="post" onsubmit="return check()">

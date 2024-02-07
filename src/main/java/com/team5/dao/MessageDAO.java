@@ -11,7 +11,7 @@ import com.team5.dto.MessageDTO;
 
 public class MessageDAO extends AbstractDAO {
 
-	public List<MessageDTO> MessageList() {
+	public List<MessageDTO> userList() {
 		List<MessageDTO> list = new ArrayList<MessageDTO>();
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -195,7 +195,8 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 		String sql = "SELECT mname, mscontent, "
 				+ "if(date_format(sendDate, '%Y-%m-%d') = date_format(current_timestamp(), '%Y-%m-%d'), "
 				+ "date_format(sendDate, '%H:%i'), date_format(sendDate, '%m-%d')) AS sendDate "
-				+ "FROM message ms JOIN member m ON ms.fromMno=m.mno";
+				+ "FROM message ms JOIN member m ON ms.fromMno=m.mno "
+				+ "WHERE ms.toMno IS NULL";
 		
 		try {
 			pstmt = con.prepareStatement(sql);

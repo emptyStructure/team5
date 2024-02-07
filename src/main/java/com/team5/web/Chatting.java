@@ -29,11 +29,8 @@ public class Chatting extends HttpServlet {
 		String mid = (String) session.getAttribute("mid");
 		MessageDAO dao = new MessageDAO();
 		
-		List<MessageDTO> loginlist = dao.loginList(mid);
-		System.out.println("실행");
-		request.setAttribute("loginlist", loginlist);
-		System.out.println(loginlist);
-		
+		List<MessageDTO> userlist = dao.userList();
+		request.setAttribute("userlist", userlist);
 		
 		// 화면에 나올 전체 채팅 목록 chatlist
 		List<MessageDTO> chatlist = new ArrayList<MessageDTO>();
