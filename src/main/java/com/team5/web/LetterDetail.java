@@ -1,7 +1,6 @@
 package com.team5.web;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,26 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team5.dao.MessageDAO;
-import com.team5.dto.MessageDTO;
+import com.team5.dao.LetterDAO;
+import com.team5.dto.LetterDTO;
 
-@WebServlet("/messagewrite")
-public class MessageWrite extends HttpServlet {
+@WebServlet("/letterDetail")
+public class LetterDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public MessageWrite() {
+    public LetterDetail() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MessageDAO dao = new MessageDAO();
-		List<MessageDTO> list = dao.MessageList();;
-		request.setAttribute("list", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/messagewrite.jsp");
+		request.getParameter("lno");
+
+		LetterDAO dao = new LetterDAO();
+		LetterDTO detail = dao.detail(Integer.parseInt(request.getParameter("lno")));
+		request.setAttribute("detail", detail);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("letterDetail.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 	}
 
 }

@@ -9,25 +9,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.team5.dao.MessageDAO;
-import com.team5.dto.MessageDTO;
+import com.team5.dao.LetterDAO;
+import com.team5.dto.LetterDTO;
 
-@WebServlet("/sentmessage")
-public class SentMessage extends HttpServlet {
+@WebServlet("/receivedLetter")
+public class ReceivedLetter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SentMessage() {
+    public ReceivedLetter() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MessageDAO dao = new MessageDAO();
-		List<MessageDTO> list = dao.sentList();
+		HttpSession session = request.getSession();
+		String mid = (String) session.getAttribute("mid");
+		LetterDAO dao = new LetterDAO();
+		List<LetterDTO> list = dao.receiveList(mid);
 		
 		request.setAttribute("list", list);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("sentmessage.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("receivedLetter.jsp");
 		rd.forward(request, response);
 	}
 
