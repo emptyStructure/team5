@@ -40,7 +40,7 @@ public class Logout extends HttpServlet {
         if (referer != null && !referer.isEmpty()) {
             response.sendRedirect(referer);
         } else {
-        	response.sendRedirect("./index"); // 기본 페이지로 리다이렉트
+           response.sendRedirect("./index"); // 기본 페이지로 리다이렉트
         }
 		
 	}
