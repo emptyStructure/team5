@@ -24,14 +24,18 @@ public class ReceivedLetter extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String mid = (String) session.getAttribute("mid");
-		LetterDAO dao = new LetterDAO();
-		List<LetterDTO> list = dao.receiveList(mid);
-		
-		request.setAttribute("list", list);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("receivedLetter.jsp");
-		rd.forward(request, response);
+		if(session.getAttribute("mname")==null||session.getAttribute("mid")==null) {
+			response.sendRedirect("login");
+		} else {
+			String mid = (String) session.getAttribute("mid");
+			LetterDAO dao = new LetterDAO();
+			List<LetterDTO> list = dao.receiveList(mid);
+			
+			request.setAttribute("list", list);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("receivedLetter.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -40,38 +40,27 @@ $(function(){
 		</div>
 		<div class="main">
 			<article>
-				<h2>받은 쪽지함</h2>
-				<table>
+				<h2>쪽지함</h2>
+				<table border="1">
 					<thead>
 						<tr>
-							<td>보낸 이</td>
-							<td>내용</td>
-							<td>날짜</td>
+							<td class="date">날짜</td>
+							<td class="person">보낸 이</td>
+							<td class="person">받는 이</td>
+							<td class="title">제목</td>
+							<td class="content">내용</td>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>홍길동</td>
-							<td>안녕하세요. 잘 되나요?</td>
-							<td>2024-01-29</td>
+					<c:forEach var="row" items="${list }">
+						<tr class="row${row.lno }">
+							<td>${row.date }</td>
+							<td>${row.writer }</td>
+							<td>${row.receiver }</td>
+							<td class="rowTitle">${row.ltitle }</td>
+							<td>${row.msg }</td>
 						</tr>
-					</tbody>
-				</table>
-				<h2>보낸 쪽지함</h2>
-				<table>
-					<thead>
-						<tr>
-							<td>받는 이</td>
-							<td>내용</td>
-							<td>날짜</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>포세이돈</td>
-							<td>이건 내가 보낸 쪽지야</td>
-							<td>2024-01-24</td>
-						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</article>

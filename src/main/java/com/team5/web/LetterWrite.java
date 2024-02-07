@@ -23,8 +23,13 @@ public class LetterWrite extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/letterWrite.jsp");
-		rd.forward(request, response);
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mname")==null||session.getAttribute("mid")==null) {
+			response.sendRedirect("login");
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("/letterWrite.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
