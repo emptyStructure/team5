@@ -39,6 +39,8 @@ public class Logout extends HttpServlet {
         // 이전 페이지가 존재하면 해당 페이지로 리다이렉트, 없으면 기본 페이지로 이동
         if (referer != null && !referer.isEmpty()) {
             response.sendRedirect(referer);
+        } else if (referer.contains("/personalchat")) {
+        	response.sendRedirect("./chatting");
         } else {
         	response.sendRedirect("./index"); // 기본 페이지로 리다이렉트
         }

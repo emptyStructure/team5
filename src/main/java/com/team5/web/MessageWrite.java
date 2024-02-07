@@ -23,7 +23,7 @@ public class MessageWrite extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MessageDAO dao = new MessageDAO();
-		List<MessageDTO> list = dao.MessageList();;
+		List<MessageDTO> list = dao.MessageList();
 		request.setAttribute("list", list);
 		RequestDispatcher rd = request.getRequestDispatcher("/messagewrite.jsp");
 		rd.forward(request, response);
