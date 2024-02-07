@@ -1,4 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+function home(){
+	location.href="./index";
+}
+</script>
+</head>
+<body>
+	<div id="logo">
+		<img alt="logoImg" src="./img/header.png" onclick="home()">
+	</div>
+	<div id="menu">
 		<nav>
 			<ul>
 				<li onclick="url('./index')">홈</li>
@@ -10,3 +23,5 @@
 				<li onclick="url('./logout')">로그아웃</li></c:otherwise></c:choose>
 			</ul>
 		</nav>
+	</div>
+</body>

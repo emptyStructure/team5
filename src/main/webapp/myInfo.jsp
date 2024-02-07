@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>마이 페이지</title>
 <link href="./css/index.css" rel="stylesheet"/>
-<link href="./css/menu.css" rel="stylesheet"/>
+<link href="./css/header.css" rel="stylesheet"/>
 <link href="./css/myInfo.css" rel="stylesheet"/>
 <script type="text/javascript" src="./js/menu.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
@@ -31,21 +31,12 @@ $(function(){
 
 });
 
-function home(){
-	location.href="./index";
-}
-
 </script>
 </head>
 <body>	
 	<div id="container">
 		<header>
-			<div id="logo">
-				<img alt="logoImg" src="./img/header.png" onclick="home()">
-			</div>
-			<div id="menu">
-				<%@ include file="menu.jsp"%>
-			</div>
+			<%@ include file="header.jsp"%>
 		</header>
 		<div class="side" id="left">
 			<%@ include file="leftside.jsp"%>
