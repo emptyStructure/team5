@@ -13,6 +13,17 @@
 <link href="./css/myInfo.css" rel="stylesheet"/>
 <script type="text/javascript" src="./js/menu.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+<script type="text/javascript">
+$('.name').click(function (){
+	
+});	
+
+</script>
+<style type="text/css">
+* {
+	cursor: url("./img/porori.png") 12 12, auto;
+}
+</style>
 </head>
 <body>	
 	<div id="container">
@@ -31,7 +42,18 @@
 			<h3>아이디 찾기</h3>
 			<div id="infoContents">
 				<form action="./findId" method="post">
-					p
+				
+					<div class="namefinder">
+						<label class="name">이름</label>
+	    				<input type="text" id="namefinder" name="namefinder" placeholder="아이디">
+	    				<button type="submit" id="namefinder">아이디 확인하기</button>
+    				</div>
+    				<br><br><br>
+    				<div class="emailfinder">
+						<label>이메일</label>
+    					<input type="text" id="emailfinder" name="emailfinder" placeholder="이메일">
+    					<button type="submit" id="emailfinder">아이디 확인하기</button>
+    				</div>
 				</form>
 			</div>
 		</div>
