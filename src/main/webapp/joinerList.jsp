@@ -20,15 +20,15 @@ $(function(){
 			let select = $(this).parents(".select");
 			let tr = select.parents("tr");
 			let jno = tr.prev().val();
+			let mid = tr.children(".mid").text();
 			let sno = ${param.sno };
 			let total = $('#info').children(".total").children();
 			var num = Number(total.text());
-			
 			$.ajax({
 				url:'./joinerList',
 				type:'post',
 				dataType:'text',
-				data: {'jno':jno,'respon':1, 'sno':sno},
+				data: {'jno':jno,'respon':1, 'sno':sno,"title":'${detail.stitle}',"mid":mid },
 				success: function(result){
 					if(result==1){
 						select.html("🟢 승인 <button class='out'>추방</button>");
@@ -52,13 +52,14 @@ $(function(){
 			let select = $(this).parents(".select");
 			let tr = select.parents("tr");
 			let jno = tr.prev().val();
+			let mid = tr.children(".mid").text();
 			let sno = ${param.sno };
-		
+			
 			$.ajax({
 				url:'./joinerList',
 				type:'post',
 				dataType:'text',
-				data: {'jno':jno,'respon':0 },
+				data: {'jno':jno,'respon':0, 'sno':sno,"title":'${detail.stitle}',"mid":mid },
 				success: function(result){
 					select.text("❌ 거절");
 					<c:if test="${param.status ne null}">
@@ -72,10 +73,12 @@ $(function(){
 		}
 	});
 	
-	$('.out').click(function(){
+	$(document).on('click', '.out', function(){
 		let select = $(this).parents(".select");
 		let mid1 = select.siblings(".mid").text();
-		
+		let total = $('#info').children(".total").children();
+		var num = Number(total.text());
+
 		if(mid1 == '${sessionScope.mid }'){
 			alert("작성자 본인을 추방 할 수 없습니다.");
 		} else {
@@ -83,13 +86,13 @@ $(function(){
 				let tr = select.parents("tr");
 				let jno = tr.prev().val();		
 				let sno = ${param.sno };
-				alert(jno);
 				$.ajax({
 					url:'./joinerList',
 					type:'post',
 					dataType:'text',
-					data: {'jno':jno,'respon':4 },
+					data: {'jno':jno,'respon':4, 'sno':sno,"title":'${detail.stitle}',"mid":mid1 },
 					success: function(result){
+						total.text(num-1);
 						select.text("추방");
 						<c:if test="${param.status ne null}">
 							tr.hide();

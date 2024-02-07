@@ -66,7 +66,7 @@ $(function(){
 					</form>
 				<button type="button" class="closeBtn"> 닫기 </button>
 				</div>
-				<h4 class="infoBtn"><a href="./somoimAdmin">쪽지</a></h4>
+				<h4 class="infoBtn"><a href="./letter">쪽지</a></h4>
 				<h4 class="infoBtn">내가 쓴 글</h4>
 				<div class="infoBox">
 					<div class="boardTable">
