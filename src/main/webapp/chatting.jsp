@@ -12,6 +12,20 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript">
 $(function(){
+	
+	$(".personalChatBtn").click(function(){
+		let personalChat = $(this).val();
+		 // 팝업 창 열기
+	    let popupUrl = "./personalchat?toMno=" + personalChat;
+	    let popup = window.open(popupUrl, "PersonalChatPopup", "width=600, height=700, resizable=no, scrollbars=yes");
+		
+	    popup.onload = function() {
+			popup.personalChatValue = personalChat;
+		};
+	    // 현재 페이지에서 이동하지 않도록 false 반환
+	    return false;
+	})
+	
 	$("#chattingBtn").click(function(){
 		//alert("버튼을 클릭하였습니다.");
 		let chatting = $("#chatting").val();
@@ -57,13 +71,30 @@ $(function(){
 		  // 페이지가 로드될 때 함수 호출
 		  scrollToBottom();
 });
+$(document).ready(function() {
+	  let personalChatValue = window.opener.personalChatValue;
+	  console.log("personalChatValue: " + personalChatValue);
+	  $.ajax({
+	      url: './personalchat',
+	      type: 'post',
+	      dataType: 'json',
+	      data: { toMno: personalChatValue },
+	      success: function(response) {
+	          // 서블릿에서 반환한 데이터를 처리
+	          console.log(response);
+	      },
+	      error: function(error) {
+	          console.error("에러", error);
+	      }
+	  });
+	});
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
   
   //말풍선 길이 변경
   adjustBackgroundLength();
-  
+
   //테마 변경
   
   $("#themeBtn").click(function() {
@@ -178,13 +209,17 @@ function loadThemePreference() {
  	background-image: url('img/friends3.gif');
   	background-size : cover;
   	width : 100%;
-  	height: 80vh;
+  	height: 75vh;
   }
 .mscontent {
 	text-align: left;
 	overflow-y: auto;
 	height: 98%;
 	padding : 5px;
+}
+.user {
+	overflow-y: auto;
+	height: 25vh;
 }
  #chatting {
  	width: 80%;
@@ -236,10 +271,10 @@ function loadThemePreference() {
 		</header>
 		<div class="side" id="left">
 			<%@ include file="leftside.jsp"%>
+				<h2>참가자</h2>
 			<div class="user">
-				<p> 접속자</p>
-				<c:forEach var="login" items="${loginlist }">
-					<p><i class="xi-user"></i> ${login.mname }<p>
+				<c:forEach var="user" items="${userlist }">
+				<p><i class="xi-user"></i> ${user.mname } <button class="personalChatBtn" value="${user.mno }">채팅</button></p>
 				</c:forEach>
 			</div>
 		</div>
@@ -263,9 +298,9 @@ function loadThemePreference() {
 				</div>
 			</article>
 		</div>
-		</div>
 		<footer>
 		<%@ include file="footer.jsp"%>
 	</footer>
+		</div>
 </body>
 </html>
