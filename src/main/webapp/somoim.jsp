@@ -8,11 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>소모임</title>
-<link href="./css/somoim.css" rel="stylesheet"/>
-<link href="./css/menu.css" rel="stylesheet"/>
 <link href="./css/index.css" rel="stylesheet"/>
+<link href="./css/header.css" rel="stylesheet"/>
+<link href="./css/somoim.css" rel="stylesheet"/>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
-<script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/header.js"></script>
 <script type="text/javascript">
 $(function(){
 	
@@ -53,18 +53,16 @@ $(function(){
 <body>
 	<div class="conteiner">
 		<header>
-			<div id="menu">
-				<%@ include file="menu.jsp"%>
-			</div>
-		</header>					
+			<%@ include file="header.jsp"%>		
+		</header>
 		<div class="side" id="left">
 			<%@ include file="leftside.jsp"%>
 		</div>
 		<div class="side" id="right">
 			<%@ include file="rightside.jsp"%>
-		</div>			
+		</div>				
 		<div id="content">
-			<h1>소모임 출력</h1>
+			<h1>소모임</h1>
 			<div class="main">
 				<div>
 					<select class="cSelect">
