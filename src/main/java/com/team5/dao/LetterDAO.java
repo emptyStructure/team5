@@ -16,10 +16,39 @@ public class LetterDAO extends AbstractDAO {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM letter where receiver=?";
+		String sql = "SELECT * FROM letter where receiver=? order by date desc";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, writer);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				LetterDTO dto = new LetterDTO();
+				dto.setLno(rs.getInt(1));
+				dto.setReceiver(rs.getString(2));
+				dto.setLtitle(rs.getString(3));
+				dto.setMsg(rs.getString(4));
+				dto.setWriter(rs.getString(5));
+				dto.setDate(rs.getString(6));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		}
+		return list;
+	}
+	
+	public List<LetterDTO> letterList(String mid) {
+		List<LetterDTO> list = new ArrayList<LetterDTO>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM letter where writer = ? OR receiver = ? order by date desc";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, mid);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				LetterDTO dto = new LetterDTO();
@@ -44,7 +73,7 @@ public class LetterDAO extends AbstractDAO {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM letter where writer=?";
+		String sql = "SELECT * FROM letter where writer=? order by date desc";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, receiver);
@@ -73,7 +102,6 @@ public class LetterDAO extends AbstractDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT COUNT(*) from member where mid = ?";
-		System.out.println(dto.getReceiver());
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getReceiver());
@@ -96,7 +124,7 @@ public class LetterDAO extends AbstractDAO {
 		int result = 0;
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO letter (receiver,ltitle, msg, writer) VALUES (?,?,?,?) ";
+		String sql = "INSERT INTO letter (receiver,ltitle, msg, writer) VALUES (?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getReceiver());
@@ -111,16 +139,20 @@ public class LetterDAO extends AbstractDAO {
 		}
 		return result;
 	}
-
-	public LetterDTO detail(int lno) {
+	
+	public LetterDTO detail(int lno, String mid) {
 		LetterDTO dto = new LetterDTO();
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM letter where lno=?";
+		
+		String sql = "SELECT * FROM letter where lno=? AND (writer = ? OR receiver = ?)";
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, lno);
+			pstmt.setString(2, mid);
+			pstmt.setString(3, mid);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				dto.setLno(rs.getInt(1));
