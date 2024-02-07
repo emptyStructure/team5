@@ -71,23 +71,6 @@ $(function(){
 		  // 페이지가 로드될 때 함수 호출
 		  scrollToBottom();
 });
-$(document).ready(function() {
-	  let personalChatValue = window.opener.personalChatValue;
-	  console.log("personalChatValue: " + personalChatValue);
-	  $.ajax({
-	      url: './personalchat',
-	      type: 'post',
-	      dataType: 'json',
-	      data: { toMno: personalChatValue },
-	      success: function(response) {
-	          // 서블릿에서 반환한 데이터를 처리
-	          console.log(response);
-	      },
-	      error: function(error) {
-	          console.error("에러", error);
-	      }
-	  });
-	});
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
