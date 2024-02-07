@@ -51,8 +51,8 @@ public class InfoDAO extends AbstractDAO{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT bno, btitle, mno, bcount, "
-				+ "if(date_format(current_timestamp(),'%Y. %m. %d') = DATE_FORMAT(bdate,'%Y. %m. %d'),date_format(bdate,'%h:%i'),date_format(bdate,'%m. %d')) AS bdate "
-				+ "from board WHERE mno=(SELECT mno FROM member WHERE mid=?) LIMIT 0, 10";
+				+ "DATE_FORMAT(bdate,'%Y. %m. %d') AS bdate "
+				+ "from board WHERE mno=(SELECT mno FROM member WHERE mid=?) ORDER BY bno DESC";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
