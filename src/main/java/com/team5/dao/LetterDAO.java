@@ -147,7 +147,6 @@ public class LetterDAO extends AbstractDAO {
 		ResultSet rs = null;
 		
 		String sql = "SELECT * FROM letter where lno=? AND (writer = ? OR receiver = ?)";
-		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, lno);

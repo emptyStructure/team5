@@ -14,6 +14,14 @@
 <link href="./css/letter.css" rel="stylesheet"/>
 <script type="text/javascript">
 $(function(){
+	$('.row').click(function(){
+		let lno = $(this).children(".d").children(".lno").val();
+		var url = "./letterDetail?lno="+lno;
+        var name = "letterDetail";
+        var option = "width = 600, height = 500, top = 100, left = 200, location = no"
+		window.open(url, name, option);
+	});
+	
 	$('.msgWrite').click(function(){
 		let sno = $(this).children().children(".sno").val();
 		var url = "./letterWrite";
@@ -30,10 +38,12 @@ $(function(){
 		<div class="menu">
 			<nav>
 				<ul>
-					<li onclick="url('./letter')"><i class="xi-home"></i> 홈</li>
-					<li class="msgWrite"><i class="xi-send"></i> 쪽지 쓰기</li>
+					<li onclick="location.href='./somoimAdmin'"><i class="xi-calendar-check"></i> 신청자 관리</li>
+					<li onclick="location.href='./somoimApplications'"><i class="xi-list"></i> 내 신청 목록</li>
+					<li onclick="url('./letter')"><i class="xi-mail"></i> 쪽지 전체보기</li>
 					<li onclick="url('./receivedLetter')"><i class="xi-reply"></i> 받은 쪽지함</li>
 					<li onclick="url('./sentLetter')"><i class="xi-share"></i> 보낸 쪽지함</li>
+					<li class="msgWrite"><i class="xi-send"></i> 쪽지 쓰기</li>
 					<li onclick="url('./chatting')"><i class="xi-forum"></i> 채팅</li>
 				</ul>
 			</nav>
@@ -52,8 +62,9 @@ $(function(){
 					</thead>
 					<tbody>
 					<c:forEach var="row" items="${list }">
-						<tr class="row${row.lno }">
-							<td>${row.date }</td>
+						<tr class="row">
+							<td class="d">${row.date }
+							<input type="hidden" class="lno" value="${row.lno }"></td>
 							<td>${row.writer }</td>
 							<td class="rowTitle">${row.ltitle }</td>
 							<td>${row.msg }</td>

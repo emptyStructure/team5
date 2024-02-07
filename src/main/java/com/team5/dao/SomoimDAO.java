@@ -217,6 +217,7 @@ public class SomoimDAO extends AbstractDAO{
 				close(null, pstmt, conn);
 			}
 		}
+		
 		return result;
 	}
 
@@ -471,7 +472,10 @@ public class SomoimDAO extends AbstractDAO{
 		}finally {
 			close(null, pstmt, conn);
 		}
-		
+		switch(respon) {
+		case 1:
+			
+		}
 		return result;
 	}
 	public int writerBool(int sno, String mid) {
