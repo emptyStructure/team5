@@ -28,6 +28,13 @@ $(function(){
 		}
 	})
 	
+	$('.stitle').click(function(){
+		let sno = $(this).children(".sno").val();
+		var url = "./soDetail?sno="+sno;
+        var name = "detail from admin";
+        var option = "width = 600, height = 700, top = 100, left = 200, location = no";
+		window.open(url, name, option);
+	});
 });
 
 </script>
@@ -86,7 +93,8 @@ $(function(){
 					<table>
 						<c:forEach items="${somList}" var="row">
 						<tr>
-							<td class="title"><a href="./soDetail?sno=${row.sno}">${row.stitle }</a></td>
+							<td class="stitle">${row.stitle }
+							<input type="hidden" value="${row.sno }" class="sno"></td>
 							<td class="date">
 							<fmt:parseDate value="${row.sdate }" var="sdate" pattern="yyyy. MM. dd. hh:mm"/>
 							<fmt:formatDate value="${sdate}" var="dateTwo" pattern="yyyy-MM-dd"/>
