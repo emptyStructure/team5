@@ -8,18 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet("/message")
-public class Message extends HttpServlet {
+@WebServlet("/letter")
+public class Letter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Message() {
+    public Letter() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("message.jsp");
-		rd.forward(request, response);
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mname")==null||session.getAttribute("mid")==null) {
+			response.sendRedirect("login");
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("letter.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

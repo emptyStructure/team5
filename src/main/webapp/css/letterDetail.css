@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.soheader{
+	width: calc(100% - 40px);
+	height: 50px;
+	margin: 10px 20px; 
+	background-color: #F9F7C9;
+	overflow: hidden;
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+}
+.title{
+	width: 100%;
+	float: left;
+	line-height: 50px;
+	margin-left: 20px;
+}
+.title{
+	text-align: left;
+}
+.body{
+	width: calc(100% - 80px);
+	height: 280px;
+	margin: 10px 20px; 
+	padding: 10px 20px;
+	background-color: #F9F7C9;
+	overflow: hidden;
+	border: 1px solid black;
+}
+.writer, .date{
+	width: 50%;
+	float: left;
+	line-height: 20px;
+	font-size: smaller;
+}
+.writer{
+	text-align: left;
+}
+.date{
+	text-align: right;
+}
+.content{
+	clear: both;
+	width: 100%;
+	height: auto;
+	margin-top: 10px;
+}
+.info{
+	overflow: hidden;
+	border-bottom: 1px solid black;
+}
