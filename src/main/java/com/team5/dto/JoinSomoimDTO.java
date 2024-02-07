@@ -2,7 +2,7 @@ package com.team5.dto;
 
 public class JoinSomoimDTO {
 	private int jno, mno, sno, status, no;
-	private String name, ph, message, joindate, title;
+	private String name, ph, message, joindate, title, mid;
 	public int getJno() {
 		return jno;
 	}
@@ -62,6 +62,12 @@ public class JoinSomoimDTO {
 	}
 	public void setNo(int no) {
 		this.no = no;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 	
 	

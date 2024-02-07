@@ -31,7 +31,7 @@ $(function(){
 				data: {'jno':jno,'respon':1, 'sno':sno},
 				success: function(result){
 					if(result==1){
-						select.text("🟢 승인");
+						select.html("🟢 승인 <button class='out'>추방</button>");
 						total.text(num+1);
 						<c:if test="${param.status ne null}">
 							tr.hide();
@@ -51,14 +51,14 @@ $(function(){
 		if(confirm("거절하시겠습니까?")){
 			let select = $(this).parents(".select");
 			let tr = select.parents("tr");
-			let jno = tr.prev().val();		
+			let jno = tr.prev().val();
 			let sno = ${param.sno };
 		
 			$.ajax({
 				url:'./joinerList',
 				type:'post',
 				dataType:'text',
-				data: {'jno':jno,'respon':0, 'sno':sno},
+				data: {'jno':jno,'respon':0 },
 				success: function(result){
 					select.text("❌ 거절");
 					<c:if test="${param.status ne null}">
@@ -69,6 +69,36 @@ $(function(){
 				}
 			});
 		
+		}
+	});
+	
+	$('.out').click(function(){
+		let select = $(this).parents(".select");
+		let mid1 = select.siblings(".mid").text();
+		
+		if(mid1 == '${sessionScope.mid }'){
+			alert("작성자 본인을 추방 할 수 없습니다.");
+		} else {
+			if(confirm("추방하시겠습니까?")){
+				let tr = select.parents("tr");
+				let jno = tr.prev().val();		
+				let sno = ${param.sno };
+				alert(jno);
+				$.ajax({
+					url:'./joinerList',
+					type:'post',
+					dataType:'text',
+					data: {'jno':jno,'respon':4 },
+					success: function(result){
+						select.text("추방");
+						<c:if test="${param.status ne null}">
+							tr.hide();
+						</c:if>
+					}, error: function(request, status, error){
+						alert("통신 오류");
+					}
+				});
+			}
 		}
 	});
 	
@@ -92,9 +122,12 @@ $(function(){
 					<div class="status-list">
 						<ul>
 							<li onclick="location.href='./joinerList?sno=${sno }'"> 전체</li>
-							<li onclick="location.href='./joinerList?sno=${sno }&status=2'"> 대기</li>
-							<li onclick="location.href='./joinerList?sno=${sno }&status=1'"> 승인</li>
-							<li onclick="location.href='./joinerList?sno=${sno }&status=0'"> 거절</li>
+							<li onclick="location.href='./joinerList?sno=${sno }&status=2'">🧾 대기</li>
+							<li onclick="location.href='./joinerList?sno=${sno }&status=1'">🟢 승인</li>
+							<li onclick="location.href='./joinerList?sno=${sno }&status=0'">❌ 거절</li>
+							<li onclick="location.href='./joinerList?sno=${sno }&status=3'">🌀 탈퇴</li>
+							<li onclick="location.href='./joinerList?sno=${sno }&status=4'">🏳️ 추방</li>
+							<li onclick="location.href='./joinerList?sno=${sno }&status=5'">🚩 취소</li>
 						</ul>
 					</div>
 					<div id="info">
@@ -116,6 +149,7 @@ $(function(){
 							<tr>
 								<th class="tno">No.</th>
 								<th class="tname">이름</th>
+								<th class="tid">ID</th>
 								<th class="tph">연락처</th>
 								<th class="tmsg">메세지</th>
 								<th class="tdate">신청일</th>
@@ -129,6 +163,7 @@ $(function(){
 									<tr>
 										<td class="no">${row.no }</td>
 										<td>${row.name }</td>
+										<td class="mid">${row.mid }</td>
 										<td>${row.ph }</td>
 										<td>${row.message }</td>
 										<td>${row.joindate }</td>
@@ -141,7 +176,20 @@ $(function(){
 												<c:when test="${row.status eq 0 }">
 												<div class="X">❌ 거절</div>
 												</c:when>
-												<c:otherwise><div class="O">🟢 승인</div></c:otherwise>
+												<c:when test="${row.status eq 1 }">
+													<div class="O">🟢 승인
+														<button class="out">추방</button>
+													</div>
+												</c:when>
+												<c:when test="${row.status eq 3 }">
+													<div class="">탈퇴</div>
+												</c:when>
+												<c:when test="${row.status eq 4 }">
+													<div class="">추방</div>
+												</c:when>
+												<c:when test="${row.status eq 5 }">
+													<div class="">취소</div>
+												</c:when>
 											</c:choose>
 										</td>
 									</tr>

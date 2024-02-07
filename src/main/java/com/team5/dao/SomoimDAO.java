@@ -12,6 +12,7 @@ import com.team5.dto.SomoimDTO;
 
 public class SomoimDAO extends AbstractDAO{
 	//전체 글
+	/*
 	public List<SomoimDTO> list(int page){
 		List<SomoimDTO> result = new ArrayList<SomoimDTO>();
 		
@@ -47,13 +48,50 @@ public class SomoimDAO extends AbstractDAO{
 		
 		return result;
 	}
+	*/
+	public List<SomoimDTO> list(int page, String where){
+		List<SomoimDTO> result = new ArrayList<SomoimDTO>();
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT * FROM somoimView "+ where
+				+ " limit ?,12";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (page-1)*12);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				SomoimDTO dto = new SomoimDTO();
+				dto.setSno(rs.getInt(1));
+				dto.setStitle(rs.getString(2));
+				dto.setScontent(rs.getString(3));
+				dto.setScategory(rs.getString(4));
+				dto.setPersonnel(rs.getInt(5));
+				dto.setSwriter(rs.getString(6));
+				dto.setMno(rs.getInt(7));
+				dto.setSdate(rs.getString(8));
+				dto.setTotal(rs.getInt(9));
+				dto.setWaiting(rs.getInt(10));
+				result.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		}
+		
+		return result;
+	}
 	
-	public int totalCount() {
+	public int totalCount(String where) {
 		int result = 0;
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) from somoimView";
+		String sql = "SELECT COUNT(*) from somoimView "+where;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -157,20 +195,21 @@ public class SomoimDAO extends AbstractDAO{
 		return result;
 	}
 	
-	public int join(JoinSomoimDTO dto, String mid) {
+	public int join(JoinSomoimDTO dto) {
 		int result = 0;
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO joinSomoim (mno, sno, name, ph, message) VALUES ((SELECT mno FROM member WHERE MID = ?),?,?,?,?)";
-		int joinBool = joinBool(dto.getSno(),mid);
+		String sql = "INSERT INTO joinSomoim (mno, mid, sno, name, ph, message) VALUES ((SELECT mno FROM member WHERE MID = ?),?,?,?,?,?)";
+		int joinBool = joinBool(dto.getSno(),dto.getMid());
 		if(joinBool==0) {
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, mid);
-				pstmt.setInt(2, dto.getSno());
-				pstmt.setString(3, dto.getName());
-				pstmt.setString(4, dto.getPh());
-				pstmt.setString(5, dto.getMessage());
+				pstmt.setString(1, dto.getMid());
+				pstmt.setString(2, dto.getMid());
+				pstmt.setInt(3, dto.getSno());
+				pstmt.setString(4, dto.getName());
+				pstmt.setString(5, dto.getPh());
+				pstmt.setString(6, dto.getMessage());
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -197,16 +236,32 @@ public class SomoimDAO extends AbstractDAO{
 			pstmt.setString(5, mid);
 			result = pstmt.executeUpdate();
 			if(result==1) {
-				String sql2="INSERT INTO joinSomoim (mno, sno, name, ph, message, status) "
-						+ "VALUES ((SELECT mno FROM member WHERE MID = ?), "
-						+ "(SELECT sno FROM somoim WHERE mno=(SELECT mno FROM member WHERE MID = ?) ORDER BY sno DESC LIMIT 0,1), "
-						+ "?, 'Host','Host',1)";
-				pstmt = conn.prepareStatement(sql2);
-				pstmt.setString(1, mid);
-				pstmt.setString(2, mid);
-				pstmt.setString(3, mname);
-				result = pstmt.executeUpdate();
+				result = selfInsert(mid, mname);
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
+		
+		return result;
+	}
+	public int selfInsert(String mid, String mname) {
+		int result = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql="INSERT INTO joinSomoim (mno, sno, name, ph, message, status, mid) "
+				+ "VALUES ((SELECT mno FROM member WHERE MID = ?), "
+				+ "(SELECT sno FROM somoim WHERE mno=(SELECT mno FROM member WHERE MID = ?) ORDER BY sno DESC LIMIT 0,1), "
+				+ "?, 'Host','Host',1,?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, mid);
+			pstmt.setString(3, mname);
+			pstmt.setString(4, mid);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -256,7 +311,7 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, j.joinno, j.mno, j.sno, j.name, j.ph, j.message, j.joinDate, j.status, s.stitle "
+		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, j.joinno, j.mno, j.sno, j.name, j.ph, j.message, j.joinDate, j.status, s.stitle, j.mid "
 				+ "FROM joinSomoim j JOIN somoim s ON j.sno = s.sno "
 				+ "WHERE j.sno= ? and s.mno=(SELECT mno FROM member WHERE MID = ?)";
 		try {
@@ -276,6 +331,7 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setJoindate(rs.getString(8));
 				dto.setStatus(rs.getInt(9));
 				dto.setTitle(rs.getString(10));
+				dto.setMid(rs.getString(11));
 				result.add(dto);
 			}
 			
@@ -294,7 +350,7 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO,j.joinno, j.mno, j.sno, j.name, j.ph, j.message, j.joinDate, j.status, s.stitle "
+		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO,j.joinno, j.mno, j.sno, j.name, j.ph, j.message, j.joinDate, j.status, s.stitle, j.mid "
 				+ "FROM joinSomoim j JOIN somoim s ON j.sno = s.sno "
 				+ "WHERE j.sno= ? and s.mno=(SELECT mno FROM member WHERE MID = ?) AND status =?";
 		try {
@@ -315,6 +371,7 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setJoindate(rs.getString(8));
 				dto.setStatus(rs.getInt(9));
 				dto.setTitle(rs.getString(10));
+				dto.setMid(rs.getString(11));
 				result.add(dto);
 			}
 			
@@ -333,7 +390,7 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT  ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status, j.sno FROM joinSomoim j JOIN somoim s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?)";
+		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status, j.sno, j.joinno, j.mid FROM joinSomoim j JOIN somoim s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
@@ -347,7 +404,9 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setMessage(rs.getString(5));
 				dto.setJoindate(rs.getString(6));
 				dto.setStatus(rs.getInt(7));
-				dto.setJno(rs.getInt(8));
+				dto.setSno(rs.getInt(8));
+				dto.setJno(rs.getInt(9));
+				dto.setMid(rs.getString(10));
 				result.add(dto);
 			}
 			
@@ -366,7 +425,7 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT  ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status, j.sno FROM joinSomoim j JOIN somoim s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?) AND j.status=?";
+		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status, j.sno, j.joinno, j.mid FROM joinSomoim j JOIN somoim s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?) AND j.status=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
@@ -381,7 +440,9 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setMessage(rs.getString(5));
 				dto.setJoindate(rs.getString(6));
 				dto.setStatus(rs.getInt(7));
-				dto.setJno(rs.getInt(8));
+				dto.setSno(rs.getInt(8));
+				dto.setJno(rs.getInt(9));
+				dto.setMid(rs.getString(10));
 				result.add(dto);
 			}
 			
@@ -400,7 +461,6 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE joinSomoim SET status=? WHERE joinno=?";
-		System.out.println(respon);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, respon);

@@ -55,19 +55,25 @@ public class JoinerList extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SomoimDAO dao = new SomoimDAO();
 
 		int result = 0;
-		int sno = Util.str2Int(request.getParameter("sno"));
+		SomoimDAO dao = new SomoimDAO();
+		SomoimDTO dto = new SomoimDTO();
 		int respon = Util.str2Int2(request.getParameter("respon"));
+		System.out.println(respon);
 		String jno = request.getParameter("jno");
-		
-		SomoimDTO dto = dao.detail(sno);
-		
-		if(dto.getTotal() < dto.getPersonnel()) {
-			result = dao.respon(respon, jno);
+		System.out.println(jno);
+		if(request.getParameter("sno") != null) {
+			int sno = Util.str2Int(request.getParameter("sno"));
+			dto = dao.detail(sno);
+			if(dto.getTotal() < dto.getPersonnel()) {
+				result = dao.respon(respon, jno);
+			} else {
+				result = 0;
+			}
 		} else {
-			result = 0;
+			result = dao.respon(respon, jno);
+			System.out.println("dao");
 		}
 		
 		PrintWriter pw = response.getWriter();

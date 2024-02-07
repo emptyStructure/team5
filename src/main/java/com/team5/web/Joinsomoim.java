@@ -35,12 +35,15 @@ public class Joinsomoim extends HttpServlet {
 		if(session.getAttribute("mname")==null) {
 			response.sendRedirect("login");
 		} else {
+			String msg = Util.removeTag(request.getParameter("msg"));
+			msg = Util.addBR(msg);
+			dto.setMessage(msg);
+			dto.setName(Util.removeTag(request.getParameter("name")));
 			dto.setSno(Util.str2Int2(request.getParameter("sno")));
-			dto.setName(request.getParameter("name"));
+			dto.setMid((String)session.getAttribute("mid"));
 			dto.setPh(request.getParameter("ph"));
-			dto.setMessage(request.getParameter("msg"));
 			
-			int result = dao.join(dto, (String)session.getAttribute("mid"));
+			int result = dao.join(dto);
 			
 			PrintWriter pw = response.getWriter();
 			pw.print(result);
