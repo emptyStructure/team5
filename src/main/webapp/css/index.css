@@ -16,8 +16,16 @@ body{
 header{
 	padding: 5px;
 	height: 180px;
-	text-align: center;
-	background-image: url("../img/headerex.png");
+/*	text-align: center;*/
+	background-color: cornsilk;
+}
+
+#logo{
+	float: left;
+    margin: 0;
+    padding: 0;
+    width: 410px;
+    height: 180px;
 }
 
 footer{

@@ -30,6 +30,10 @@ $(function(){
 	
 });
 
+function home(){
+	location.href="./index";
+}
+
 </script>
 <style type="text/css">
 #content{
@@ -41,6 +45,9 @@ $(function(){
 <body>	
 	<div id="container">
 		<header>
+			<div id="logo">
+				<img alt="logoImg" src="./img/header.png" onclick="home()">
+			</div>
 			<div id="menu">
 				<%@ include file="menu.jsp"%>
 			</div>

@@ -30,11 +30,19 @@ $(function(){
 /* 	$('#mPW').text("*"); */
 
 });
+
+function home(){
+	location.href="./index";
+}
+
 </script>
 </head>
 <body>	
 	<div id="container">
 		<header>
+			<div id="logo">
+				<img alt="logoImg" src="./img/header.png" onclick="home()">
+			</div>
 			<div id="menu">
 				<%@ include file="menu.jsp"%>
 			</div>
