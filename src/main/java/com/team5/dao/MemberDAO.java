@@ -112,7 +112,7 @@ public class MemberDAO extends AbstractDAO{
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql ="SELECT mid FROM member WHERE memail=?";
+		String sql ="SELECT mid, mdate FROM member WHERE memail=?";
 		
 		try {
 			pstmt = con.prepareStatement(sql);

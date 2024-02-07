@@ -46,7 +46,8 @@ $(function (){
 			<%@ include file="rightside.jsp"%>
 		</div>					
 		<div id="content">
-			<h3>아이디 찾기</h3>
+			<h2>&ensp;</h2>
+			<h2>아이디 찾기</h2><br>
 			<div id="infoContents">
 				<form method="post">
 					<label class="name">이름으로 찾기</label>
