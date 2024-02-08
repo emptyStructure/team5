@@ -9,6 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>중고디테일</title>
+
+<link href="./css/index.css" rel="stylesheet"/>
+<link href="./css/header.css" rel="stylesheet"/>
+<script type="text/javascript" src="./js/header.js"></script>
 <link href="./css/index.css" rel="stylesheet" />
 <link href="./css/menu.css" rel="stylesheet" />
 <link href="./css/detail.css" rel="stylesheet" />

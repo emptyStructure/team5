@@ -9,7 +9,8 @@
 <meta charset="UTF-8">
 <title>글수정하기</title>
 <link href="./css/index.css" rel="stylesheet"/>
-<link href="./css/menu.css" rel="stylesheet"/>
+<link href="./css/header.css" rel="stylesheet"/>
+<script type="text/javascript" src="./js/header.js"></script>
 <script type="text/javascript" src="./js/menu.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
