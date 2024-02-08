@@ -95,8 +95,8 @@
 	</footer>	
 	</div>
 	<script type="text/javascript">
-		function paging(no) {
-			location.href = "./board?page=" + no;
+		function paging(bno) {
+			location.href = "./board?page=" + bno;
 		}
 	</script>
 </body>
