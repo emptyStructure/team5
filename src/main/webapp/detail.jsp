@@ -1,17 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>상세사항</title>
+<style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #container {
+            min-height: 100%;
+            position: relative;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .main {
+            padding-bottom: 50px;
+        }
+
+        .comment {
+            max-height: 400px; 
+            overflow-y: auto;
+            margin-bottom: 20px; 
+        }
+
+       
+    </style>
 <link href="./css/index.css" rel="stylesheet" />
 <link href="./css/menu.css" rel="stylesheet" />
+<link href="./css/header.css" rel="stylesheet" />
 <link href="./css/detail.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/header.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -83,6 +114,7 @@ function del(){var ch = confirm("글을 삭제하시겠습니까?");if(ch){locat
     				success:function(result){
     					if(result == 1){
     						point.remove();
+    						location.reload();//삭제했을때 화면에서 자동 새로고침
     					} else {
     						alert("삭제할 수 없습니다.");
     					}
@@ -138,11 +170,13 @@ function del(){var ch = confirm("글을 삭제하시겠습니까?");if(ch){locat
         });
     });
 </script>
+</head>
 <body>
-	<div class="container">
+	<div id="container">
 		<header>
-			<%@ include file="menu.jsp"%>
+			<%@ include file="header.jsp"%>
 		</header>
+		
 		<div class="main">
 			<div class="mainStyle">
 				<article>
@@ -154,10 +188,9 @@ function del(){var ch = confirm("글을 삭제하시겠습니까?");if(ch){locat
 						</div>
 						<div class="detailBCONTENT">${detail.bcontent }</div>
 					</div>
-					<c:if
-						test="${sessionScope.mname ne null && detail.mid eq sessionScope.mid }">
-						<button onclick="update()">수정하기</button>
-						<button onclick="del()">삭제하기</button>
+					<c:if test="${sessionScope.mname ne null && detail.mid eq sessionScope.mid }">
+						<button onclick="update()">수정</button>
+						<button onclick="del()">삭제</button>
 					</c:if>
 
 					<c:if test="${sessionScope.mid ne null }">
@@ -177,8 +210,8 @@ function del(){var ch = confirm("글을 삭제하시겠습니까?");if(ch){locat
 					            <div class="chead">
 					                <div class="cname">${co.mname }님<c:if test="${sessionScope.mname ne null && co.mid eq sessionScope.mid }">
 					                    <input type="hidden" class="cno" value="${co.cno }">
-					                    <button class="bcommentEdit">수정하기</button>
-						                <button class="bcommentDel">삭제하기</button>
+					                    <button class="bcommentEdit">수정</button>
+						                <button class="bcommentDel">삭제</button>
 						            </c:if>
 					            </div>
 					            <div class="cdate">${co.cip} / ${co.cdate }</div>
@@ -187,15 +220,13 @@ function del(){var ch = confirm("글을 삭제하시겠습니까?");if(ch){locat
 					    </div>
 					    </c:forEach>
 					</div>
-					
-
-					<button onclick="url('./board?page=${param.page}')">게시판으로</button>
+					<button onclick="location.href='./board?page=${param.page}'">게시판으로</button>
 				</article>
 			</div>
 		</div>
 		<footer>
-		<c:import url="footer.jsp"/>
-		</footer>
+		<%@ include file="footer.jsp"%>
+	</footer>
 	</div>
 </body>
 </html>

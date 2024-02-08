@@ -16,6 +16,7 @@
 <link href="./css/index.css" rel="stylesheet"/>
 <link href="./css/menu.css" rel="stylesheet"/>
 <script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/header.js"></script>
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -32,7 +33,7 @@
 </style>
 </head>
 <body>
-	<div class="container1">
+	<div id="container">
 		<div class="main">
 			<div class="mainStyle">
 				<article>
