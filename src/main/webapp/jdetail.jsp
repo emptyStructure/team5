@@ -12,17 +12,12 @@
 
 <link href="./css/index.css" rel="stylesheet"/>
 <link href="./css/header.css" rel="stylesheet"/>
-<script type="text/javascript" src="./js/header.js"></script>
-<link href="./css/index.css" rel="stylesheet" />
-<link href="./css/menu.css" rel="stylesheet" />
 <link href="./css/detail.css" rel="stylesheet" />
+<script type="text/javascript" src="./js/header.js"></script>
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<script type="text/javascript" src="./js/menu.js"></script>
 <c:set var="jQueryURL"
-	value="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" />
-	
-	
+	value="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" />	
 <script src="${jQueryURL}"
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -40,7 +35,7 @@
 		}
 	}
 	
-	 function removeUnnecessaryTags(content) {
+	/*  function removeUnnecessaryTags(content) {
 	        // <p> 태그 제거
 	        content = content.replace(/<p>/gi, '');
 	        content = content.replace(/<\/p>/gi, '');
@@ -80,7 +75,7 @@
     // 페이지 로드 후 extractImages 함수 호출
     window.onload = function() {
         extractImages();
-    };
+    }; */
 	 
 	$(document)
 			.ready(
@@ -239,10 +234,17 @@
 </head>
 <body>
 
-	<div class="container">
+	<div id="container">
 		<header>
-			<%@ include file="menu.jsp"%>
+			<%@ include file="header.jsp"%>	
 		</header>
+		<div class="side" id="left">
+			<%@ include file="leftside.jsp"%>
+		</div>
+		<div class="side" id="right">
+			<%@ include file="rightside.jsp"%>
+		</div>
+		<div id="content">
 		<div class="main">
 			<div class="mainStyle">
 				<article>
@@ -310,6 +312,7 @@
 
 
 			</div>
+		</div>
 		</div>
 	</div>
 
