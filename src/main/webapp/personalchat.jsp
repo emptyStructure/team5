@@ -112,7 +112,7 @@ $(document).ready(function() {
   
   function applyOriginalTheme() {
 	  $(".chat").css({
-			"background-image": "url('img/friends3.gif')"
+			"background-image": "url('img/friends5.gif')"
 		});
 	  }
   
@@ -187,7 +187,7 @@ function loadThemePreference() {
 	height: 85%;
   }
  .chat {
- 	background-image: url('img/friends3.gif');
+ 	background-image: url('img/friends5.gif');
   	background-size : cover;
   	width : 100%;
   	height: 75vh;
