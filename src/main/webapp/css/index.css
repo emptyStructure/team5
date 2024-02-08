@@ -36,8 +36,9 @@ footer{
     height: calc(100vh - 240px);
 /*    background-color: lightgoldenrodyellow;*/
 }
+
 #left{
-	float: left;
+	float: left;	
 }
 #content {
 	width: calc(100% - 360px);
@@ -153,5 +154,5 @@ a{
 }
 
 #add1{
-	margin-top: 150px;
+	margin-top: 100px;
 }

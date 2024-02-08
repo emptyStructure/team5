@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+.main{
+	width: calc(100% - 360px);
+    height: calc(100vh - 240px);
+	float: left;
+	text-align: -webkit-center;
+}
+
 table {
 	width: 900px;
 	height: 400px;
@@ -21,7 +28,7 @@ td {
 	text-align: center;
 }
 
-.title {
+.btitle {
 	text-align: left;
 	width: 50%;
 }

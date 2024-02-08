@@ -14,7 +14,7 @@
 <script type="text/javascript" src="./js/header.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div id="container">
 		<header>
 			<%@ include file="header.jsp"%>
 		</header>
