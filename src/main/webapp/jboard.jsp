@@ -11,7 +11,17 @@
 <head>
 <meta charset="UTF-8">
 <title>중고거래</title>
+<link href="./css/index.css" rel="stylesheet"/>
+<link href="./css/header.css" rel="stylesheet"/>
+<script type="text/javascript" src="./js/header.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <style>
+#contents{
+	display: unset;
+	padding: 10px;
+	
+}
+
     table {
         width: 100%;
         border-collapse: collapse;
@@ -33,6 +43,7 @@
         background-color: #e9e9e9;
     }
     .paging {
+    	width: 100%;
         margin-top: 20px;
         text-align: center;
     }
@@ -81,60 +92,73 @@
 
 </head>
 <body>
+<div id="container">
+	<header>
+		<%@ include file="header.jsp"%>		
+	</header>
+	<div class="side" id="left">
+		<%@ include file="leftside.jsp"%>
+	</div>
+	<div class="side" id="right">
+		<%@ include file="rightside.jsp"%>
+	</div>			
+	<div id="content">
+		<div id="contents">
+			<table>
+				<tr>
+ 			  		<th>번호</th>
+			  	    <th>제목</th>
+  				    <th>사진</th>
+  				    <th>글쓴이</th>
+  				    <th>날짜</th>
+  				    <th>읽음</th>
+  			 	    <th>판매</th>
+ 				</tr>
+ 				<c:forEach items="${list}" var="row">
+			  	<tr>
+   	     			<td>${row.jno}</td>
+   	     			<td><a href="./jdetail?page=${page}&no=${row.jno}">${row.jtitle}</a></td>            
+         			<td><img src="data:image/jpeg;base64,${row.jimg}" width="100" height="100" alt="사진 없음"></td>
+  	     			<td>${row.jwrite}</td>
+    	 			<td>${row.jdate}</td>
+        			<td>${row.jcount}</td>
+         	 		<td>${row.jsell}</td>
+			    </tr>
+  		 		</c:forEach>
+			</table>
 
-<table>
-    <tr>
-        <th>번호</th>
-        <th>제목</th>
-        <th>사진</th>
-        <th>글쓴이</th>
-        <th>날짜</th>
-        <th>읽음</th>
-        <th>판매</th>
-    </tr>
-    <c:forEach items="${list}" var="row">
-        <tr>
-            <td>${row.jno}</td>
-            <td><a href="./jdetail?page=${page}&no=${row.jno}">${row.jtitle}</a></td>            
-             <td><img src="data:image/jpeg;base64,${row.jimg}" width="100" height="100" alt="사진 없음"></td>
-            <td>${row.jwrite}</td>
-            <td>${row.jdate}</td>
-            <td>${row.jcount}</td>
-            <td>${row.jsell}</td>
-        </tr>
-    </c:forEach>
-</table>
+			<c:set var="totalPage" value="${totalCount / 10 }" />
+			<fmt:parseNumber integerOnly="true" value="${totalPage }" var="totalPage" />
+			<c:if test="${totalCount % 10 gt 0 }">
+			    <c:set var="totalPage" value="${totalPage + 1 }" />
+			</c:if>
+			<c:set var="startPage" value="1" />
+			<c:if test="${page gt 5 }">
+    			<c:set var="startPage" value="${page - 5 }" />
+			</c:if>
+			<c:set var="endPage" value="${startPage + 9 }" />
+			<c:if test="${endPage gt totalPage }">
+    		<c:set var="endPage" value="${totalPage }" />
+			</c:if>
 
-<c:set var="totalPage" value="${totalCount / 10 }" />
-<fmt:parseNumber integerOnly="true" value="${totalPage }"
-    var="totalPage" />
-<c:if test="${totalCount % 10 gt 0 }">
-    <c:set var="totalPage" value="${totalPage + 1 }" />
-</c:if>
-<c:set var="startPage" value="1" />
-<c:if test="${page gt 5 }">
-    <c:set var="startPage" value="${page - 5 }" />
-</c:if>
-<c:set var="endPage" value="${startPage + 9 }" />
-<c:if test="${endPage gt totalPage }">
-    <c:set var="endPage" value="${totalPage }" />
-</c:if>
-
-<div class="paging">
-    <button onclick="paging(1)">⏮️</button>
-    <button <c:if test="${page - 10 lt 1 }">disabled="disabled"</c:if>
-        onclick="paging(${page - 10 })">◀️</button>
-    <c:forEach begin="${startPage }" end="${endPage }" var="p">
-        <button <c:if test="${page eq p }">class="currentBtn"</c:if>
+			<div class="paging">
+		    <button onclick="paging(1)">⏮️</button>
+	 	    <button <c:if test="${page - 10 lt 1 }">disabled="disabled"</c:if>
+	 	    onclick="paging(${page - 10 })">◀️</button>
+    		<c:forEach begin="${startPage }" end="${endPage }" var="p">
+        	<button <c:if test="${page eq p }">class="currentBtn"</c:if>
             onclick="paging(${p })">${p }</button>
-    </c:forEach>
-    <button
-        <c:if test="${page + 10 gt totalPage }">disabled="disabled"</c:if>
-        onclick="paging(${page + 10 })">▶️</button>
-    <button onclick="paging(${totalPage })">⏭️</button>
+    		</c:forEach>
+    		<button <c:if test="${page + 10 gt totalPage }">disabled="disabled"</c:if>
+        		onclick="paging(${page + 10 })">▶️</button>
+    		<button onclick="paging(${totalPage })">⏭️</button>
+			</div>
+			<button class="writeButton" onclick="window.location.href='./jwrite'">글쓰기</button>
+		</div>
+	</div>
+<footer>
+	<%@ include file="footer.jsp"%>
+</footer>
 </div>
-
-<button class="writeButton" onclick="window.location.href='./jwrite'">글쓰기</button>
-
 </body>
 </html>
