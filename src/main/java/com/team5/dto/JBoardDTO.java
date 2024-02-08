@@ -4,6 +4,7 @@ public class JBoardDTO {
 	
 	private int jno, jcount, jcomment, jdel;
 	private String jtitle, jcontent, jwrite, jdate, jmid, jip, jsell;
+	String jimg;
 	public int getJno() {
 		return jno;
 	}
@@ -69,6 +70,12 @@ public class JBoardDTO {
 	}
 	public void setJsell(String jsell) {
 		this.jsell = jsell;
+	}
+	public String getJimg() {
+		return jimg;
+	}
+	public void setJimg(String base64EncodedImage) {
+		this.jimg = base64EncodedImage;
 	}
 
 }

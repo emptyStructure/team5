@@ -74,8 +74,13 @@ public class Util {
 
 	// HTML태그를 특수기호로 변경하기 < &lt > &gt
 	public static String removeTag(String str) {
-		str = str.replaceAll("<", "&lt");
-		str = str.replaceAll(">", "&gt");
+//		str = str.replaceAll("<", "");
+//		str = str.replaceAll(">", "");
+		 str = str.replaceAll("<p>", "");
+		    str = str.replaceAll("</p>", "");
+		    
+		    // <br> 태그 제거
+		    str = str.replaceAll("<br>", "");
 		return str;
 	}
 

@@ -18,7 +18,7 @@ public class JCommentDAO extends AbstractDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		//String sql = "SELECT * FROM comment WHERE board_no=?";
-		String sql = "SELECT * FROM jcommentview WHERE jno=?";
+		String sql = "SELECT * FROM jcommentview WHERE jno=? and jcdel ='1'";
 		
 //		CREATE VIEW commentview as
 //		SELECT c.cno, c.board_no, c.ccomment,
@@ -91,6 +91,68 @@ public class JCommentDAO extends AbstractDAO {
 		}
 			
 		// TODO Auto-generated method stub
+		return result;
+	}
+
+
+
+
+
+
+
+
+	public int commentDelete(JCommentDTO dto) {
+		// TODO Auto-generated method stub
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE jcomment SET jcdel= '0' "
+				+"WHERE jcno=? AND mno = (SELECT mno FROM member WHERE mid = ?)";
+		
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getJcno());
+			pstmt.setString(2, dto.getJcmid());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(null,pstmt,con);
+		}
+	
+		return result;
+	}
+
+
+
+
+
+
+
+
+	public int commentUpdate(JCommentDTO dto) {
+		// TODO Auto-generated method stub
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		String sql ="UPDATE jcomment SET jccontent=? "
+				+"WHERE jcno=? AND mno=(SELECT mno FROM member WHERE mid=?)";
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getJccontent());
+			pstmt.setInt(2, dto.getJcno());
+			pstmt.setString(3, dto.getJcmid());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(null,pstmt,con);
+		}
+		
 		return result;
 	}
 	

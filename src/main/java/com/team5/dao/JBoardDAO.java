@@ -20,7 +20,7 @@ public class JBoardDAO extends AbstractDAO {
 		Connection con = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql ="SELECT j.jno, j.jtitle, j.jwrite, j.jdate, "
+		String sql ="SELECT j.jno, j.jtitle, j.jwrite, j.jdate, j.jimg, "
 				+ "    IFNULL(vc.visit_count, 0) AS jcount, "
 				+ "    j.jsell "
 				+ "FROM joonggo j "
@@ -60,6 +60,7 @@ public class JBoardDAO extends AbstractDAO {
 				JBoardDTO e = new JBoardDTO();
 				e.setJno(rs.getInt("jno"));
 				e.setJtitle(rs.getString("jtitle"));
+				e.setJimg(rs.getString("jimg"));
 				e.setJwrite(rs.getString("jwrite"));
 				e.setJdate(rs.getString("jdate"));
 				e.setJcount(rs.getInt("jcount"));
@@ -144,17 +145,18 @@ public int jwrite(JBoardDTO dto) {
 	
 	Connection con = db.getConnection();
 	PreparedStatement pstmt = null; 
-	String sql = "INSERT INTO joonggo( jtitle, jcontent, mno, jwrite, jip)"
-			+"VALUES(?,?,(SELECT mno FROM member WHERE mid=?),(SELECT mid FROM member WHERE mid=?) ,?)";
+	String sql = "INSERT INTO joonggo( jtitle, jcontent,jimg,  mno, jwrite, jip)"
+			+"VALUES(?,?,?,(SELECT mno FROM member WHERE mid=?),(SELECT mid FROM member WHERE mid=?) ,?)";
 	// TODO Auto-generated method stub
 	
 	try {
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, dto.getJtitle());
 		pstmt.setString(2, dto.getJcontent());
-		pstmt.setString(3, dto.getJmid());
+		pstmt.setString(3, dto.getJimg());
 		pstmt.setString(4, dto.getJmid());
-		pstmt.setString(5, dto.getJip());
+		pstmt.setString(5, dto.getJmid());
+		pstmt.setString(6, dto.getJip());
 		
 		result = pstmt.executeUpdate();
 	} catch (SQLException e) {
