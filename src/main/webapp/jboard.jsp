@@ -82,6 +82,10 @@
     button.writeButton:hover {
         background-color: #005f7b;
     }
+    
+    .sold-out {
+        filter: blur(2px); /* 흐리게 처리하는 CSS 스타일 */
+    }
 </style>
 
 <script type="text/javascript">
@@ -89,6 +93,8 @@
 			location.href="./jboard?page="+no;
 		}	
 	</script>
+	
+	
 
 </head>
 <body>
@@ -115,7 +121,7 @@
   			 	    <th>판매</th>
  				</tr>
  				<c:forEach items="${list}" var="row">
-			  	<tr>
+			  	<tr class="${row.jsell == 0 ? 'sold-out' : ''}">
    	     			<td>${row.jno}</td>
    	     			<td><a href="./jdetail?page=${page}&no=${row.jno}">${row.jtitle}</a></td>            
          			<td><img src="data:image/jpeg;base64,${row.jimg}" width="100" height="100" alt="사진 없음"></td>
@@ -158,6 +164,18 @@
 	</div>
 <footer>
 	<%@ include file="footer.jsp"%>
+	
+	<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var rows = document.querySelectorAll('tr');
+        rows.forEach(function(row) {
+            var sellStatus = row.querySelector('td:nth-child(7)').textContent.trim();
+            if (sellStatus === '판매 완료') {
+                row.classList.add('sold-out');
+            }
+        });
+    });
+</script>
 </footer>
 </div>
 </body>
