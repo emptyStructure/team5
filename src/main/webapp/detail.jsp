@@ -229,11 +229,9 @@ function del(){var ch = confirm("글을 삭제하시겠습니까?");if(ch){locat
 			</div>
 		</div>
 		</div>
-		<footer>
+	<footer>
 		<%@ include file="footer.jsp"%>
 	</footer>
-		<c:import url="footer.jsp"/>
-		</footer>
 	</div>
 </body>
 </html>

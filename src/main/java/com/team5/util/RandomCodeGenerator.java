@@ -3,10 +3,10 @@ package com.team5.util;
 import java.util.Random;
 
 public class RandomCodeGenerator {
-	public static void main(String[] args) {
-		String code = RandomCodeGenerator.randomCode();
-		MailApp.gmailSend("kgb4232@naver.com", code);
-	}
+//	public static void main(String[] args) {
+//		String code = RandomCodeGenerator.randomCode();
+//		MailApp.gmailSend("kgb4232@naver.com", code);
+//	}
 	
     public static String randomCode() {
     	String result = "";
