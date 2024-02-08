@@ -132,4 +132,30 @@ public class MemberDAO extends AbstractDAO{
 		return list;
 	}
 
+	public List<MemberDTO> checkIdEmail(MemberDTO dto) {
+		List<MemberDTO> list = new ArrayList<>(); 
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT mname, mpw, mid FROM member WHERE mid=? AND memail=? ";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getMid());
+			pstmt.setString(2, dto.getMemail());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				dto.setMname(rs.getString("mname"));
+				dto.setMpw(rs.getString("mpw"));
+				dto.setMid(rs.getString("mid"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, con);
+		}
+		return list;
+	}
+
 }
