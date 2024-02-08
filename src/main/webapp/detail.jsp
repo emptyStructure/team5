@@ -7,11 +7,11 @@
 <meta charset="UTF-8">
 <title>상세사항</title>
 <link href="./css/index.css" rel="stylesheet" />
-<link href="./css/menu.css" rel="stylesheet" />
+<link href="./css/header.css" rel="stylesheet" />
 <link href="./css/detail.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/header.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
 	integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -141,8 +141,15 @@ function del(){var ch = confirm("글을 삭제하시겠습니까?");if(ch){locat
 <body>
 	<div class="container">
 		<header>
-			<%@ include file="menu.jsp"%>
+			<%@ include file="header.jsp"%>
 		</header>
+		<div class="side" id="left">
+			<%@ include file="leftside.jsp"%>
+		</div>
+		<div class="side" id="right">
+			<%@ include file="rightside.jsp"%>
+		</div>
+		<div id="content">
 		<div class="main">
 			<div class="mainStyle">
 				<article>
@@ -187,11 +194,10 @@ function del(){var ch = confirm("글을 삭제하시겠습니까?");if(ch){locat
 					    </div>
 					    </c:forEach>
 					</div>
-					
-
 					<button onclick="url('./board?page=${param.page}')">게시판으로</button>
 				</article>
 			</div>
+		</div>
 		</div>
 		<footer>
 		<c:import url="footer.jsp"/>
