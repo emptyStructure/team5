@@ -84,10 +84,13 @@
 
 		</div>
 	</div>
+	<footer>
+		<c:import url="footer.jsp"/>
+	</footer>
 	</div>
 	<script type="text/javascript">
-		function paging(no) {
-			location.href = "./board?page=" + no;
+		function paging(bno) {
+			location.href = "./board?page=" + bno;
 		}
 	</script>
 
