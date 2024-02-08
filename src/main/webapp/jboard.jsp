@@ -21,6 +21,9 @@
 	padding: 10px;
 	
 }
+.main{
+	padding: 20px;
+}
 
     table {
         width: 100%;
@@ -103,7 +106,7 @@
 		<%@ include file="rightside.jsp"%>
 	</div>			
 	<div id="content">
-		<div id="contents">
+		<div class="main">
 			<table>
 				<tr>
  			  		<th>번호</th>
