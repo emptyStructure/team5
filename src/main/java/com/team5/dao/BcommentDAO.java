@@ -64,7 +64,6 @@ public class BcommentDAO extends AbstractDAO {
 			pstmt.setInt(1, dto.getCno());
 			pstmt.setString(2, dto.getMid());
 			result = pstmt.executeUpdate();
-			System.out.println("result :" + result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

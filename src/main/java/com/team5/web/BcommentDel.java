@@ -50,8 +50,6 @@ public class BcommentDel extends HttpServlet {
 			BcommentDTO dto = new BcommentDTO();
 			dto.setMid((String)session.getAttribute("mid"));
 			dto.setCno(Util.str2Int(request.getParameter("cno")));
-			System.out.println(dto.getCno());
-			System.out.println(dto.getMid());
 			
 			BcommentDAO dao = new BcommentDAO();
 			result = dao.bcommentDel(dto);

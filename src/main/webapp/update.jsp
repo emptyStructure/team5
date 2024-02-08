@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>글수정하기</title>
 <link href="./css/index.css" rel="stylesheet"/>
+<link href="./css/header.css" rel="stylesheet" />
 <link href="./css/menu.css" rel="stylesheet"/>
 <script type="text/javascript" src="./js/menu.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -17,6 +18,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script type="text/javascript" src="./js/header.js"></script>
 <style type="text/css">
 #title{
 	width: 100%;
@@ -28,7 +30,7 @@
 <body>
 	<div class="container1">
 		<header>
-			<%@ include file="menu.jsp"%>
+			<%@ include file="header.jsp"%>
 		</header>
 		<div class="main">
 			<div class="mainStyle">
@@ -46,8 +48,8 @@
 			</div>
 		</div>
 		<footer>
-		<c:import url="footer.jsp"/>
-		</footer>
+		<%@ include file="footer.jsp"%>
+	    </footer>
 	</div>
 	<script>
     $(document).ready(function() {

@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <link href="./css/index.css" rel="stylesheet" />
+<link href="./css/menu.css" rel="stylesheet" />
 <link href="./css/header.css" rel="stylesheet" />
 <link href="./css/board.css" rel="stylesheet" />
 <script type="text/javascript" src="./js/header.js"></script>
@@ -95,8 +96,8 @@
 	</footer>
 	</div>
 	<script type="text/javascript">
-		function paging(bno) {
-			location.href = "./board?page=" + bno;
+		function paging(no) {
+			location.href = "./board?page="+no;
 		}
 	</script>
 </body>
