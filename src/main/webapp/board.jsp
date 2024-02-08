@@ -9,15 +9,21 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <link href="./css/index.css" rel="stylesheet" />
-<link href="./css/menu.css" rel="stylesheet" />
+<link href="./css/header.css" rel="stylesheet" />
 <link href="./css/board.css" rel="stylesheet" />
-<script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/header.js"></script>
 </head>
 <body>
 	<div class="container">
 		<header>
-			<%@ include file="menu.jsp"%>
+			<%@ include file="header.jsp"%>
 		</header>
+		<div class="side" id="left">
+			<%@ include file="leftside.jsp"%>
+		</div>
+		<div class="side" id="right">
+			<%@ include file="rightside.jsp"%>
+		</div>	
 		<div class="main">
 			<div class="mainStyle">
 				<article>
@@ -84,13 +90,14 @@
 
 		</div>
 	</div>
+	<footer>
+		<%@ include file="footer.jsp"%>
+	</footer>	
 	</div>
 	<script type="text/javascript">
 		function paging(no) {
 			location.href = "./board?page=" + no;
 		}
 	</script>
-
-
 </body>
 </html>
