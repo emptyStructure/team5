@@ -51,7 +51,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="conteiner">
+	<div id="container">
 		<header>
 			<%@ include file="header.jsp"%>		
 		</header>
