@@ -1,6 +1,7 @@
 package com.team5.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.team5.dao.BoardDAO;
+import com.team5.dto.BcommentDTO;
 import com.team5.dto.BoardDTO;
 import com.team5.util.Util;
 
@@ -40,6 +42,13 @@ public class Detail extends HttpServlet {
 			response.sendRedirect("./error.jsp");
 		} else {
 			request.setAttribute("detail", dto);
+			
+			List<BcommentDTO> bcommentList = dao.bcommentList(bno);
+			
+			if(bcommentList.size() > 0) {
+				request.setAttribute("bcommentList", bcommentList);
+			}
+			
 		
 		RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");
 		rd.forward(request, response);

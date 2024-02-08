@@ -1,12 +1,15 @@
 package com.team5.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.team5.util.Util;
+import com.team5.dto.BcommentDTO;
 import com.team5.dto.BoardDTO;
 
 public class BoardDAO extends AbstractDAO {
@@ -214,5 +217,37 @@ public class BoardDAO extends AbstractDAO {
 		} finally {
 			close (null, pstmt, con);
 		}
+	}
+
+	public List<BcommentDTO> bcommentList(int bno) {
+		Connection con = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM bcommentview WHERE bno=? and cdel='1'";
+		List<BcommentDTO> list = new ArrayList<BcommentDTO>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BcommentDTO dto = new BcommentDTO();
+				dto.setCno(rs.getInt("cno"));
+				dto.setBno(rs.getInt("bno"));
+				dto.setMno(rs.getInt("mno"));
+				dto.setCcontent(rs.getString("ccontent"));
+				dto.setCdate(rs.getString("cdate"));
+				dto.setMid(rs.getString("mid"));
+				dto.setMname(rs.getString("mname"));
+				dto.setCip(Util.ipMasking(rs.getString("cip")));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close (rs, pstmt, con);
+		}
+		return list;
 	}
 }

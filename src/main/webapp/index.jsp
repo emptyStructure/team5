@@ -22,8 +22,8 @@ $(function(){
 		var titleE = thistitle.html();
 		var start = titleE.indexOf(">");
 		var end = titleE.indexOf("<", 2);
- 		if(titleC.length > 13) {
-			var shortTitle = titleE.substr(0, start + 1) + titleC.substr(0, 12) + "..." + titleE.substr(end);
+ 		if(titleC.length > 12) {
+			var shortTitle = titleE.substr(0, start + 1) + titleC.substr(0, 10) + "..." + titleE.substr(end);
 			thistitle.html(shortTitle);
 		}
 	})
