@@ -72,6 +72,13 @@
         background-color: #005f7b;
     }
 </style>
+
+<script type="text/javascript">
+		function paging(no){
+			location.href="./jboard?page="+no;
+		}	
+	</script>
+
 </head>
 <body>
 
@@ -79,6 +86,7 @@
     <tr>
         <th>번호</th>
         <th>제목</th>
+        <th>사진</th>
         <th>글쓴이</th>
         <th>날짜</th>
         <th>읽음</th>
@@ -87,7 +95,8 @@
     <c:forEach items="${list}" var="row">
         <tr>
             <td>${row.jno}</td>
-            <td><a href="./jdetail?page=${page}&no=${row.jno}">${row.jtitle}</a></td>
+            <td><a href="./jdetail?page=${page}&no=${row.jno}">${row.jtitle}</a></td>            
+             <td><img src="data:image/jpeg;base64,${row.jimg}" width="100" height="100" alt="사진 없음"></td>
             <td>${row.jwrite}</td>
             <td>${row.jdate}</td>
             <td>${row.jcount}</td>
