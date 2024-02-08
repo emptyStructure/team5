@@ -52,7 +52,7 @@ $(document).ready(function(){
 		<div class="main">
 			<div class="mainStyle">
 				<article>
-					<h1>글 작성</h1>
+					<h1>모임 글 작성</h1>
 					<div class="board">
 						<form action="./somoimWrite" method="post" id="somoim">
 							<div class="title">
