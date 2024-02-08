@@ -129,8 +129,8 @@ button[type="submit"]:hover {
         
         <div class="password">
         	<label for="password">비밀번호:</label>
-       		<input type="password" id="pw1" name="pw1" class="inputPw1" placeholder="비밀번호" required>
-        	<i class="xi-eye-off-o"></i>
+       		<input type="password" id="pw1" name="pw1" class="inputPw1" placeholder="비밀번호 " required>
+       		<i class="xi-eye-off-o"></i>
     	</div>
     	
         <div class="password2">

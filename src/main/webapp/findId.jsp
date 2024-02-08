@@ -50,14 +50,15 @@ $(function (){
 			<h2>아이디 찾기</h2><br>
 			<div id="infoContents">
 				<form method="post">
-					<label class="name">이름으로 찾기</label>
+					<button type="button"><p class="name">이름으로 찾기</p></button> 
 					<div class="namefinder">
+					<br>
 						<label class="name">이름</label>
 	    				<input type="text" id="namefinder" name="namefinder" placeholder="이름을 입력해주세요">
 	    				<button type="submit" formaction="./findIdName">아이디 확인하기</button>
     				</div>
     				<br><br><br>
-    				<label class="email">이메일로 찾기</label>
+    				<button type="button"><p class="email">이메일로 찾기</p></button>
     				<div class="emailfinder">
 						<label>이메일</label>
     					<input type="email" id="emailfinder" name="emailfinder" placeholder="이메일을 @를 포함해서 입력해주세요" >
