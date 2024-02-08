@@ -16,7 +16,6 @@ $(function(){
 	
 	let urlParams = new URLSearchParams(window.location.search);
     let personalChat = urlParams.get('toMno');
-    
     $(".personalChatBtn").click(function(){
 		let personalChat = $(this).val();
 
@@ -41,8 +40,9 @@ $(function(){
 	    	data : {'mscontent' : chatting, 'toMno' : personalChat},
 	    	success : function(result) {
 	    		if (result == 1) {
-	    		location.reload();
+	    		//location.reload();
 				$("#chatting").val('');
+				$("#chatting").focus();
 	    		} else if (result == 0) {
 					alert("로그인 해주세요.");	    			
 	    		}
@@ -72,11 +72,12 @@ $(function(){
 		  
 		  
 });
-
+</script>
+<script type="text/javascript">
 $(document).ready(function() {
   
-  
-
+  //말풍선 길이 변경
+  adjustBackgroundLength();
   //테마 변경
   
   $("#themeBtn").click(function() {
@@ -123,6 +124,39 @@ $(document).ready(function() {
       }
   });
   
+	   //추가 1
+	   updatePersonalChat();
+	   
+	   //추가2
+	   setInterval(updatePersonalChat, 1000);
+	   
+   $('#mscontent').on('scroll', function() {
+    const chatContainer = document.getElementById("mscontent");
+    autoScroll = chatContainer.scrollHeight - chatContainer.clientHeight <= chatContainer.scrollTop + 1;
+  });
+   //추가3
+    function updatePersonalChat() {
+	  let urlParams = new URLSearchParams(window.location.search);
+  	  let personalChat = urlParams.get('toMno');
+	  const chatContainer = document.getElementById("mscontent");
+  	  $.ajax({
+		  url: './updatePersonalChat',
+	  	  type: 'get',
+	  	  dataType: 'html',
+	  	  data : {'toMno' : personalChat},
+	  	  success: function(result) {
+	  		  $("#mscontent").html(result);
+	  		  adjustBackgroundLength();
+	  		  
+	  		if(autoScroll || isScrolledToBottom) {
+		  		  chatContainer.scrollTop = chatContainer.scrollHeight;
+				  }
+	  	  },
+	  	  error: function(error) {
+	  	  }
+	  });
+  }
+   
   $("#chatting").on("input", function() {
     adjustBackgroundLength();
   });
@@ -138,48 +172,7 @@ $(document).ready(function() {
       $(this).css("width", dynamicWidth + "%");
     });
   }
-   $('#mscontent').on('scroll', function() {
-    const chatContainer = document.getElementById("mscontent");
-    autoScroll = chatContainer.scrollHeight - chatContainer.clientHeight <= chatContainer.scrollTop + 1;
-  });
-	 //말풍선 길이 변경
-	   adjustBackgroundLength();
-	   //추가 1
-	   updatePersonalChat();
-	   
-	   //추가2
-	   setInterval(updatePersonalChat, 1000);
 });
-	   
-  //추가3
-    function updatePersonalChat() {
-	  let urlParams = new URLSearchParams(window.location.search);
-  	  let personalChat = urlParams.get('toMno');
-	  
-  	  $.ajax({
-		  url: './updatePersonalChat',
-	  	  type: 'get',
-	  	  dataType: 'html',
-	  	  data : {'toMno' : personalChat},
-	  	  success: function(result) {
-	  		  $("#mscontent").html(result);
-	  		  adjustBackgroundLength();
-	  		  
-			  if(autoScroll || isScrolledToBottom) {
-	  		  chatContainer.scrollTop = chatContainer.scrollHeight;
-			  }
-			
-	  	  },
-	  	  error: function(error) {
-	  		  alert("에러");
-	  	  }
-	  });
-  }
-  
- 
-  
-  
-  
 function saveThemePreference(theme) {
 	localStorage.setItem('themePreference', theme);
 }
@@ -207,7 +200,7 @@ function loadThemePreference() {
 }
 .user {
 	overflow-y: auto;
-	height: 25vh;
+	height: 70.7vh;
 }
  #chatting {
  	width: 80%;
@@ -256,10 +249,10 @@ function loadThemePreference() {
 				<%@ include file="header.jsp"%>
 		</header>
 		<div class="side" id="left">
-			<%@ include file="leftside.jsp"%>
 				<h2>참가자</h2>
 			<div class="user">
-				<p><i class="xi-user"></i> 전체채팅 <button onclick="url('./chatting')">채팅</button></p>
+				<p><i class="xi-user"></i> 중호호 AI <button onclick="url('https://chat.openai.com/')">채팅</button></p>
+				<p><i class="xi-user"></i> 전체 채팅 <button onclick="url('./chatting')">채팅</button></p>
 				<c:forEach var="user" items="${userlist }">
 				<p><i class="xi-user"></i> ${user.mname } <button class="personalChatBtn" value="${user.mno }">채팅</button></p>
 				</c:forEach>
@@ -285,9 +278,6 @@ function loadThemePreference() {
 				</div>
 			</article>
 		</div>
-		<footer>
-		<%@ include file="footer.jsp"%>
-	</footer>
 		</div>
 </body>
 </html>

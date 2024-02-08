@@ -195,7 +195,8 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 				+ "if(date_format(sendDate, '%Y-%m-%d') = date_format(current_timestamp(), '%Y-%m-%d'), "
 				+ "date_format(sendDate, '%H:%i'), date_format(sendDate, '%m-%d')) AS sendDate "
 				+ "FROM message ms JOIN member m ON ms.fromMno=m.mno "
-				+ "WHERE ms.toMno IS NULL";
+				+ "WHERE ms.toMno IS NULL "
+				+ "ORDER BY date_format(sendDate, '%Y-%m-%d %H:%i:%s')";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -272,7 +273,7 @@ List<MessageDTO> list = new ArrayList<MessageDTO>();
 				+ "date_format(sendDate, '%H:%i'), date_format(sendDate, '%m-%d')) AS sendDate "
 				+ "FROM message JOIN member ON message.fromMno = member.mno "
 				+ "WHERE (toMno = ? AND fromMno = ?) OR (toMno = ? AND fromMno = ?) "
-				+ "ORDER BY sendDate";
+				+ "ORDER BY date_format(sendDate, '%Y-%m-%d %H:%i:%s')";
 		
 		try {
 			pstmt = con.prepareStatement(sql);

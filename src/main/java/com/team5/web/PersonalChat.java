@@ -35,7 +35,6 @@ public class PersonalChat extends HttpServlet {
 		List<MessageDTO> userlist = dao.userList();
 		request.setAttribute("userlist", userlist);
 		
-		System.out.println("실행전 결과값: " + result);
 		if (mid != null && fromMno > 0) {
 			MessageDTO dto = new MessageDTO();
 			dto.setFromMno(fromMno);
@@ -43,8 +42,6 @@ public class PersonalChat extends HttpServlet {
 			List<MessageDTO> personalchatlist = dao.personalChatList(dto);
 			request.setAttribute("personalchatlist", personalchatlist);
 			result = 1;
-			System.out.println("실행후 결과값: " + result);
-			System.out.println(personalchatlist);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("personalchat.jsp");
 			dispatcher.forward(request, response);
