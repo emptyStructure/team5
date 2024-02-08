@@ -40,7 +40,7 @@
 		}
 	}
 	
-	 function removeUnnecessaryTags(content) {
+	/*  function removeUnnecessaryTags(content) {
 	        // <p> 태그 제거
 	        content = content.replace(/<p>/gi, '');
 	        content = content.replace(/<\/p>/gi, '');
@@ -80,7 +80,7 @@
     // 페이지 로드 후 extractImages 함수 호출
     window.onload = function() {
         extractImages();
-    };
+    }; */
 	 
 	$(document)
 			.ready(
