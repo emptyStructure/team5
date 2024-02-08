@@ -292,8 +292,8 @@
 									<div class="cname">${co.jcmname }님<c:if
 											test="${sessionScope.mname ne null && co.jcmid eq sessionScope.mid }">
 											<input type="hidden" class="cno" value="${co.jcno }">
-											<img alt="삭제" src="./img/delete.png" class="commentDelete">
-											<img alt="수정" src="./img/edit.png" class="commentEdit">
+											  <button class="bcommentEdit">수정</button>
+						              		  <button class="bcommentDel">삭제</button>
 										</c:if>
 									</div>
 									<div class="cdate">${co.jcip}/${co.jcdate }</div>
