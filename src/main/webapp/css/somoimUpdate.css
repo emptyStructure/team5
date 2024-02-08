@@ -1,0 +1,17 @@
+@charset "UTF-8";
+#title{
+	width: 60%;
+	height: 30px;
+	margin-bottom: 10px;
+}
+.title{
+	width: 100%;
+}
+.board{
+	width: 100%;
+}
+.cate, .per{
+	width: 50%;
+	float: left;
+	margin-bottom: 5px;
+}

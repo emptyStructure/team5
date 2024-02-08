@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>소모임 글 작성</title>
-<link href="./css/somoimWrite.css" rel="stylesheet" />
+<link href="./css/somoimUpdate.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -20,10 +20,10 @@ $(document).ready(function(){
 	$('#textLengthCheck').text("( "+length+" / 20글자 )");
 	
 	$("#title").keyup(function(){
+		let length = $("#title").val().length;
 		$('#textLengthCheck').text("( "+length+" / 20글자 )");
 		$('#textLengthCheck').css("color","black");
 		if(length>20){
-			$('#textLengthCheck').text("( "+length+" / 20글자 ) 20글자까지만 입력 가능합니다.");
 			$('#textLengthCheck').css("color","red");
 		}
 	});
@@ -43,6 +43,13 @@ $(document).ready(function(){
 			}
 		}
 	});
+	
+	$('.addrSearch').click(function(){
+		var url = "./searchAddr";
+        var name = "addr";
+        var option = "width = 300, height = 500, top = 100, left = 200, location = no";
+		window.open(url, name, option);
+	});
 });
 </script>
 </head>
@@ -54,27 +61,37 @@ $(document).ready(function(){
 					<h1>글 작성</h1>
 					<div>
 						<form action="./somoimUpdate" method="post" id="somoim">
-							<input type="text" id="title" name="title" placeholder="입력" value="${detail.stitle }">
-							카테고리 : 
-							<input type="hidden" name="sno" value="${detail.sno }">
-							<select class="category" name="category">
-								<option <c:if test="${detail.scategory eq '식사'}">selected="selected"</c:if>
-								>식사</option>
-								<option <c:if test="${detail.scategory eq '게임'}">selected="selected"</c:if>
-								> 게임</option>
-								<option <c:if test="${detail.scategory eq '공부'}">selected="selected"</c:if>
-								>공부</option>
-								<option <c:if test="${detail.scategory eq '유흥'}">selected="selected"</c:if>
-								>유흥</option>
-							</select>
-							 정원 :
-							<select class="personnel" name="personnel">
-								<c:forEach var="i" begin="1" end="20">
-								<option <c:if test="${i eq detail.personnel }">selected="selected"</c:if>
-								 value="${i }">${i }명</option>
-								</c:forEach>
-							</select>
-							<span id="textLengthCheck">( 0 / 20글자 )</span>
+							<div class="title">
+							제목 : <input type="text" id="title" name="title" placeholder="입력" value="${detail.stitle }">
+							<span id="textLengthCheck"> ( 0 / 20글자 )</span>
+							</div>
+							<div class="cate">
+								카테고리 : 
+								<input type="hidden" name="sno" value="${detail.sno }">
+								<select class="category" name="category">
+									<option <c:if test="${detail.scategory eq '식사'}">selected="selected"</c:if>
+									>식사</option>
+									<option <c:if test="${detail.scategory eq '게임'}">selected="selected"</c:if>
+									> 게임</option>
+									<option <c:if test="${detail.scategory eq '공부'}">selected="selected"</c:if>
+									>공부</option>
+									<option <c:if test="${detail.scategory eq '유흥'}">selected="selected"</c:if>
+									>유흥</option>
+								</select>
+							</div>
+							<div class="per">
+								 정원 :
+								<select class="personnel" name="personnel">
+									<c:forEach var="i" begin="1" end="20">
+									<option <c:if test="${i eq detail.personnel }">selected="selected"</c:if>
+									 value="${i }">${i }명</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="addr">
+								주소 : <input type="text" id="address" name="address" placeholder="주소">
+							<button type="button" class="addrSearch">주소 검색</button>
+							</div>
 							<textarea id="summernote" name="content">${detail.scontent }</textarea>
 							<button type="button" id="done">작성하기</button>
 						</form>
@@ -86,7 +103,7 @@ $(document).ready(function(){
 	<script>
 		$(document).ready(function() {
 			$('#summernote').summernote({
-				height : 405
+				height : 380
 			});
 		});
 	</script>

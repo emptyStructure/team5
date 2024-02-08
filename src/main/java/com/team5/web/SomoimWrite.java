@@ -44,6 +44,7 @@ public class SomoimWrite extends HttpServlet {
 			dto.setStitle(request.getParameter("title"));
 			dto.setScontent(request.getParameter("content"));
 			dto.setScategory(request.getParameter("category"));
+			dto.setAddress(request.getParameter("address"));
 			dto.setPersonnel(Util.str2Int2(request.getParameter("personnel")));
 			int result = dao.write(dto, (String)session.getAttribute("mid"), (String)session.getAttribute("mname"));
 			if(result == 1) {

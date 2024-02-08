@@ -22,7 +22,6 @@ $(document).ready(function(){
 		$('#textLengthCheck').text("( "+length+" / 20글자 )");
 		$('#textLengthCheck').css("color","black");
 		if(length>20){
-			$('#textLengthCheck').text("( "+length+" / 20글자 ) 20글자까지만 입력 가능합니다.");
 			$('#textLengthCheck').css("color","red");
 		}
 	});
@@ -37,6 +36,14 @@ $(document).ready(function(){
 			$('#somoim').submit();
 		}
 	});
+	
+	$('.addrSearch').click(function(){
+		var url = "./searchAddr";
+        var name = "addr";
+        var option = "width = 300, height = 500, top = 100, left = 200, location = no";
+		window.open(url, name, option);
+	});
+	
 });
 </script>
 </head>
@@ -46,9 +53,13 @@ $(document).ready(function(){
 			<div class="mainStyle">
 				<article>
 					<h1>글 작성</h1>
-					<div>
+					<div class="board">
 						<form action="./somoimWrite" method="post" id="somoim">
-							<input type="text" id="title" name="title" placeholder="입력">
+							<div class="title">
+							제목 : <input type="text" id="title" name="title" placeholder="입력">
+							<span id="textLengthCheck"> ( 0 / 20글자 )</span>
+							</div>
+							<div class="cate">
 							카테고리 : 
 							<select class="category" name="category">
 								<option>식사</option>
@@ -56,13 +67,19 @@ $(document).ready(function(){
 								<option>공부</option>
 								<option>유흥</option>
 							</select>
+							</div>
+							<div class="per">
 							 정원 : 
 							<select class="personnel" name="personnel">
 								<c:forEach var="i" begin="1" end="20">
 								<option>${i }명</option>
 								</c:forEach>
 							</select>
-							<span id="textLengthCheck">( 0 / 20글자 )</span>
+							</div>
+							<div class="addr">
+								주소 : <input type="text" id="address" name="address" placeholder="주소">
+							<button type="button" class="addrSearch">주소 검색</button>
+							</div>
 							<textarea id="summernote" name="content"></textarea>
 							<button type="button" id="done">작성하기</button>
 						</form>

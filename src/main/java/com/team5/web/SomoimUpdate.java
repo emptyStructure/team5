@@ -53,6 +53,7 @@ public class SomoimUpdate extends HttpServlet {
 			dto.setStitle(request.getParameter("title"));
 			dto.setScontent(request.getParameter("content"));
 			dto.setScategory(request.getParameter("category"));
+			dto.setAddress(request.getParameter("address"));
 			dto.setSno(Util.str2Int2(request.getParameter("sno")));
 			dto.setPersonnel(Util.str2Int2(request.getParameter("personnel")));
 			

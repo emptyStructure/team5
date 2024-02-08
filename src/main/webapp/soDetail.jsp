@@ -110,6 +110,15 @@ $(document).ready(function(){
 				url('./somoimUpdate?sno=${detail.sno}');
 			}
 		});
+		
+		$(".addr").click(function(){
+			if(${detail.address eq ""}){
+				alert("주소 정보가 존재하지 않는 글입니다.");
+			} else {
+				url('https://map.naver.com/p/search/${detail.address}');
+			}
+		});
+		
 });
 </script> 
 </head>
@@ -171,6 +180,7 @@ $(document).ready(function(){
 						</c:if>
 					</div>
 				</c:if>
+				<div class="addr">장소 : ${detail.address }</div>
 				<c:if test="${detail.total ge detail.personnel}">
 					<div class="done">
 						<h2>이미 마감된 모임입니다.</h2>

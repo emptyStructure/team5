@@ -165,6 +165,7 @@ public class SomoimDAO extends AbstractDAO{
 				result.setSdate(rs.getString(8));
 				result.setTotal(rs.getInt(9));
 				result.setMid(rs.getString(11));
+				result.setAddress(rs.getString(12));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -227,7 +228,7 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
-		String sql = "INSERT INTO somoim (stitle, scontent, scategory, personnel, mno) VALUES (?,?,?,?,(SELECT mno FROM member WHERE MID = ?))";
+		String sql = "INSERT INTO somoim (stitle, scontent, scategory, personnel, mno, address) VALUES (?,?,?,?,(SELECT mno FROM member WHERE MID = ?),?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getStitle());
@@ -235,6 +236,7 @@ public class SomoimDAO extends AbstractDAO{
 			pstmt.setString(3, dto.getScategory());
 			pstmt.setInt(4, dto.getPersonnel());
 			pstmt.setString(5, mid);
+			pstmt.setString(6, dto.getAddress());
 			result = pstmt.executeUpdate();
 			if(result==1) {
 				result = selfInsert(mid, mname);
@@ -523,15 +525,16 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
-		String sql = "UPDATE somoim SET stitle=?, scontent=?, scategory=?, personnel=? WHERE sno=? AND mno=(SELECT mno from member where mid = ?)";
+		String sql = "UPDATE somoim SET stitle=?, scontent=?, scategory=?, personnel=?, address=? WHERE sno=? AND mno=(SELECT mno from member where mid = ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getStitle());
 			pstmt.setString(2, dto.getScontent());
 			pstmt.setString(3, dto.getScategory());
 			pstmt.setInt(4, dto.getPersonnel());
-			pstmt.setInt(5, dto.getSno());
-			pstmt.setString(6, mid);
+			pstmt.setString(5, dto.getAddress());
+			pstmt.setInt(6, dto.getSno());
+			pstmt.setString(7, mid);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
