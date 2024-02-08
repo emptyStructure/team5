@@ -74,6 +74,7 @@ public class JUpdate extends HttpServlet {
 			dto.setJcontent(request.getParameter("jcontent"));
 			dto.setJno(Util.str2Int(request.getParameter("jno")));
 			dto.setJmid((String)session.getAttribute("mid"));
+			dto.setJsell(request.getParameter("salesStatus"));
 			JBoardDAO dao = new JBoardDAO();
 			int result = dao.jupdate(dto);
 

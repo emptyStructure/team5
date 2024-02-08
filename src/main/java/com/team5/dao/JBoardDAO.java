@@ -110,7 +110,7 @@ public JBoardDTO detail(int no) {
 	Connection con = db.getConnection();
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	String sql = "SELECT j.jno, j.jtitle, j.jcontent, m.mname as jboard_write, m.mid as jmid,j.jdate, j.jip, "
+	String sql = "SELECT j.jno, j.jtitle, j.jcontent, m.mname as jboard_write, m.mid as jmid,j.jdate,j.jsell, j.jip, "
 			+ "			(SELECT COUNT(*) FROM jvisitcount WHERE jno = j.jno) AS jboard_count "
 			+ "			FROM joonggo j JOIN member m ON j.mno=m.mno WHERE j.jno=?";
 	
@@ -126,6 +126,7 @@ public JBoardDTO detail(int no) {
 			dto.setJwrite(rs.getString("jboard_write"));
 			dto.setJdate(rs.getString("jdate"));
 			dto.setJcount(rs.getInt( "jboard_count"));
+			dto.setJsell(rs.getString("jsell"));
 			dto.setJmid(rs.getString("jmid"));
 			dto.setJip(rs.getString("jip"));
 		}
@@ -268,15 +269,16 @@ public int jupdate(JBoardDTO dto) {
 	
 	Connection con =DBConnection.getInstance().getConnection();
 	PreparedStatement pstmt = null ;
-	String sql = "UPDATE joonggo SET jtitle=?, jcontent=? WHERE jno =? AND mno=(SELECT mno FROM member WHERE mid =?) ";
+	String sql = "UPDATE joonggo SET jtitle=?,jsell=?, jcontent=? WHERE jno =? AND mno=(SELECT mno FROM member WHERE mid =?) ";
 	
 	
 	try {
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1,dto.getJtitle() );
-		pstmt.setString(2,dto.getJcontent() );
-		pstmt.setInt(3,dto.getJno() );
-		pstmt.setString(4,dto.getJmid() );
+		pstmt.setString(2, dto.getJsell());
+		pstmt.setString(3,dto.getJcontent() );
+		pstmt.setInt(4,dto.getJno() );
+		pstmt.setString(5,dto.getJmid() );
 		result = pstmt.executeUpdate();
 	} catch(SQLException e) { 
 		e.printStackTrace();

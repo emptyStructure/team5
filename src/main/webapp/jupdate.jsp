@@ -36,6 +36,10 @@
 					<h1>글수정하기</h1>
 					<div class="writeFORM">
 						<form action="./jupdate" method="post">
+							<select name="salesStatus">
+       							 <option value="1">판매미완료</option>
+        						<option value="0">판매완료</option>
+    						</select>
 							<input type="text" id="jtitle" name="jtitle" value="${jupdate.jtitle }">
 							<textarea id="summernote" name="jcontent">${jupdate.jcontent }</textarea>
 							<button type="submit">글수정하기</button>

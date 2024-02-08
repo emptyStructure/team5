@@ -244,6 +244,7 @@
 				<article>
 					<div class="detailDIV">
 						<div class="detailBTITLE">${jdetail.jtitle }</div>
+						<div>판매여부 ${jdetail.jsell == 1 ? '*판매 미완료*' : '*판매 완료*'}</div>
 						<hr>
 						<!-- 수평선 추가 -->
 						<div class="detailBWRITECOUNT">
@@ -260,12 +261,10 @@
 
 					</div>
 
-					<c:if
-						test="${sessionScope.mname ne null && detail.mid eq sessionScope.mid }">
-						<button onclick="update()">수정하기</button>
-						<button onclick="del()">삭제하기</button>
-					</c:if>
-
+					<c:if test="${sessionScope.mname != null && jdetail.jmid eq sessionScope.mid}">
+    <button onclick="update()">수정하기</button>
+    <button onclick="del()">삭제하기</button>
+</c:if>
 					<c:if test="${sessionScope.mid ne null }">
 
 						<button class="xi-comment-o">댓글쓰기</button>

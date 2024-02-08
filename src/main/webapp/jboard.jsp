@@ -122,7 +122,7 @@
   	     			<td>${row.jwrite}</td>
     	 			<td>${row.jdate}</td>
         			<td>${row.jcount}</td>
-         	 		<td>${row.jsell}</td>
+         	 		<td>${row.jsell == 1 ? '판매 미완료' : '판매 완료'}</td> 
 			    </tr>
   		 		</c:forEach>
 			</table>
