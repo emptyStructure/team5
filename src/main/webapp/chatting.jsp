@@ -37,8 +37,9 @@ $(function(){
 	    	data : {'mscontent' : chatting},
 	    	success : function(result) {
 	    		if (result == 1) {
-	    		location.reload();
+	    		//location.reload();
 				$("#chatting").val('');
+				$("#chatting").focus();
 	    		} else if (result == 0) {
 					alert("로그인 해주세요.");	    			
 	    		}
@@ -132,6 +133,7 @@ $(document).ready(function() {
   });
   //추가3
   function updateChat() {
+	  const chatContainer = document.getElementById("mscontent");
 	  $.ajax({
 		  url: './updateChat',
 	  	  type: 'get',
@@ -146,14 +148,10 @@ $(document).ready(function() {
 			
 	  	  },
 	  	  error: function(error) {
-	  		  alert("에러");
 	  	  }
 	  });
   }
   //여기까지
-  
-  
-  
   
   $("#chatting").on("input", function() {
     adjustBackgroundLength();
@@ -198,7 +196,7 @@ function loadThemePreference() {
 }
 .user {
 	overflow-y: auto;
-	height: 25vh;
+	height: 70.7vh;
 }
  #chatting {
  	width: 80%;
@@ -247,10 +245,10 @@ function loadThemePreference() {
 				<%@ include file="header.jsp"%>
 		</header>
 		<div class="side" id="left">
-			<%@ include file="leftside.jsp"%>
 				<h2>참가자</h2>
 			<div class="user">
-				<p><i class="xi-user"></i> 전체채팅 <button onclick="url('./chatting')">채팅</button></p>
+				<p><i class="xi-user"></i> 중호호 AI <button onclick="url('https://chat.openai.com/')">채팅</button></p>
+				<p><i class="xi-user"></i> 전체 채팅 <button onclick="url('./chatting')">채팅</button></p>
 				<c:forEach var="user" items="${userlist }">
 				<p><i class="xi-user"></i> ${user.mname } <button class="personalChatBtn" value="${user.mno }">채팅</button></p>
 				</c:forEach>
@@ -276,9 +274,6 @@ function loadThemePreference() {
 				</div>
 			</article>
 		</div>
-		<footer>
-		<%@ include file="footer.jsp"%>
-	</footer>
 		</div>
 </body>
 </html>
