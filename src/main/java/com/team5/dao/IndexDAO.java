@@ -22,7 +22,7 @@ public class IndexDAO extends AbstractDAO{
 		ResultSet rs = null;
 		String sql = "SELECT bno, btitle, "
 				+ "DATE_FORMAT(bdate,'%Y. %m. %d. %h:%i') AS bdate "	
-				+ "FROM board ORDER BY bno desc LIMIT 0, 10";
+				+ "FROM board WHERE bdel='1' ORDER BY bno desc LIMIT 0, 10";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -81,7 +81,7 @@ public class IndexDAO extends AbstractDAO{
 		ResultSet rs = null;
 		String sql = "SELECT jno, jtitle, "
 				+ "DATE_FORMAT(jdate,'%Y. %m. %d. %h:%i') AS jdate "
-				+ "FROM joonggo ORDER BY jno DESC LIMIT 0, 10";
+				+ "FROM joonggo WHERE jdel='1' ORDER BY jno DESC LIMIT 0, 10";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
