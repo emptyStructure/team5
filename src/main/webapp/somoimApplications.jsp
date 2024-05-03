@@ -149,7 +149,7 @@ $(function(){
 										</c:when>
 									</c:choose>
 									<input value="${row.jno }" type="hidden" class="jno">
-									<input value="${row.mid }" type="hidden" class="mid">
+									<input value="${row.host }" type="hidden" class="mid">
 								</td>
 							</tr>
 						</c:forEach>

@@ -393,7 +393,7 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status, j.sno, j.joinno, j.mid FROM joinSomoim j JOIN somoim s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?)";
+		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status, j.sno, j.joinno, j.mid, s.host FROM joinSomoim j JOIN (SELECT s.*, m.mid AS host FROM somoim s JOIN member m ON s.mno = m.mno) as s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
@@ -410,6 +410,7 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setSno(rs.getInt(8));
 				dto.setJno(rs.getInt(9));
 				dto.setMid(rs.getString(10));
+				dto.setHost(rs.getString(11));
 				result.add(dto);
 			}
 			
@@ -428,7 +429,7 @@ public class SomoimDAO extends AbstractDAO{
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status, j.sno, j.joinno, j.mid FROM joinSomoim j JOIN somoim s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?) AND j.status=?";
+		String sql = "SELECT ROW_NUMBER() OVER ( ORDER BY joinno) AS NO, s.stitle, j.name, j.ph, j.message, j.joinDate, j.status, j.sno, j.joinno, j.mid, s.host FROM joinSomoim j JOIN (SELECT s.*, m.mid AS host FROM somoim s JOIN member m ON s.mno = m.mno) as s ON j.sno = s.sno WHERE j.mno=(SELECT mno FROM member WHERE MID = ?) AND j.status=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
@@ -446,6 +447,7 @@ public class SomoimDAO extends AbstractDAO{
 				dto.setSno(rs.getInt(8));
 				dto.setJno(rs.getInt(9));
 				dto.setMid(rs.getString(10));
+				dto.setHost(rs.getString(11));
 				result.add(dto);
 			}
 			

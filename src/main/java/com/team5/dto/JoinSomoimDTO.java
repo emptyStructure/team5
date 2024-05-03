@@ -2,7 +2,7 @@ package com.team5.dto;
 
 public class JoinSomoimDTO {
 	private int jno, mno, sno, status, no;
-	private String name, ph, message, joindate, title, mid;
+	private String name, ph, message, joindate, title, mid, host;
 	public int getJno() {
 		return jno;
 	}
@@ -68,6 +68,12 @@ public class JoinSomoimDTO {
 	}
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+	public String getHost() {
+		return host;
+	}
+	public void setHost(String host) {
+		this.host = host;
 	}
 	
 	
